@@ -194,6 +194,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/ScattersLines/timeSeries/index.html</loc>
+    <lastmod>2021-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://lazarusa.github.io/BeautifulMakie/surfWireLines/surface1Color/index.html</loc>
     <lastmod>2021-06-08</lastmod>
     <changefreq>monthly</changefreq>
@@ -248,6 +254,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/heatmaps/heatmapText/index.html</loc>
+    <lastmod>2021-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://lazarusa.github.io/BeautifulMakie/StatsPlots/DensitiesDataSet/index.html</loc>
     <lastmod>2021-06-08</lastmod>
     <changefreq>monthly</changefreq>
@@ -279,6 +291,12 @@
 </url>
 <url>
     <loc>https://lazarusa.github.io/BeautifulMakie/ScattersLines/MultipleMulticoloredLineCbarOut/index.html</loc>
+    <lastmod>2021-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/StatsPlots/candlestick/index.html</loc>
     <lastmod>2021-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
