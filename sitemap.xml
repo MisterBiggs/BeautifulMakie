@@ -278,6 +278,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/ScattersLines/ScatterHistDensitySides/index.html</loc>
+    <lastmod>2021-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://lazarusa.github.io/BeautifulMakie/StatsPlots/ViolinPlot/index.html</loc>
     <lastmod>2021-06-09</lastmod>
     <changefreq>monthly</changefreq>
@@ -501,6 +507,12 @@
 </url>
 <url>
     <loc>https://lazarusa.github.io/BeautifulMakie/surfWireLines/wireTori/index.html</loc>
+    <lastmod>2021-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/ScattersLines/twinAxis/index.html</loc>
     <lastmod>2021-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
