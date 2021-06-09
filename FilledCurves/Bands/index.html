@@ -8,6 +8,7 @@
     <span class=hljs-comment ># filled curve 2</span>
     band!(x, cos.(x), <span class=hljs-number >1</span> .+ cos.(x); color = (:red, <span class=hljs-number >0.2</span>))
     fig[<span class=hljs-number >1</span>,<span class=hljs-number >1</span>] = ax
+    fig
     <span class=hljs-comment >#save(&quot;Bands.png&quot;), fig, px_per_unit = 2.0)</span>
 <span class=hljs-keyword >end</span></code></pre></p> <p> <span style="color:#e53e00;"> <strong> Dependencies </strong> </span> <div class=code-output ><pre><code class="plaintext hljs">      Status `~/Documents/BeaufitulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.5

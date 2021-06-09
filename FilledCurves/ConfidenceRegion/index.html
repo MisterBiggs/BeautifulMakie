@@ -9,6 +9,7 @@
     lines!(x, y1d, color = :black)
     band!(x, lower, upper; color = (<span class=hljs-string >&quot;#E69F00&quot;</span>, <span class=hljs-number >0.2</span>))
     fig[<span class=hljs-number >1</span>,<span class=hljs-number >1</span>] = ax
+    fig
     <span class=hljs-comment >#save(&quot;ConfidenceRegion.png&quot;), fig, px_per_unit = 2.0)</span>
 <span class=hljs-keyword >end</span></code></pre> <span style="color:#e53e00;"> <strong> Dependencies </strong> </span> <div class=code-output ><pre><code class="plaintext hljs">      Status `~/Documents/BeaufitulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.5

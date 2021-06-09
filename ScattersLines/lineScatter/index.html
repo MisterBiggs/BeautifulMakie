@@ -8,9 +8,9 @@
     leg = Legend(fig, [[line1, pnts1]], [<span class=hljs-string >&quot;sin(x)&quot;</span>], markersize = <span class=hljs-number >8</span>,
     tellheight = <span class=hljs-literal >false</span>, tellwidth = <span class=hljs-literal >false</span>, halign = :right, valign = :top,
     bgcolor = :transparent, margin = (<span class=hljs-number >10</span>, <span class=hljs-number >10</span>, <span class=hljs-number >10</span>, <span class=hljs-number >10</span>), framevisible = <span class=hljs-literal >true</span>)
-
     fig[<span class=hljs-number >1</span>, <span class=hljs-number >1</span>] = ax
     fig[<span class=hljs-number >1</span>, <span class=hljs-number >1</span>] = leg
+    fig
     <span class=hljs-comment >#save(&quot;FigLineScatter.png&quot;, fig, px_per_unit = 2)</span>
 <span class=hljs-keyword >end</span></code></pre> <span style="color:#e53e00;"> <strong> Dependencies </strong> </span> <div class=code-output ><pre><code class="plaintext hljs">      Status `~/Documents/BeaufitulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.5
