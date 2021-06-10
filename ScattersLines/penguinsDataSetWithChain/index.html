@@ -218,7 +218,7 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="penguins_dataset_using_chain"><a href="#penguins_dataset_using_chain" class="header-anchor">Penguins Dataset, using Chain</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/penguinsDataSetWithChain/output/penguinsDataSetWithChain.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, PalmerPenguins, Colors, Chain, DataFrames
+<p><img src="/BeautifulMakie/assets/scripts/penguinsDataSetWithChain/output/penguinsDataSetWithChain.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, PalmerPenguins, Colors, Chain, DataFrames, GLM
 <span class="hljs-keyword">let</span>
     <span class="hljs-literal">ENV</span>[<span class="hljs-string">&quot;DATADEPS_ALWAYS_ACCEPT&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span> <span class="hljs-comment"># Don&#x27;t ask if the datasets should be downloaded</span>
 	penguins = dropmissing(DataFrame(PalmerPenguins.load()))
