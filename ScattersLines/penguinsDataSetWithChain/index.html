@@ -220,8 +220,8 @@
 <div class="franklin-content"><h2 id="penguins_dataset_using_chain"><a href="#penguins_dataset_using_chain" class="header-anchor">Penguins Dataset, using Chain</a></h2>
 <p><img src="/BeautifulMakie/assets/scripts/penguinsDataSetWithChain/output/penguinsDataSetWithChain.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, PalmerPenguins, Colors, Chain, DataFrames
 <span class="hljs-keyword">let</span>
-    penguins = dropmissing(DataFrame(PalmerPenguins.load()))
-	<span class="hljs-comment">#the first time you need to type yes in the repl to download this dataset</span>
+    <span class="hljs-literal">ENV</span>[<span class="hljs-string">&quot;DATADEPS_ALWAYS_ACCEPT&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span> <span class="hljs-comment"># Don&#x27;t ask if the datasets should be downloaded</span>
+	penguins = dropmissing(DataFrame(PalmerPenguins.load()))
     set_theme!(Theme(
         Axis = (
             leftspinevisible = <span class="hljs-literal">false</span>,
