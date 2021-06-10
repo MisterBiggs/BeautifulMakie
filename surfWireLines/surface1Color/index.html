@@ -218,21 +218,21 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="surface_one_color"><a href="#surface_one_color" class="header-anchor">Surface, one Color</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/surface1Color.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie
-<span class="hljs-keyword">let</span>
-    t = <span class="hljs-number">0</span>:<span class="hljs-number">0.1</span>:<span class="hljs-number">2</span><span class="hljs-literal">π</span>
-    u = -<span class="hljs-number">1</span>:<span class="hljs-number">0.1</span>:<span class="hljs-number">1</span>
-    x = [u*sin(t) <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> t, u <span class="hljs-keyword">in</span> u]
-    y = [u*cos(t) <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> t, u <span class="hljs-keyword">in</span> u]
-    z = [u        <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> t, u <span class="hljs-keyword">in</span> u]
-    fig, _ = surface(x, y, z, colorrange = (-<span class="hljs-number">2</span>,-<span class="hljs-number">1.1</span>), highclip = :dodgerblue,
-        lightposition = Vec3f0(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.8</span>), ambient = Vec3f0(<span class="hljs-number">0.6</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.6</span>),
-        backlight = <span class="hljs-number">5f0</span>) <span class="hljs-comment"># the colorrange must be outside the range of z</span>
-    wireframe!(x,y,z, overdraw = <span class="hljs-literal">false</span>, linewidth = <span class="hljs-number">0.1</span>) <span class="hljs-comment"># try overdraw = true</span>
+<p><img src="/BeautifulMakie/assets/scripts/output/surface1Color.png" alt=""> <pre><code class="language-julia">using GLMakie
+let
+    t &#61; 0:0.1:2π
+    u &#61; -1:0.1:1
+    x &#61; &#91;u*sin&#40;t&#41; for t in t, u in u&#93;
+    y &#61; &#91;u*cos&#40;t&#41; for t in t, u in u&#93;
+    z &#61; &#91;u        for t in t, u in u&#93;
+    fig, _ &#61; surface&#40;x, y, z, colorrange &#61; &#40;-2,-1.1&#41;, highclip &#61; :dodgerblue,
+        lightposition &#61; Vec3f0&#40;0, 0, 0.8&#41;, ambient &#61; Vec3f0&#40;0.6, 0.6, 0.6&#41;,
+        backlight &#61; 5f0&#41; # the colorrange must be outside the range of z
+    wireframe&#33;&#40;x,y,z, overdraw &#61; false, linewidth &#61; 0.1&#41; # try overdraw &#61; true
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [e9467ef8] GLMakie v0.3.3
 </code></pre></div></p>
 <div class="page-foot">
@@ -248,8 +248,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

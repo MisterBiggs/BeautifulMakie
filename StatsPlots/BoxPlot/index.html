@@ -218,34 +218,34 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="box_plots_vertical_and_horizontal"><a href="#box_plots_vertical_and_horizontal" class="header-anchor">Box Plots, vertical and horizontal</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/BoxPlot.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">13</span>)
-    n = <span class="hljs-number">3000</span>
-    data = randn(n)
-    a = fill(<span class="hljs-number">1</span>, n)
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">800</span>), font = <span class="hljs-string">&quot;sans&quot;</span>)
-    ax1 = Axis(fig, xlabel = <span class="hljs-string">&quot;variable&quot;</span>, ylabel = <span class="hljs-string">&quot;values&quot;</span>,
-                xticks = ([<span class="hljs-number">1</span>],[<span class="hljs-string">&quot;normal Distribution&quot;</span>]) )
-    ax2 = Axis(fig, xlabel = <span class="hljs-string">&quot;values&quot;</span>, ylabel = <span class="hljs-string">&quot;variable&quot;</span>,
-        yticks = ([<span class="hljs-number">1</span>],[<span class="hljs-string">&quot;normal Distribution&quot;</span>]), yticklabelrotation = <span class="hljs-literal">pi</span>/<span class="hljs-number">2</span>)
-    boxplot!(ax1, a, data; whiskerwidth = <span class="hljs-number">1</span>, width = <span class="hljs-number">0.35</span>,color = (:red, <span class="hljs-number">0.45</span>),
-                whiskercolor = (:red, <span class="hljs-number">1</span>), mediancolor = :red, markersize = <span class="hljs-number">8</span>,
-                strokecolor = :black, strokewidth = <span class="hljs-number">1</span>, label = <span class="hljs-string">&quot;vertical&quot;</span>)
-    limits!(ax1, <span class="hljs-number">0</span>,<span class="hljs-number">2</span>,-<span class="hljs-number">5</span>,<span class="hljs-number">5</span>)
-    boxplot!(ax2,a,data;orientation=:horizontal, whiskerwidth = <span class="hljs-number">1</span>, width = <span class="hljs-number">0.35</span>,
-            color = (:navy, <span class="hljs-number">0.45</span>),whiskercolor = (:navy, <span class="hljs-number">1</span>),mediancolor = :navy,
-                markersize = <span class="hljs-number">8</span>, strokecolor = :black, strokewidth = <span class="hljs-number">1</span>,
-                label = <span class="hljs-string">&quot;horizontal&quot;</span>)
-    limits!(ax2, -<span class="hljs-number">5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>)
-    axislegend(ax1, position = :rt)
-    axislegend(ax2, position = :rt)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax1
-    fig[<span class="hljs-number">2</span>,<span class="hljs-number">1</span>] = ax2
+<p><img src="/BeautifulMakie/assets/scripts/output/BoxPlot.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;13&#41;
+    n &#61; 3000
+    data &#61; randn&#40;n&#41;
+    a &#61; fill&#40;1, n&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 800&#41;, font &#61; &quot;sans&quot;&#41;
+    ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;variable&quot;, ylabel &#61; &quot;values&quot;,
+                xticks &#61; &#40;&#91;1&#93;,&#91;&quot;normal Distribution&quot;&#93;&#41; &#41;
+    ax2 &#61; Axis&#40;fig, xlabel &#61; &quot;values&quot;, ylabel &#61; &quot;variable&quot;,
+        yticks &#61; &#40;&#91;1&#93;,&#91;&quot;normal Distribution&quot;&#93;&#41;, yticklabelrotation &#61; pi/2&#41;
+    boxplot&#33;&#40;ax1, a, data; whiskerwidth &#61; 1, width &#61; 0.35,color &#61; &#40;:red, 0.45&#41;,
+                whiskercolor &#61; &#40;:red, 1&#41;, mediancolor &#61; :red, markersize &#61; 8,
+                strokecolor &#61; :black, strokewidth &#61; 1, label &#61; &quot;vertical&quot;&#41;
+    limits&#33;&#40;ax1, 0,2,-5,5&#41;
+    boxplot&#33;&#40;ax2,a,data;orientation&#61;:horizontal, whiskerwidth &#61; 1, width &#61; 0.35,
+            color &#61; &#40;:navy, 0.45&#41;,whiskercolor &#61; &#40;:navy, 1&#41;,mediancolor &#61; :navy,
+                markersize &#61; 8, strokecolor &#61; :black, strokewidth &#61; 1,
+                label &#61; &quot;horizontal&quot;&#41;
+    limits&#33;&#40;ax2, -5,5,0,2&#41;
+    axislegend&#40;ax1, position &#61; :rt&#41;
+    axislegend&#40;ax2, position &#61; :rt&#41;
+    fig&#91;1,1&#93; &#61; ax1
+    fig&#91;2,1&#93; &#61; ax2
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -262,8 +262,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

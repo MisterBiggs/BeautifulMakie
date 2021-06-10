@@ -218,38 +218,38 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="scatter_histogram_and_density_on_the_sides"><a href="#scatter_histogram_and_density_on_the_sides" class="header-anchor">Scatter, Histogram and Density on the Sides</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/ScatterHistDensitySides.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    <span class="hljs-comment">#### see also https://discourse.julialang.org/t/beautiful-makie-gallery/62523/31</span>
-    Random.seed!(<span class="hljs-number">123</span>)
-    n = <span class="hljs-number">200</span>
-    x, y, color = randn(n)/<span class="hljs-number">2</span>, randn(n), randn(n)
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">700</span>))
-    ax1 = Axis(fig,xgridstyle=:dash,ygridstyle=:dash,xtickalign=<span class="hljs-number">1</span>, ytickalign=<span class="hljs-number">1</span>)
-    ax2 = Axis(fig,xgridstyle=:dash,ygridstyle=:dash,xtickalign=<span class="hljs-number">1</span>, ytickalign=<span class="hljs-number">1</span>)
-    ax3 = Axis(fig,xgridstyle=:dash,ygridstyle=:dash,xtickalign=<span class="hljs-number">1</span>, ytickalign=<span class="hljs-number">1</span>)
-    hist!(ax1, x, color = (:orange, <span class="hljs-number">0.5</span>), strokewidth = <span class="hljs-number">0.5</span>)
-    density!(ax3,y,direction = :y,color = (:dodgerblue, <span class="hljs-number">0.5</span>),strokewidth = <span class="hljs-number">0.5</span>)
-    scatter!(ax2, x, y, color = color, colormap=:plasma, markersize = <span class="hljs-number">10</span>,
-        marker = :circle, strokewidth = <span class="hljs-number">0</span>)
-    xlims!(ax1,-<span class="hljs-number">4</span>,<span class="hljs-number">4</span>)
-    limits!(ax2,-<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,-<span class="hljs-number">4</span>,<span class="hljs-number">4</span>)
-    ylims!(ax3,-<span class="hljs-number">4</span>,<span class="hljs-number">4</span>)
-    hideydecorations!(ax3, ticks = <span class="hljs-literal">false</span>, grid = <span class="hljs-literal">false</span>)
-    hidexdecorations!(ax1, ticks = <span class="hljs-literal">false</span>, grid = <span class="hljs-literal">false</span>)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax2
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] = ax3
-    fig[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>] = ax1
+<p><img src="/BeautifulMakie/assets/scripts/output/ScatterHistDensitySides.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    #### see also https://discourse.julialang.org/t/beautiful-makie-gallery/62523/31
+    Random.seed&#33;&#40;123&#41;
+    n &#61; 200
+    x, y, color &#61; randn&#40;n&#41;/2, randn&#40;n&#41;, randn&#40;n&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 700&#41;&#41;
+    ax1 &#61; Axis&#40;fig,xgridstyle&#61;:dash,ygridstyle&#61;:dash,xtickalign&#61;1, ytickalign&#61;1&#41;
+    ax2 &#61; Axis&#40;fig,xgridstyle&#61;:dash,ygridstyle&#61;:dash,xtickalign&#61;1, ytickalign&#61;1&#41;
+    ax3 &#61; Axis&#40;fig,xgridstyle&#61;:dash,ygridstyle&#61;:dash,xtickalign&#61;1, ytickalign&#61;1&#41;
+    hist&#33;&#40;ax1, x, color &#61; &#40;:orange, 0.5&#41;, strokewidth &#61; 0.5&#41;
+    density&#33;&#40;ax3,y,direction &#61; :y,color &#61; &#40;:dodgerblue, 0.5&#41;,strokewidth &#61; 0.5&#41;
+    scatter&#33;&#40;ax2, x, y, color &#61; color, colormap&#61;:plasma, markersize &#61; 10,
+        marker &#61; :circle, strokewidth &#61; 0&#41;
+    xlims&#33;&#40;ax1,-4,4&#41;
+    limits&#33;&#40;ax2,-4,4,-4,4&#41;
+    ylims&#33;&#40;ax3,-4,4&#41;
+    hideydecorations&#33;&#40;ax3, ticks &#61; false, grid &#61; false&#41;
+    hidexdecorations&#33;&#40;ax1, ticks &#61; false, grid &#61; false&#41;
+    fig&#91;1,1&#93; &#61; ax2
+    fig&#91;1,2&#93; &#61; ax3
+    fig&#91;0,1&#93; &#61; ax1
     fig
-    colsize!(fig.layout, <span class="hljs-number">1</span>, Relative(<span class="hljs-number">2</span>/<span class="hljs-number">3</span>))
-    rowsize!(fig.layout, <span class="hljs-number">1</span>, Relative(<span class="hljs-number">1</span>/<span class="hljs-number">3</span>))
-    colgap!(fig.layout, <span class="hljs-number">10</span>)
-    rowgap!(fig.layout, <span class="hljs-number">10</span>)
+    colsize&#33;&#40;fig.layout, 1, Relative&#40;2/3&#41;&#41;
+    rowsize&#33;&#40;fig.layout, 1, Relative&#40;1/3&#41;&#41;
+    colgap&#33;&#40;fig.layout, 10&#41;
+    rowgap&#33;&#40;fig.layout, 10&#41;
     fig
-<span class="hljs-keyword">end</span></code></pre></p>
+end</code></pre></p>
 <p>
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -266,8 +266,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

@@ -218,21 +218,21 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="histogram_and_pdf_density"><a href="#histogram_and_pdf_density" class="header-anchor">Histogram and pdf &#61;&gt; density&#33;</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/histDensity.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">13</span>)
-    n = <span class="hljs-number">3000</span>
-    data = randn(n)
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">450</span>), font = <span class="hljs-string">&quot;sans&quot;</span>, fontsize = <span class="hljs-number">20</span>)
-    ax1 = Axis(fig, xlabel = <span class="hljs-string">&quot;value&quot;</span> )
-    hist!(ax1,data,normalization=:pdf,color = (:red,<span class="hljs-number">0.5</span>), label = <span class="hljs-string">&quot;hist &amp; pdf&quot;</span>)
-    density!(ax1, data, color =(:grey, <span class="hljs-number">0.5</span>), label = <span class="hljs-string">&quot;density!&quot;</span>, strokewidth=<span class="hljs-number">1</span>)
-    axislegend(ax1, position = :rt)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax1
+<p><img src="/BeautifulMakie/assets/scripts/output/histDensity.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;13&#41;
+    n &#61; 3000
+    data &#61; randn&#40;n&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 450&#41;, font &#61; &quot;sans&quot;, fontsize &#61; 20&#41;
+    ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;value&quot; &#41;
+    hist&#33;&#40;ax1,data,normalization&#61;:pdf,color &#61; &#40;:red,0.5&#41;, label &#61; &quot;hist &amp; pdf&quot;&#41;
+    density&#33;&#40;ax1, data, color &#61;&#40;:grey, 0.5&#41;, label &#61; &quot;density&#33;&quot;, strokewidth&#61;1&#41;
+    axislegend&#40;ax1, position &#61; :rt&#41;
+    fig&#91;1,1&#93; &#61; ax1
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -249,8 +249,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

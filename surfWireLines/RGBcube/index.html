@@ -218,24 +218,24 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="rgb_cube"><a href="#rgb_cube" class="header-anchor">RGB cube</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/RGBcube.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie, GeometryBasics, Colors
-<span class="hljs-keyword">let</span>
-    positions = vec([(i/<span class="hljs-number">5</span>, j/<span class="hljs-number">5</span>, k/<span class="hljs-number">5</span>) <span class="hljs-keyword">for</span> i=<span class="hljs-number">1</span>:<span class="hljs-number">7</span>,j=<span class="hljs-number">1</span>:<span class="hljs-number">7</span>,k=<span class="hljs-number">1</span>:<span class="hljs-number">7</span>]) <span class="hljs-comment"># note 7 &gt; 5 [factor in each i,j,k], whichs is misleading</span>
-    fig, ax, obj = mesh(HyperRectangle(Vec3f0(positions[<span class="hljs-number">1</span>]...), Vec3f0(<span class="hljs-number">0.15</span>)),
-        color = RGBA(positions[<span class="hljs-number">1</span>]..., <span class="hljs-number">0.5</span>),
-        transparency = <span class="hljs-literal">false</span>)
-    wireframe!(ax,HyperRectangle(Vec3f0(positions[<span class="hljs-number">1</span>]...), Vec3f0(<span class="hljs-number">0.15</span>)),
-        linewidth = <span class="hljs-number">0.1</span>, overdraw = <span class="hljs-literal">false</span>)
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">2</span>:length(positions)
-        mesh!(ax, HyperRectangle(Vec3f0(positions[i]...), Vec3f0(<span class="hljs-number">0.15</span>)),
-            color = RGBA(positions[i]..., <span class="hljs-number">0.5</span>))
-        wireframe!(ax, HyperRectangle(Vec3f0(positions[i]...), Vec3f0(<span class="hljs-number">0.15</span>)),
-            linewidth = <span class="hljs-number">0.1</span>, overdraw = <span class="hljs-literal">false</span>)
-    <span class="hljs-keyword">end</span>
+<p><img src="/BeautifulMakie/assets/scripts/output/RGBcube.png" alt=""> <pre><code class="language-julia">using GLMakie, GeometryBasics, Colors
+let
+    positions &#61; vec&#40;&#91;&#40;i/5, j/5, k/5&#41; for i&#61;1:7,j&#61;1:7,k&#61;1:7&#93;&#41; # note 7 &gt; 5 &#91;factor in each i,j,k&#93;, whichs is misleading
+    fig, ax, obj &#61; mesh&#40;HyperRectangle&#40;Vec3f0&#40;positions&#91;1&#93;...&#41;, Vec3f0&#40;0.15&#41;&#41;,
+        color &#61; RGBA&#40;positions&#91;1&#93;..., 0.5&#41;,
+        transparency &#61; false&#41;
+    wireframe&#33;&#40;ax,HyperRectangle&#40;Vec3f0&#40;positions&#91;1&#93;...&#41;, Vec3f0&#40;0.15&#41;&#41;,
+        linewidth &#61; 0.1, overdraw &#61; false&#41;
+    for i in 2:length&#40;positions&#41;
+        mesh&#33;&#40;ax, HyperRectangle&#40;Vec3f0&#40;positions&#91;i&#93;...&#41;, Vec3f0&#40;0.15&#41;&#41;,
+            color &#61; RGBA&#40;positions&#91;i&#93;..., 0.5&#41;&#41;
+        wireframe&#33;&#40;ax, HyperRectangle&#40;Vec3f0&#40;positions&#91;i&#93;...&#41;, Vec3f0&#40;0.15&#41;&#41;,
+            linewidth &#61; 0.1, overdraw &#61; false&#41;
+    end
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [e9467ef8] GLMakie v0.3.3
   [5c1252a2] GeometryBasics v0.3.12
 </code></pre></div></p>
@@ -252,8 +252,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

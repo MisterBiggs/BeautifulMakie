@@ -218,45 +218,45 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="surface_and_constraints"><a href="#surface_and_constraints" class="header-anchor">Surface and Constraints</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/surfaceConstraints.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie
-<span class="hljs-keyword">let</span>
-    x = <span class="hljs-built_in">LinRange</span>(-<span class="hljs-number">2</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">501</span>)
-    y = <span class="hljs-built_in">LinRange</span>(-<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">501</span>)
-    <span class="hljs-comment"># objective function</span>
-    z = <span class="hljs-number">100</span> .* (y&#x27; .- x .^ <span class="hljs-number">2</span>) .^ <span class="hljs-number">2</span> .+ (<span class="hljs-number">1</span> .- x) .^ <span class="hljs-number">2</span>
-    <span class="hljs-comment"># build constraints</span>
-    zin = copy(z)
-    zout1 = copy(z)
-    zout2 = copy(z)
-    <span class="hljs-keyword">for</span> (i,x) <span class="hljs-keyword">in</span> enumerate(x), (j,y) <span class="hljs-keyword">in</span> enumerate(y)
-        <span class="hljs-keyword">if</span> x*y &gt;=<span class="hljs-number">1</span>
-            zin[i,j] = <span class="hljs-literal">NaN</span>
-            zout1[i,j] = z[i,j]
-            zout2[i,j] = <span class="hljs-literal">NaN</span>
-        <span class="hljs-keyword">elseif</span> (x + y^<span class="hljs-number">2</span>) &gt;=<span class="hljs-number">1</span>
-            zin[i,j] = <span class="hljs-literal">NaN</span>
-            zout1[i,j] = <span class="hljs-literal">NaN</span>
-            zout2[i,j] = z[i,j]
-        <span class="hljs-keyword">else</span>
-            zin[i,j] = z[i,j]
-            zout1[i,j] = <span class="hljs-literal">NaN</span>
-            zout2[i,j] = <span class="hljs-literal">NaN</span>
-        <span class="hljs-keyword">end</span>
-    <span class="hljs-keyword">end</span>
-    fig = Figure(resolution = (<span class="hljs-number">1200</span>,<span class="hljs-number">900</span>), fontsize = <span class="hljs-number">20</span>)
-    ax = Axis3(fig, aspect = (<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>), perspectiveness = <span class="hljs-number">0.5</span>, elevation = <span class="hljs-literal">π</span>/<span class="hljs-number">9</span>,
-        azimuth = <span class="hljs-number">0.2</span><span class="hljs-literal">π</span>, zgridcolor = :grey,ygridcolor=:grey,xgridcolor = :grey)
-    pltobj = surface!(ax, x, y, zin, colormap = Reverse(:inferno))
-    surface!(ax, x, y, zout1, colormap = (:orangered,:red))
-    surface!(ax, x, y, zout2, colormap = (:dodgerblue,:blue))
-    cbar = Colorbar(fig, pltobj, label = <span class="hljs-string">&quot;xy &lt;=1 &amp; x + y^2&lt;=1&quot;</span>,
-        height = Relative(<span class="hljs-number">0.5</span>), width = <span class="hljs-number">20</span> )
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] = cbar
+<p><img src="/BeautifulMakie/assets/scripts/output/surfaceConstraints.png" alt=""> <pre><code class="language-julia">using GLMakie
+let
+    x &#61; LinRange&#40;-2, 0.5, 501&#41;
+    y &#61; LinRange&#40;-2, 2, 501&#41;
+    # objective function
+    z &#61; 100 .* &#40;y&#39; .- x .^ 2&#41; .^ 2 .&#43; &#40;1 .- x&#41; .^ 2
+    # build constraints
+    zin &#61; copy&#40;z&#41;
+    zout1 &#61; copy&#40;z&#41;
+    zout2 &#61; copy&#40;z&#41;
+    for &#40;i,x&#41; in enumerate&#40;x&#41;, &#40;j,y&#41; in enumerate&#40;y&#41;
+        if x*y &gt;&#61;1
+            zin&#91;i,j&#93; &#61; NaN
+            zout1&#91;i,j&#93; &#61; z&#91;i,j&#93;
+            zout2&#91;i,j&#93; &#61; NaN
+        elseif &#40;x &#43; y^2&#41; &gt;&#61;1
+            zin&#91;i,j&#93; &#61; NaN
+            zout1&#91;i,j&#93; &#61; NaN
+            zout2&#91;i,j&#93; &#61; z&#91;i,j&#93;
+        else
+            zin&#91;i,j&#93; &#61; z&#91;i,j&#93;
+            zout1&#91;i,j&#93; &#61; NaN
+            zout2&#91;i,j&#93; &#61; NaN
+        end
+    end
+    fig &#61; Figure&#40;resolution &#61; &#40;1200,900&#41;, fontsize &#61; 20&#41;
+    ax &#61; Axis3&#40;fig, aspect &#61; &#40;1,1,1&#41;, perspectiveness &#61; 0.5, elevation &#61; π/9,
+        azimuth &#61; 0.2π, zgridcolor &#61; :grey,ygridcolor&#61;:grey,xgridcolor &#61; :grey&#41;
+    pltobj &#61; surface&#33;&#40;ax, x, y, zin, colormap &#61; Reverse&#40;:inferno&#41;&#41;
+    surface&#33;&#40;ax, x, y, zout1, colormap &#61; &#40;:orangered,:red&#41;&#41;
+    surface&#33;&#40;ax, x, y, zout2, colormap &#61; &#40;:dodgerblue,:blue&#41;&#41;
+    cbar &#61; Colorbar&#40;fig, pltobj, label &#61; &quot;xy &lt;&#61;1 &amp; x &#43; y^2&lt;&#61;1&quot;,
+        height &#61; Relative&#40;0.5&#41;, width &#61; 20 &#41;
+    fig&#91;1,1&#93; &#61; ax
+    fig&#91;1,2&#93; &#61; cbar
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [e9467ef8] GLMakie v0.3.3
 </code></pre></div></p>
 <div class="page-foot">
@@ -272,8 +272,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

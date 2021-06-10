@@ -218,39 +218,39 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="line_with_inset"><a href="#line_with_inset" class="header-anchor">Line with Inset</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/LineWithInset.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">123</span>)
-    x = -<span class="hljs-number">3</span>:<span class="hljs-number">0.05</span>:<span class="hljs-number">3</span>
-    y = exp.(-x.^<span class="hljs-number">2</span>)
-    n = <span class="hljs-number">15</span>
-    y[<span class="hljs-number">1</span>:n] = y[<span class="hljs-number">1</span>:n] .+ <span class="hljs-number">0.02</span>*randn(n)
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">450</span>))
-    ax1 = Axis(fig, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;f(x)&quot;</span>, xgridvisible = <span class="hljs-literal">true</span>,
-              ygridvisible = <span class="hljs-literal">true</span>)
-    ax2 = Axis(fig, bbox = BBox(<span class="hljs-number">140</span>, <span class="hljs-number">260</span>, <span class="hljs-number">260</span>, <span class="hljs-number">350</span>), xticklabelsize = <span class="hljs-number">12</span>,
-            yticklabelsize = <span class="hljs-number">12</span>, showgrid=<span class="hljs-literal">false</span>,
-            title = <span class="hljs-string">&quot;inset  at (100, 300, 100, 200)&quot;</span>)
-    line1 = lines!(ax1, x, y, color = :red)
-    <span class="hljs-comment"># inset</span>
-    lines!(ax2, x, y, color = :red)
-    limits!(ax2, -<span class="hljs-number">3.1</span>,-<span class="hljs-number">1.9</span>,-<span class="hljs-number">0.05</span>,<span class="hljs-number">0.05</span>)
-    ax2.yticks = [-<span class="hljs-number">0.05</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.05</span>]
-    ax2.xticks = [-<span class="hljs-number">3</span>,-<span class="hljs-number">2.5</span>,-<span class="hljs-number">2</span>]
-    translate!(ax2.scene, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>)
-    translate!(ax2.elements[:background], <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">9</span>)
-    translate!(ax2.elements[:xgridlines], <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">9</span>)
-    translate!(ax2.elements[:ygridlines], <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">9</span>)
+<p><img src="/BeautifulMakie/assets/scripts/output/LineWithInset.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;123&#41;
+    x &#61; -3:0.05:3
+    y &#61; exp.&#40;-x.^2&#41;
+    n &#61; 15
+    y&#91;1:n&#93; &#61; y&#91;1:n&#93; .&#43; 0.02*randn&#40;n&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 450&#41;&#41;
+    ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;f&#40;x&#41;&quot;, xgridvisible &#61; true,
+              ygridvisible &#61; true&#41;
+    ax2 &#61; Axis&#40;fig, bbox &#61; BBox&#40;140, 260, 260, 350&#41;, xticklabelsize &#61; 12,
+            yticklabelsize &#61; 12, showgrid&#61;false,
+            title &#61; &quot;inset  at &#40;100, 300, 100, 200&#41;&quot;&#41;
+    line1 &#61; lines&#33;&#40;ax1, x, y, color &#61; :red&#41;
+    # inset
+    lines&#33;&#40;ax2, x, y, color &#61; :red&#41;
+    limits&#33;&#40;ax2, -3.1,-1.9,-0.05,0.05&#41;
+    ax2.yticks &#61; &#91;-0.05,0,0.05&#93;
+    ax2.xticks &#61; &#91;-3,-2.5,-2&#93;
+    translate&#33;&#40;ax2.scene, 0, 0, 10&#41;
+    translate&#33;&#40;ax2.elements&#91;:background&#93;, 0, 0, 9&#41;
+    translate&#33;&#40;ax2.elements&#91;:xgridlines&#93;, 0, 0, 9&#41;
+    translate&#33;&#40;ax2.elements&#91;:ygridlines&#93;, 0, 0, 9&#41;
 
-    leg = Legend(fig, [line1], [<span class="hljs-string">&quot;f(x)&quot;</span>], halign = :right, valign = :top,
-    tellheight =<span class="hljs-literal">false</span>, tellwidth = <span class="hljs-literal">false</span>, margin = (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>),)
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax1
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = leg
+    leg &#61; Legend&#40;fig, &#91;line1&#93;, &#91;&quot;f&#40;x&#41;&quot;&#93;, halign &#61; :right, valign &#61; :top,
+    tellheight &#61;false, tellwidth &#61; false, margin &#61; &#40;10, 10, 10, 10&#41;,&#41;
+    fig&#91;1, 1&#93; &#61; ax1
+    fig&#91;1, 1&#93; &#61; leg
     fig
-    <span class="hljs-comment">#save(&quot;Fig2Lines.png&quot;, fig, px_per_unit = 2)</span>
-<span class="hljs-keyword">end</span></code></pre> 
+    #save&#40;&quot;Fig2Lines.png&quot;, fig, px_per_unit &#61; 2&#41;
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -267,8 +267,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

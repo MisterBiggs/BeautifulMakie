@@ -218,31 +218,31 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="heatmap_with_an_irregular_grid_log_scales"><a href="#heatmap_with_an_irregular_grid_log_scales" class="header-anchor">Heatmap with an irregular grid, log scales</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/heatmapLogIrregular.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Colors, ColorSchemes, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">38</span>)
-    x = y = <span class="hljs-number">1</span>:<span class="hljs-number">100</span>
-    z = exp10.(<span class="hljs-number">2</span>*rand(<span class="hljs-number">100</span>,<span class="hljs-number">100</span>))
-    fig = Figure(resolution = (<span class="hljs-number">450</span>, <span class="hljs-number">400</span>))
-    ax = Axis(fig, xscale = log10, yscale = log10, aspect = <span class="hljs-number">1</span>, xlabel = <span class="hljs-string">&quot;x&quot;</span>,
-        ylabel = <span class="hljs-string">&quot;y&quot;</span>, yminorticksvisible = <span class="hljs-literal">true</span>, xminorticksvisible = <span class="hljs-literal">true</span>,
-        yminorticks = IntervalsBetween(<span class="hljs-number">9</span>),xminorticks = IntervalsBetween(<span class="hljs-number">9</span>))
-    cmap = cgrad(:CMRmap, scale = :log)
-    hmap = heatmap!(x,y,z, colormap = cmap, colorrange = (<span class="hljs-number">1</span>,<span class="hljs-number">100</span>))
-    cbar = Colorbar(fig, hmap, label = <span class="hljs-string">&quot;z values&quot;</span>, width = <span class="hljs-number">15</span>, ticksize=<span class="hljs-number">15</span>,
-        minorticks = IntervalsBetween(<span class="hljs-number">9</span>), minorticksvisible=<span class="hljs-literal">true</span>,labelsize=<span class="hljs-number">12</span>,
-        ticklabelsize = <span class="hljs-number">12</span>,tickalign = <span class="hljs-number">1</span>, minortickalign =<span class="hljs-number">1</span>,
-        height = Relative(<span class="hljs-number">0.91</span>),scale = log10) <span class="hljs-comment"># log10 colorbar</span>
-    ax.xticks = [<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">100</span>]
-    ax.yticks = [<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">100</span>]
-    cbar.ticks = [<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">100</span>]
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] = cbar
+<p><img src="/BeautifulMakie/assets/scripts/output/heatmapLogIrregular.png" alt=""> <pre><code class="language-julia">using CairoMakie, Colors, ColorSchemes, Random
+let
+    Random.seed&#33;&#40;38&#41;
+    x &#61; y &#61; 1:100
+    z &#61; exp10.&#40;2*rand&#40;100,100&#41;&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;450, 400&#41;&#41;
+    ax &#61; Axis&#40;fig, xscale &#61; log10, yscale &#61; log10, aspect &#61; 1, xlabel &#61; &quot;x&quot;,
+        ylabel &#61; &quot;y&quot;, yminorticksvisible &#61; true, xminorticksvisible &#61; true,
+        yminorticks &#61; IntervalsBetween&#40;9&#41;,xminorticks &#61; IntervalsBetween&#40;9&#41;&#41;
+    cmap &#61; cgrad&#40;:CMRmap, scale &#61; :log&#41;
+    hmap &#61; heatmap&#33;&#40;x,y,z, colormap &#61; cmap, colorrange &#61; &#40;1,100&#41;&#41;
+    cbar &#61; Colorbar&#40;fig, hmap, label &#61; &quot;z values&quot;, width &#61; 15, ticksize&#61;15,
+        minorticks &#61; IntervalsBetween&#40;9&#41;, minorticksvisible&#61;true,labelsize&#61;12,
+        ticklabelsize &#61; 12,tickalign &#61; 1, minortickalign &#61;1,
+        height &#61; Relative&#40;0.91&#41;,scale &#61; log10&#41; # log10 colorbar
+    ax.xticks &#61; &#91;1,10,100&#93;
+    ax.yticks &#61; &#91;1,10,100&#93;
+    cbar.ticks &#61; &#91;1,10,100&#93;
+    fig&#91;1, 1&#93; &#61; ax
+    fig&#91;1, 2&#93; &#61; cbar
     fig
-<span class="hljs-keyword">end</span></code></pre></p>
+end</code></pre></p>
 <p>
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [35d6a980] ColorSchemes v3.12.1
   [9a3f8284] Random
@@ -260,8 +260,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

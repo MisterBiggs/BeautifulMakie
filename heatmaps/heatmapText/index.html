@@ -218,54 +218,54 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="heatmap_with_text_annotations"><a href="#heatmap_with_text_annotations" class="header-anchor">Heatmap with text annotations</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/heatmapText.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">123</span>)
-    m = <span class="hljs-number">15</span>
-    n = <span class="hljs-number">5</span>
-    data = rand(m,n)
-    <span class="hljs-comment"># some fake ticks</span>
-    alphabet = <span class="hljs-string">&#x27;A&#x27;</span>:<span class="hljs-string">&#x27;E&#x27;</span> 
-    yticks = string.(collect(alphabet))
-    k = <span class="hljs-number">4</span>
-    itr = Iterators.product(ntuple(_ -&gt; alphabet, k)...)
-    xticks = []
-    <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> Base.Generator(join, itr)
-        push!(xticks, word)
-        <span class="hljs-keyword">if</span> length(xticks) == m
-            <span class="hljs-keyword">break</span>
-        <span class="hljs-keyword">end</span>
-    <span class="hljs-keyword">end</span>
-    xticks = string.(xticks)
+<p><img src="/BeautifulMakie/assets/scripts/output/heatmapText.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;123&#41;
+    m &#61; 15
+    n &#61; 5
+    data &#61; rand&#40;m,n&#41;
+    # some fake ticks
+    alphabet &#61; &#39;A&#39;:&#39;E&#39; 
+    yticks &#61; string.&#40;collect&#40;alphabet&#41;&#41;
+    k &#61; 4
+    itr &#61; Iterators.product&#40;ntuple&#40;_ -&gt; alphabet, k&#41;...&#41;
+    xticks &#61; &#91;&#93;
+    for word in Base.Generator&#40;join, itr&#41;
+        push&#33;&#40;xticks, word&#41;
+        if length&#40;xticks&#41; &#61;&#61; m
+            break
+        end
+    end
+    xticks &#61; string.&#40;xticks&#41;
 
-    fig = Figure(resolution = (<span class="hljs-number">1200</span>, <span class="hljs-number">600</span>), fontsize = <span class="hljs-number">20</span>)
-    ax = Axis(fig)
-    hmap = heatmap!(ax, data, colormap = :plasma)
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">15</span>, j <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">5</span>
-        <span class="hljs-keyword">if</span> data[i,j] &lt; <span class="hljs-number">0.15</span>
-            txtcolor = :white
-        <span class="hljs-keyword">else</span>
-            txtcolor = :black
-        <span class="hljs-keyword">end</span>
-        text!(ax, <span class="hljs-string">&quot;<span class="hljs-subst">$(round(data[i,j], digits = <span class="hljs-number">2</span>)</span>)&quot;</span>, position = (i,j),
-            color = txtcolor, align = (:center, :center))
-    <span class="hljs-keyword">end</span>
+    fig &#61; Figure&#40;resolution &#61; &#40;1200, 600&#41;, fontsize &#61; 20&#41;
+    ax &#61; Axis&#40;fig&#41;
+    hmap &#61; heatmap&#33;&#40;ax, data, colormap &#61; :plasma&#41;
+    for i in 1:15, j in 1:5
+        if data&#91;i,j&#93; &lt; 0.15
+            txtcolor &#61; :white
+        else
+            txtcolor &#61; :black
+        end
+        text&#33;&#40;ax, &quot;&#36;&#40;round&#40;data&#91;i,j&#93;, digits &#61; 2&#41;&#41;&quot;, position &#61; &#40;i,j&#41;,
+            color &#61; txtcolor, align &#61; &#40;:center, :center&#41;&#41;
+    end
 
-    cbar = Colorbar(fig, hmap, label = <span class="hljs-string">&quot;values&quot;</span>, width = <span class="hljs-number">15</span>,
-                ticksize=<span class="hljs-number">15</span>, tickalign = <span class="hljs-number">1</span>, height = Relative(<span class="hljs-number">3.55</span>/<span class="hljs-number">4</span>))
-    ax.xticks = (<span class="hljs-number">1</span>:m, xticks)
-    ax.yticks = (<span class="hljs-number">1</span>:n, yticks)
-    ax.xticklabelrotation = <span class="hljs-literal">π</span>/<span class="hljs-number">3</span>
-    <span class="hljs-comment">#ax.xticklabelsize = 12</span>
-    <span class="hljs-comment">#ax.xticklabelalign = (:center, :center)</span>
-    <span class="hljs-comment">#ax.xticklabelpad = 20</span>
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] = cbar
-    colgap!(fig.layout, <span class="hljs-number">7</span>)
+    cbar &#61; Colorbar&#40;fig, hmap, label &#61; &quot;values&quot;, width &#61; 15,
+                ticksize&#61;15, tickalign &#61; 1, height &#61; Relative&#40;3.55/4&#41;&#41;
+    ax.xticks &#61; &#40;1:m, xticks&#41;
+    ax.yticks &#61; &#40;1:n, yticks&#41;
+    ax.xticklabelrotation &#61; π/3
+    #ax.xticklabelsize &#61; 12
+    #ax.xticklabelalign &#61; &#40;:center, :center&#41;
+    #ax.xticklabelpad &#61; 20
+    fig&#91;1, 1&#93; &#61; ax
+    fig&#91;1, 2&#93; &#61; cbar
+    colgap&#33;&#40;fig.layout, 7&#41;
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -282,8 +282,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

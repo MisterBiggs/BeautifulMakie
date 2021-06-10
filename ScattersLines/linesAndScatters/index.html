@@ -218,27 +218,27 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="lines_and_scatters"><a href="#lines_and_scatters" class="header-anchor">Lines And Scatters</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/FigLinesAndScatters.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    x = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>,<span class="hljs-number">2</span><span class="hljs-literal">π</span>,<span class="hljs-number">50</span>) <span class="hljs-comment"># with 50 points in the interval.</span>
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">450</span>), font =:sans)
-    ax = Axis(fig, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;&quot;</span>)
-    line1 = lines!(x, sin.(x), color = :red)
-    line2 = lines!(x, cos.(x), color = :blue)
-    points1 = scatter!(x, cos.(x), color = :black, markersize = <span class="hljs-number">5</span>)
-    points2 = scatter!(x, -cos.(x), color = :red, strokecolor = :red,
-        markersize = <span class="hljs-number">5</span>, marker = <span class="hljs-string">&#x27;■&#x27;</span>)
-    leg = Legend(fig, [line1, [line2, points1], points2],
-        [<span class="hljs-string">&quot; sin(x)&quot;</span>, <span class="hljs-string">&quot; cos(x)&quot;</span>,  <span class="hljs-string">&quot;-cos(x)&quot;</span>], <span class="hljs-string">&quot;f(x)&quot;</span>, tellheight = <span class="hljs-literal">false</span>,
-        tellwidth = <span class="hljs-literal">false</span>, halign = :left, valign = :top, markersize = <span class="hljs-number">8</span>,
-        margin = (<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>))
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = leg
+<p><img src="/BeautifulMakie/assets/scripts/output/FigLinesAndScatters.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    x &#61; LinRange&#40;0,2π,50&#41; # with 50 points in the interval.
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 450&#41;, font &#61;:sans&#41;
+    ax &#61; Axis&#40;fig, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;&quot;&#41;
+    line1 &#61; lines&#33;&#40;x, sin.&#40;x&#41;, color &#61; :red&#41;
+    line2 &#61; lines&#33;&#40;x, cos.&#40;x&#41;, color &#61; :blue&#41;
+    points1 &#61; scatter&#33;&#40;x, cos.&#40;x&#41;, color &#61; :black, markersize &#61; 5&#41;
+    points2 &#61; scatter&#33;&#40;x, -cos.&#40;x&#41;, color &#61; :red, strokecolor &#61; :red,
+        markersize &#61; 5, marker &#61; &#39;■&#39;&#41;
+    leg &#61; Legend&#40;fig, &#91;line1, &#91;line2, points1&#93;, points2&#93;,
+        &#91;&quot; sin&#40;x&#41;&quot;, &quot; cos&#40;x&#41;&quot;,  &quot;-cos&#40;x&#41;&quot;&#93;, &quot;f&#40;x&#41;&quot;, tellheight &#61; false,
+        tellwidth &#61; false, halign &#61; :left, valign &#61; :top, markersize &#61; 8,
+        margin &#61; &#40;10, 10, 10, 10&#41;&#41;
+    fig&#91;1, 1&#93; &#61; ax
+    fig&#91;1, 1&#93; &#61; leg
     fig
-    <span class="hljs-comment">#save(&quot;FigLineScatter.png&quot;, fig, px_per_unit = 2)</span>
-<span class="hljs-keyword">end</span></code></pre> 
+    #save&#40;&quot;FigLineScatter.png&quot;, fig, px_per_unit &#61; 2&#41;
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -254,8 +254,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

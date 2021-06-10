@@ -218,28 +218,28 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="arrows"><a href="#arrows" class="header-anchor">Arrows</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/arrows.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    xs = <span class="hljs-built_in">LinRange</span>(-<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">20</span>)
-    ys = <span class="hljs-built_in">LinRange</span>(-<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">20</span>)
-    us = [x + y <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> xs, y <span class="hljs-keyword">in</span> ys]
-    vs = [y - x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> xs, y <span class="hljs-keyword">in</span> ys]
-    strength = vec(sqrt.(us .^<span class="hljs-number">2</span> .+ vs .^<span class="hljs-number">2</span>))
+<p><img src="/BeautifulMakie/assets/scripts/output/arrows.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    xs &#61; LinRange&#40;-3, 3, 20&#41;
+    ys &#61; LinRange&#40;-3, 3, 20&#41;
+    us &#61; &#91;x &#43; y for x in xs, y in ys&#93;
+    vs &#61; &#91;y - x for x in xs, y in ys&#93;
+    strength &#61; vec&#40;sqrt.&#40;us .^2 .&#43; vs .^2&#41;&#41;
 
-    fig = Figure(resolution = (<span class="hljs-number">550</span>, <span class="hljs-number">450</span>), fontsize = <span class="hljs-number">18</span>, font = <span class="hljs-string">&quot;sans&quot;</span>)
-    ax = Axis(fig, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;y&quot;</span>, aspect = <span class="hljs-number">1</span>)
-    arrows!(ax, xs, ys, us, vs, arrowsize = <span class="hljs-number">10</span>, lengthscale = <span class="hljs-number">0.1</span>,
-        arrowcolor = strength, linecolor = strength, colormap = :plasma)
-    cbar = Colorbar(fig, limits =(minimum(strength),maximum(strength)),
-    nsteps =<span class="hljs-number">100</span>, colormap = :plasma, ticksize=<span class="hljs-number">15</span>, width = <span class="hljs-number">15</span>, tickalign=<span class="hljs-number">1</span>)
-    limits!(ax, -<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,-<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] = cbar
+    fig &#61; Figure&#40;resolution &#61; &#40;550, 450&#41;, fontsize &#61; 18, font &#61; &quot;sans&quot;&#41;
+    ax &#61; Axis&#40;fig, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;, aspect &#61; 1&#41;
+    arrows&#33;&#40;ax, xs, ys, us, vs, arrowsize &#61; 10, lengthscale &#61; 0.1,
+        arrowcolor &#61; strength, linecolor &#61; strength, colormap &#61; :plasma&#41;
+    cbar &#61; Colorbar&#40;fig, limits &#61;&#40;minimum&#40;strength&#41;,maximum&#40;strength&#41;&#41;,
+    nsteps &#61;100, colormap &#61; :plasma, ticksize&#61;15, width &#61; 15, tickalign&#61;1&#41;
+    limits&#33;&#40;ax, -3,3,-3,3&#41;
+    fig&#91;1,1&#93; &#61; ax
+    fig&#91;1,2&#93; &#61; cbar
     fig
-    <span class="hljs-comment">#save(&quot;arrows.png&quot;, fig, px_per_unit = 2)</span>
-<span class="hljs-keyword">end</span></code></pre> 
+    #save&#40;&quot;arrows.png&quot;, fig, px_per_unit &#61; 2&#41;
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -255,8 +255,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

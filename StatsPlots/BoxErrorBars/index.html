@@ -218,19 +218,19 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="boxes_and_y_error_bars"><a href="#boxes_and_y_error_bars" class="header-anchor">Boxes and y error bars</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/BoxErrorBars.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">145</span>)
-    x, y, yerr = <span class="hljs-number">1</span>:<span class="hljs-number">2</span>:<span class="hljs-number">20</span>, <span class="hljs-number">5</span>*rand(<span class="hljs-number">10</span>), <span class="hljs-number">0.4</span>*abs.(randn(<span class="hljs-number">10</span>))
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">450</span>), font = <span class="hljs-string">&quot;sans&quot;</span>)
-    ax = Axis(fig, xlabel = <span class="hljs-string">&quot;variable&quot;</span>, ylabel = <span class="hljs-string">&quot;values&quot;</span>)
-    barplot!(ax, x, y,strokewidth = <span class="hljs-number">1</span>,color =:transparent,strokecolor = :black)
-    errorbars!(ax, x, y, yerr, whiskerwidth = <span class="hljs-number">12</span>)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+<p><img src="/BeautifulMakie/assets/scripts/output/BoxErrorBars.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;145&#41;
+    x, y, yerr &#61; 1:2:20, 5*rand&#40;10&#41;, 0.4*abs.&#40;randn&#40;10&#41;&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 450&#41;, font &#61; &quot;sans&quot;&#41;
+    ax &#61; Axis&#40;fig, xlabel &#61; &quot;variable&quot;, ylabel &#61; &quot;values&quot;&#41;
+    barplot&#33;&#40;ax, x, y,strokewidth &#61; 1,color &#61;:transparent,strokecolor &#61; :black&#41;
+    errorbars&#33;&#40;ax, x, y, yerr, whiskerwidth &#61; 12&#41;
+    fig&#91;1,1&#93; &#61; ax
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -247,8 +247,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

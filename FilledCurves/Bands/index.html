@@ -218,22 +218,22 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="lines_lines_bell_shaped_curves"><a href="#lines_lines_bell_shaped_curves" class="header-anchor">Lines Lines, bell shaped curves</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/Bands.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    x = <span class="hljs-built_in">LinRange</span>(-<span class="hljs-number">10</span>,<span class="hljs-number">10</span>,<span class="hljs-number">200</span>)
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">450</span>))
-    ax = Axis(fig, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;y&quot;</span>)
-    <span class="hljs-comment"># filled curve 1</span>
-    band!(x, sin.(x), sin.(x) .+ <span class="hljs-number">1</span>; color = (<span class="hljs-string">&quot;#E69F00&quot;</span>, <span class="hljs-number">0.2</span>))
-    <span class="hljs-comment"># filled curve 2</span>
-    band!(x, cos.(x), <span class="hljs-number">1</span> .+ cos.(x); color = (:red, <span class="hljs-number">0.2</span>))
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+<p><img src="/BeautifulMakie/assets/scripts/output/Bands.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    x &#61; LinRange&#40;-10,10,200&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 450&#41;&#41;
+    ax &#61; Axis&#40;fig, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;&#41;
+    # filled curve 1
+    band&#33;&#40;x, sin.&#40;x&#41;, sin.&#40;x&#41; .&#43; 1; color &#61; &#40;&quot;#E69F00&quot;, 0.2&#41;&#41;
+    # filled curve 2
+    band&#33;&#40;x, cos.&#40;x&#41;, 1 .&#43; cos.&#40;x&#41;; color &#61; &#40;:red, 0.2&#41;&#41;
+    fig&#91;1,1&#93; &#61; ax
     fig
-    <span class="hljs-comment">#save(&quot;Bands.png&quot;), fig, px_per_unit = 2.0)</span>
-<span class="hljs-keyword">end</span></code></pre></p>
+    #save&#40;&quot;Bands.png&quot;&#41;, fig, px_per_unit &#61; 2.0&#41;
+end</code></pre></p>
 <p>
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -249,8 +249,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

@@ -218,45 +218,45 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="klein_bottle"><a href="#klein_bottle" class="header-anchor">Klein Bottle</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/KleinBottle.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie
-<span class="hljs-keyword">using</span> GeometryBasics, LinearAlgebra, StatsBase
-<span class="hljs-keyword">using</span> Makie: get_dim, surface_normals
-<span class="hljs-keyword">let</span>
-    <span class="hljs-comment">### The bottle</span>
-    u = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>,<span class="hljs-literal">π</span>,<span class="hljs-number">100</span>)
-    v = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>,<span class="hljs-number">2</span><span class="hljs-literal">π</span>,<span class="hljs-number">100</span>)
-    x = [-<span class="hljs-number">2</span>/<span class="hljs-number">15</span> * cos(u)*(<span class="hljs-number">3</span>*cos(v) - <span class="hljs-number">30</span>*sin(u) + <span class="hljs-number">90</span>*cos(u)^<span class="hljs-number">4</span> *sin(u)
-            - <span class="hljs-number">60</span>*cos(u)^<span class="hljs-number">6</span> * sin(u) + <span class="hljs-number">5</span>*cos(u)*cos(v)*sin(u)) <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> u, v <span class="hljs-keyword">in</span> v]
-    y = [-<span class="hljs-number">1</span>/<span class="hljs-number">15</span> * sin(u)*(<span class="hljs-number">3</span>*cos(v) - <span class="hljs-number">3</span>*cos(u)^<span class="hljs-number">2</span>*cos(v) - <span class="hljs-number">48</span>*cos(u)^<span class="hljs-number">4</span> *cos(v) + <span class="hljs-number">48</span>*cos(u)^<span class="hljs-number">6</span> *cos(v)
-            - <span class="hljs-number">60</span>*sin(u) + <span class="hljs-number">5</span>*cos(u)*cos(v)*sin(u) - <span class="hljs-number">5</span>*cos(u)^<span class="hljs-number">3</span>*cos(v)*sin(u)
-            -<span class="hljs-number">80</span>*cos(u)^<span class="hljs-number">5</span> * cos(v)*sin(u) + <span class="hljs-number">80</span>*cos(u)^<span class="hljs-number">7</span>*cos(v)*sin(u)) <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> u, v <span class="hljs-keyword">in</span> v]
-    z = [<span class="hljs-number">2</span>/<span class="hljs-number">15</span> * (<span class="hljs-number">3</span> + <span class="hljs-number">5</span>*cos(u)*sin(u))*sin(v) <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> u, v <span class="hljs-keyword">in</span> v]
+<p><img src="/BeautifulMakie/assets/scripts/output/KleinBottle.png" alt=""> <pre><code class="language-julia">using GLMakie
+using GeometryBasics, LinearAlgebra, StatsBase
+using Makie: get_dim, surface_normals
+let
+    ### The bottle
+    u &#61; LinRange&#40;0,π,100&#41;
+    v &#61; LinRange&#40;0,2π,100&#41;
+    x &#61; &#91;-2/15 * cos&#40;u&#41;*&#40;3*cos&#40;v&#41; - 30*sin&#40;u&#41; &#43; 90*cos&#40;u&#41;^4 *sin&#40;u&#41;
+            - 60*cos&#40;u&#41;^6 * sin&#40;u&#41; &#43; 5*cos&#40;u&#41;*cos&#40;v&#41;*sin&#40;u&#41;&#41; for u in u, v in v&#93;
+    y &#61; &#91;-1/15 * sin&#40;u&#41;*&#40;3*cos&#40;v&#41; - 3*cos&#40;u&#41;^2*cos&#40;v&#41; - 48*cos&#40;u&#41;^4 *cos&#40;v&#41; &#43; 48*cos&#40;u&#41;^6 *cos&#40;v&#41;
+            - 60*sin&#40;u&#41; &#43; 5*cos&#40;u&#41;*cos&#40;v&#41;*sin&#40;u&#41; - 5*cos&#40;u&#41;^3*cos&#40;v&#41;*sin&#40;u&#41;
+            -80*cos&#40;u&#41;^5 * cos&#40;v&#41;*sin&#40;u&#41; &#43; 80*cos&#40;u&#41;^7*cos&#40;v&#41;*sin&#40;u&#41;&#41; for u in u, v in v&#93;
+    z &#61; &#91;2/15 * &#40;3 &#43; 5*cos&#40;u&#41;*sin&#40;u&#41;&#41;*sin&#40;v&#41; for u in u, v in v&#93;
 
-    <span class="hljs-keyword">function</span> getMesh(x,y,z)
-        positions = vec(map(<span class="hljs-built_in">CartesianIndices</span>(z)) <span class="hljs-keyword">do</span> i
-        GeometryBasics.Point{<span class="hljs-number">3</span>, <span class="hljs-built_in">Float32</span>}(
-            get_dim(x, i, <span class="hljs-number">1</span>, size(z)),
-            get_dim(y, i, <span class="hljs-number">2</span>, size(z)),
-            z[i])
-        <span class="hljs-keyword">end</span>)
-        faces = decompose(GLTriangleFace, Rect2D(<span class="hljs-number">0f0</span>, <span class="hljs-number">0f0</span>, <span class="hljs-number">1f0</span>, <span class="hljs-number">1f0</span>), size(z))
-        normals = surface_normals(x, y, z)
-        vertices = GeometryBasics.meta(positions; normals=normals)
-        meshObj = GeometryBasics.Mesh(vertices, faces)
+    function getMesh&#40;x,y,z&#41;
+        positions &#61; vec&#40;map&#40;CartesianIndices&#40;z&#41;&#41; do i
+        GeometryBasics.Point&#123;3, Float32&#125;&#40;
+            get_dim&#40;x, i, 1, size&#40;z&#41;&#41;,
+            get_dim&#40;y, i, 2, size&#40;z&#41;&#41;,
+            z&#91;i&#93;&#41;
+        end&#41;
+        faces &#61; decompose&#40;GLTriangleFace, Rect2D&#40;0f0, 0f0, 1f0, 1f0&#41;, size&#40;z&#41;&#41;
+        normals &#61; surface_normals&#40;x, y, z&#41;
+        vertices &#61; GeometryBasics.meta&#40;positions; normals&#61;normals&#41;
+        meshObj &#61; GeometryBasics.Mesh&#40;vertices, faces&#41;
         meshObj
-    <span class="hljs-keyword">end</span>
-    meshKlein = getMesh(x,y,z)
-    fig = Figure(resolution = (<span class="hljs-number">1200</span>, <span class="hljs-number">800</span>), backgroundcolor = :white)
-    fig.layout.alignmode[] = Outside(<span class="hljs-number">0</span>)
-    ax = LScene(fig, scenekw = (camera = cam3d!, show_axis = <span class="hljs-literal">false</span>))
-    mesh!(ax,meshKlein, color = [norm(v) <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> coordinates(meshKlein)],
-        colormap = (:Spectral_11,<span class="hljs-number">0.95</span>))
-    rotate_cam!(ax.scene, (-<span class="hljs-number">1.5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>))
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+    end
+    meshKlein &#61; getMesh&#40;x,y,z&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;1200, 800&#41;, backgroundcolor &#61; :white&#41;
+    fig.layout.alignmode&#91;&#93; &#61; Outside&#40;0&#41;
+    ax &#61; LScene&#40;fig, scenekw &#61; &#40;camera &#61; cam3d&#33;, show_axis &#61; false&#41;&#41;
+    mesh&#33;&#40;ax,meshKlein, color &#61; &#91;norm&#40;v&#41; for v in coordinates&#40;meshKlein&#41;&#93;,
+        colormap &#61; &#40;:Spectral_11,0.95&#41;&#41;
+    rotate_cam&#33;&#40;ax.scene, &#40;-1.5,0,0&#41;&#41;
+    fig&#91;1,1&#93; &#61; ax
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [e9467ef8] GLMakie v0.3.3
   [5c1252a2] GeometryBasics v0.3.12
   [ee78f7c6] Makie v0.13.12
@@ -276,8 +276,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

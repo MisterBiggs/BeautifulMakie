@@ -218,19 +218,19 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="revolution_surface"><a href="#revolution_surface" class="header-anchor">Revolution Surface</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/revolutionSurf.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie
-<span class="hljs-keyword">let</span>
-    u = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">50</span>)
-    v = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>, <span class="hljs-number">2</span><span class="hljs-literal">π</span>, <span class="hljs-number">50</span>)
-    X1 = [u <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> u, v <span class="hljs-keyword">in</span> v]
-    Y1 = [(u^<span class="hljs-number">4</span> - u^<span class="hljs-number">2</span>)*cos(v) <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> u, v <span class="hljs-keyword">in</span> v]
-    Z1 = [(u^<span class="hljs-number">4</span> - u^<span class="hljs-number">2</span>)*sin(v)  <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> u, v <span class="hljs-keyword">in</span> v]
-    fig, _ = surface(X1, Y1, Z1, shading = <span class="hljs-literal">true</span>,  ambient = Vec3f0(<span class="hljs-number">0.65</span>, <span class="hljs-number">0.65</span>, <span class="hljs-number">0.65</span>), backlight = <span class="hljs-number">0.95f0</span>,
-        color = sqrt.(X1.^<span class="hljs-number">2</span> .+ Y1.^<span class="hljs-number">2</span> .+ Z1.^<span class="hljs-number">2</span>), colormap = :plasma)
+<p><img src="/BeautifulMakie/assets/scripts/output/revolutionSurf.png" alt=""> <pre><code class="language-julia">using GLMakie
+let
+    u &#61; LinRange&#40;0, 1, 50&#41;
+    v &#61; LinRange&#40;0, 2π, 50&#41;
+    X1 &#61; &#91;u for u in u, v in v&#93;
+    Y1 &#61; &#91;&#40;u^4 - u^2&#41;*cos&#40;v&#41; for u in u, v in v&#93;
+    Z1 &#61; &#91;&#40;u^4 - u^2&#41;*sin&#40;v&#41;  for u in u, v in v&#93;
+    fig, _ &#61; surface&#40;X1, Y1, Z1, shading &#61; true,  ambient &#61; Vec3f0&#40;0.65, 0.65, 0.65&#41;, backlight &#61; 0.95f0,
+        color &#61; sqrt.&#40;X1.^2 .&#43; Y1.^2 .&#43; Z1.^2&#41;, colormap &#61; :plasma&#41;
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [e9467ef8] GLMakie v0.3.3
 </code></pre></div></p>
 <div class="page-foot">
@@ -246,8 +246,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

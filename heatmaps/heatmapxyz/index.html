@@ -218,25 +218,25 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="heatmap_with_xyz_values"><a href="#heatmap_with_xyz_values" class="header-anchor">Heatmap with x,y,z values</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/heatmapxyz.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">123</span>)
-    x = y = -<span class="hljs-number">5</span>:<span class="hljs-number">1</span>:<span class="hljs-number">5</span>
-    z = [x^<span class="hljs-number">2</span> + y^<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> x, y <span class="hljs-keyword">in</span> y]
-    fig = Figure(resolution = (<span class="hljs-number">450</span>, <span class="hljs-number">400</span>))
-    ax = Axis(fig,  aspect = <span class="hljs-number">1</span>, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;y&quot;</span>)
-    hmap = heatmap!(x,y,z, colormap = :ice)
-    cbar = Colorbar(fig, hmap, label = <span class="hljs-string">&quot;z values&quot;</span>, width = <span class="hljs-number">15</span>, ticksize=<span class="hljs-number">15</span>,
-                tickalign = <span class="hljs-number">1</span>, height = Relative(<span class="hljs-number">0.945</span>))
-    ax.xticks = -<span class="hljs-number">5</span>:<span class="hljs-number">5</span>
-    ax.yticks = -<span class="hljs-number">5</span>:<span class="hljs-number">5</span>
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] = cbar
-    colgap!(fig.layout, <span class="hljs-number">7</span>)
+<p><img src="/BeautifulMakie/assets/scripts/output/heatmapxyz.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;123&#41;
+    x &#61; y &#61; -5:1:5
+    z &#61; &#91;x^2 &#43; y^2 for x in x, y in y&#93;
+    fig &#61; Figure&#40;resolution &#61; &#40;450, 400&#41;&#41;
+    ax &#61; Axis&#40;fig,  aspect &#61; 1, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;&#41;
+    hmap &#61; heatmap&#33;&#40;x,y,z, colormap &#61; :ice&#41;
+    cbar &#61; Colorbar&#40;fig, hmap, label &#61; &quot;z values&quot;, width &#61; 15, ticksize&#61;15,
+                tickalign &#61; 1, height &#61; Relative&#40;0.945&#41;&#41;
+    ax.xticks &#61; -5:5
+    ax.yticks &#61; -5:5
+    fig&#91;1, 1&#93; &#61; ax
+    fig&#91;1, 2&#93; &#61; cbar
+    colgap&#33;&#40;fig.layout, 7&#41;
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -253,8 +253,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

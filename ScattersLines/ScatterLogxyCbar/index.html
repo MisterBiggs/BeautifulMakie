@@ -218,26 +218,26 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="log_scale_in_x_and_y_scatters_and_colormap"><a href="#log_scale_in_x_and_y_scatters_and_colormap" class="header-anchor">Log scale in x and y, scatters and colormap</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/ScatterLogxyCbar.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">123</span>)
-    x = <span class="hljs-number">10</span> .^(range(-<span class="hljs-number">1</span>,stop=<span class="hljs-number">1</span>,length=<span class="hljs-number">100</span>))
-    y = x.^<span class="hljs-number">2</span> .+ abs.(<span class="hljs-number">2</span>*randn(length(x)))
-    cmap = cgrad(:gist_stern, scale = :log)
-    cmapt = [(cmap[i],<span class="hljs-number">0.65</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:length(cmap)]
-    fig,ax,pltpbj = scatter(x, y,color = x, markersize = (x.^<span class="hljs-number">2</span>/<span class="hljs-number">3</span>)[<span class="hljs-keyword">end</span>:-<span class="hljs-number">1</span>:<span class="hljs-number">1</span>] .+<span class="hljs-number">6</span>,
-        colormap = cmapt, figure = (resolution = (<span class="hljs-number">700</span>,<span class="hljs-number">450</span>),font=:sans),
-        axis = (xscale = log10, yscale = log10, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;y&quot;</span>,
-        xgridstyle=:dash, ygridstyle=:dash, xminorticksvisible = <span class="hljs-literal">true</span>,
-        xminorticks = IntervalsBetween(<span class="hljs-number">9</span>), yminorticksvisible = <span class="hljs-literal">true</span>,
-        yminorticks = IntervalsBetween(<span class="hljs-number">9</span>)))
-    cbar = Colorbar(fig, pltpbj)
-    ylims!(ax,<span class="hljs-number">1e-1</span>,<span class="hljs-number">1e2</span>)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] = cbar
+<p><img src="/BeautifulMakie/assets/scripts/output/ScatterLogxyCbar.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;123&#41;
+    x &#61; 10 .^&#40;range&#40;-1,stop&#61;1,length&#61;100&#41;&#41;
+    y &#61; x.^2 .&#43; abs.&#40;2*randn&#40;length&#40;x&#41;&#41;&#41;
+    cmap &#61; cgrad&#40;:gist_stern, scale &#61; :log&#41;
+    cmapt &#61; &#91;&#40;cmap&#91;i&#93;,0.65&#41; for i in 1:length&#40;cmap&#41;&#93;
+    fig,ax,pltpbj &#61; scatter&#40;x, y,color &#61; x, markersize &#61; &#40;x.^2/3&#41;&#91;end:-1:1&#93; .&#43;6,
+        colormap &#61; cmapt, figure &#61; &#40;resolution &#61; &#40;700,450&#41;,font&#61;:sans&#41;,
+        axis &#61; &#40;xscale &#61; log10, yscale &#61; log10, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;,
+        xgridstyle&#61;:dash, ygridstyle&#61;:dash, xminorticksvisible &#61; true,
+        xminorticks &#61; IntervalsBetween&#40;9&#41;, yminorticksvisible &#61; true,
+        yminorticks &#61; IntervalsBetween&#40;9&#41;&#41;&#41;
+    cbar &#61; Colorbar&#40;fig, pltpbj&#41;
+    ylims&#33;&#40;ax,1e-1,1e2&#41;
+    fig&#91;1,2&#93; &#61; cbar
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -254,8 +254,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

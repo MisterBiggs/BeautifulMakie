@@ -218,20 +218,20 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="single_line"><a href="#single_line" class="header-anchor">Single line</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/lines1.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    x = <span class="hljs-number">1</span>:<span class="hljs-number">10</span>
-    lines(x, x.^<span class="hljs-number">2</span>, color = :black, linewidth = <span class="hljs-number">2</span>, linestyle = <span class="hljs-string">&quot;.-&quot;</span>, label = <span class="hljs-string">&quot;x²&quot;</span>,
-    figure = (resolution = (<span class="hljs-number">700</span>,<span class="hljs-number">450</span>), fontsize = <span class="hljs-number">18</span>, backgroundcolor = <span class="hljs-string">&quot;#D0DFE6FF&quot;</span>),
-    axis = (xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;x²&quot;</span>, backgroundcolor = :white))
-    axislegend(<span class="hljs-string">&quot;legend&quot;</span>, position = :lt)
-    limits!(<span class="hljs-number">0</span>,<span class="hljs-number">10</span>,<span class="hljs-number">0</span>,<span class="hljs-number">100</span>)
-    current_figure()
-    <span class="hljs-comment">#save(&quot;lines1.png&quot;), current_figure(), px_per_unit = 2.0)</span>
-<span class="hljs-keyword">end</span></code></pre></p>
+<p><img src="/BeautifulMakie/assets/scripts/output/lines1.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    x &#61; 1:10
+    lines&#40;x, x.^2, color &#61; :black, linewidth &#61; 2, linestyle &#61; &quot;.-&quot;, label &#61; &quot;x²&quot;,
+    figure &#61; &#40;resolution &#61; &#40;700,450&#41;, fontsize &#61; 18, backgroundcolor &#61; &quot;#D0DFE6FF&quot;&#41;,
+    axis &#61; &#40;xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;x²&quot;, backgroundcolor &#61; :white&#41;&#41;
+    axislegend&#40;&quot;legend&quot;, position &#61; :lt&#41;
+    limits&#33;&#40;0,10,0,100&#41;
+    current_figure&#40;&#41;
+    #save&#40;&quot;lines1.png&quot;&#41;, current_figure&#40;&#41;, px_per_unit &#61; 2.0&#41;
+end</code></pre></p>
 <p>
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -247,8 +247,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

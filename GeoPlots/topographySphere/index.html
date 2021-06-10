@@ -218,56 +218,56 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="surface_sphere_topography_etopo1_netcdf_file"><a href="#surface_sphere_topography_etopo1_netcdf_file" class="header-anchor">Surface sphere, topography ETOPO1, NetCDF file</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/topographySphere.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie, NetCDF
-<span class="hljs-keyword">using</span> YAXArrays.Datasets: open_mfdataset
-<span class="hljs-keyword">let</span>
-    dataset = open_mfdataset(<span class="hljs-string">&quot;./data/ETOPO1_halfdegree.nc&quot;</span>)
-    lon = dataset.lon.values
-    lat = dataset.lat.values
-    data = dataset.ETOPO1avg.data[:,:]
-    <span class="hljs-keyword">function</span> toCartesian(lon, lat; r = <span class="hljs-number">1</span>, cxyz = (<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>) )
-        lat, lon = lat*<span class="hljs-literal">π</span>/<span class="hljs-number">180</span>, lon*<span class="hljs-literal">π</span>/<span class="hljs-number">180</span>
-        x = cxyz[<span class="hljs-number">1</span>] + r * cos(lat) * cos(lon)
-        y = cxyz[<span class="hljs-number">2</span>] + r * cos(lat) * sin(lon)
-        z = cxyz[<span class="hljs-number">3</span>] + r *sin(lat)
+<p><img src="/BeautifulMakie/assets/scripts/output/topographySphere.png" alt=""> <pre><code class="language-julia">using GLMakie, NetCDF
+using YAXArrays.Datasets: open_mfdataset
+let
+    dataset &#61; open_mfdataset&#40;&quot;./data/ETOPO1_halfdegree.nc&quot;&#41;
+    lon &#61; dataset.lon.values
+    lat &#61; dataset.lat.values
+    data &#61; dataset.ETOPO1avg.data&#91;:,:&#93;
+    function toCartesian&#40;lon, lat; r &#61; 1, cxyz &#61; &#40;0,0,0&#41; &#41;
+        lat, lon &#61; lat*π/180, lon*π/180
+        x &#61; cxyz&#91;1&#93; &#43; r * cos&#40;lat&#41; * cos&#40;lon&#41;
+        y &#61; cxyz&#91;2&#93; &#43; r * cos&#40;lat&#41; * sin&#40;lon&#41;
+        z &#61; cxyz&#91;3&#93; &#43; r *sin&#40;lat&#41;
         x,y,z
-    <span class="hljs-keyword">end</span>
-    <span class="hljs-keyword">function</span> lonlat3D(lon, lat, data; cxyz = (<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>))
-        xyzw = zeros(size(data)..., <span class="hljs-number">3</span>)
-        <span class="hljs-keyword">for</span> (i,lon) <span class="hljs-keyword">in</span> enumerate(lon), (j,lat) <span class="hljs-keyword">in</span> enumerate(lat)
-            x, y, z = toCartesian(lon, lat; cxyz = cxyz)
-            xyzw[i,j,<span class="hljs-number">1</span>] = x
-            xyzw[i,j,<span class="hljs-number">2</span>] = y
-            xyzw[i,j,<span class="hljs-number">3</span>] = z
-        <span class="hljs-keyword">end</span>
-        xyzw[:,:,<span class="hljs-number">1</span>], xyzw[:,:,<span class="hljs-number">2</span>], xyzw[:,:,<span class="hljs-number">3</span>]
-    <span class="hljs-keyword">end</span>
-    <span class="hljs-comment"># this is needed in order to have a closed surface</span>
-    lonext  = cat(collect(lon), lon[<span class="hljs-number">1</span>], dims = <span class="hljs-number">1</span>)
-    dataext = <span class="hljs-keyword">begin</span>
-        tmpdata = zeros(size(lon)[<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>,  size(lat)[<span class="hljs-number">1</span>])
-        tmpdata[<span class="hljs-number">1</span>:size(lon)[<span class="hljs-number">1</span>],:] = data
-        tmpdata[size(lon)[<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>,:] = data[<span class="hljs-number">1</span>,:]
+    end
+    function lonlat3D&#40;lon, lat, data; cxyz &#61; &#40;0,0,0&#41;&#41;
+        xyzw &#61; zeros&#40;size&#40;data&#41;..., 3&#41;
+        for &#40;i,lon&#41; in enumerate&#40;lon&#41;, &#40;j,lat&#41; in enumerate&#40;lat&#41;
+            x, y, z &#61; toCartesian&#40;lon, lat; cxyz &#61; cxyz&#41;
+            xyzw&#91;i,j,1&#93; &#61; x
+            xyzw&#91;i,j,2&#93; &#61; y
+            xyzw&#91;i,j,3&#93; &#61; z
+        end
+        xyzw&#91;:,:,1&#93;, xyzw&#91;:,:,2&#93;, xyzw&#91;:,:,3&#93;
+    end
+    # this is needed in order to have a closed surface
+    lonext  &#61; cat&#40;collect&#40;lon&#41;, lon&#91;1&#93;, dims &#61; 1&#41;
+    dataext &#61; begin
+        tmpdata &#61; zeros&#40;size&#40;lon&#41;&#91;1&#93;&#43;1,  size&#40;lat&#41;&#91;1&#93;&#41;
+        tmpdata&#91;1:size&#40;lon&#41;&#91;1&#93;,:&#93; &#61; data
+        tmpdata&#91;size&#40;lon&#41;&#91;1&#93;&#43;1,:&#93; &#61; data&#91;1,:&#93;
         tmpdata
-    <span class="hljs-keyword">end</span>
-    <span class="hljs-comment">#now let&#x27;s plot that surface!</span>
-    xetopo, yetopo, zetopo = lonlat3D(lonext, lat, dataext)
+    end
+    #now let&#39;s plot that surface&#33;
+    xetopo, yetopo, zetopo &#61; lonlat3D&#40;lonext, lat, dataext&#41;
 
-    fig = Figure(resolution =(<span class="hljs-number">950</span>,<span class="hljs-number">900</span>),fontsize = <span class="hljs-number">25</span>,backgroundcolor = :black)
-    ax = Axis3(fig, aspect = :data, azimuth = -<span class="hljs-number">0.2</span><span class="hljs-literal">π</span>, elevation = -<span class="hljs-number">0.05</span><span class="hljs-literal">π</span>)
-    pltobj=surface!(ax,xetopo, yetopo, zetopo, color = dataext,
-        colormap = :hot, backlight = <span class="hljs-number">1.0f0</span>, colorrange =(-<span class="hljs-number">6000</span>,<span class="hljs-number">5000</span>))
-    cbar  =Colorbar(fig,pltobj,label = <span class="hljs-string">&quot;ETOPO1 [m]&quot;</span>,ticklabelsize = <span class="hljs-number">20</span>,
-        tickalign =<span class="hljs-number">1</span>, vertical = <span class="hljs-literal">true</span>, ticksize=<span class="hljs-number">15</span>, labelcolor = :white,
-        ticklabelcolor = :white, tickcolor = :grey90, height = Relative(<span class="hljs-number">0.5</span>))
-    hidespines!(ax)
-    hidedecorations!(ax)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] = cbar
+    fig &#61; Figure&#40;resolution &#61;&#40;950,900&#41;,fontsize &#61; 25,backgroundcolor &#61; :black&#41;
+    ax &#61; Axis3&#40;fig, aspect &#61; :data, azimuth &#61; -0.2π, elevation &#61; -0.05π&#41;
+    pltobj&#61;surface&#33;&#40;ax,xetopo, yetopo, zetopo, color &#61; dataext,
+        colormap &#61; :hot, backlight &#61; 1.0f0, colorrange &#61;&#40;-6000,5000&#41;&#41;
+    cbar  &#61;Colorbar&#40;fig,pltobj,label &#61; &quot;ETOPO1 &#91;m&#93;&quot;,ticklabelsize &#61; 20,
+        tickalign &#61;1, vertical &#61; true, ticksize&#61;15, labelcolor &#61; :white,
+        ticklabelcolor &#61; :white, tickcolor &#61; :grey90, height &#61; Relative&#40;0.5&#41;&#41;
+    hidespines&#33;&#40;ax&#41;
+    hidedecorations&#33;&#40;ax&#41;
+    fig&#91;1,1&#93; &#61; ax
+    fig&#91;1,2&#93; &#61; cbar
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [e9467ef8] GLMakie v0.3.3
   [30363a11] NetCDF v0.11.3
   [c21b50f5] YAXArrays v0.1.2
@@ -285,8 +285,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

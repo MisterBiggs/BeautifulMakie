@@ -218,30 +218,30 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="wireframe_tori"><a href="#wireframe_tori" class="header-anchor">Wireframe Tori</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/wireTori.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    U = <span class="hljs-built_in">LinRange</span>(-<span class="hljs-literal">pi</span>, <span class="hljs-literal">pi</span>, <span class="hljs-number">100</span>) <span class="hljs-comment"># 50</span>
-    V = <span class="hljs-built_in">LinRange</span>(-<span class="hljs-literal">pi</span>, <span class="hljs-literal">pi</span>, <span class="hljs-number">20</span>)
-    x1 = [cos(u) + <span class="hljs-number">.5</span> * cos(u) * cos(v)      <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> U, v <span class="hljs-keyword">in</span> V]
-    y1 = [sin(u) + <span class="hljs-number">.5</span> * sin(u) * cos(v)      <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> U, v <span class="hljs-keyword">in</span> V]
-    z1 = [<span class="hljs-number">.5</span> * sin(v)                        <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> U, v <span class="hljs-keyword">in</span> V]
-    x2 = [<span class="hljs-number">1</span> + cos(u) + <span class="hljs-number">.5</span> * cos(u) * cos(v)  <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> U, v <span class="hljs-keyword">in</span> V]
-    y2 = [<span class="hljs-number">.5</span> * sin(v)                        <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> U, v <span class="hljs-keyword">in</span> V]
-    z2 = [sin(u) + <span class="hljs-number">.5</span> * sin(u) * cos(v)      <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> U, v <span class="hljs-keyword">in</span> V]
-    fig = Figure(resolution =(<span class="hljs-number">900</span>,<span class="hljs-number">600</span>))
-    ax = LScene(fig, scenekw = (camera = cam3d!, show_axis = <span class="hljs-literal">true</span>))
-    wireframe!(x1,y1,z1, shading = <span class="hljs-literal">false</span>)
-    axis = ax.scene[OldAxis]
-    tstyle = axis[:names]
-    tstyle[:textsize] = <span class="hljs-number">16</span>
-    tstyle[:gap] = <span class="hljs-number">8</span>
-    axis[:ticks][:textcolor] = :black
-    axis[:ticks][:textsize] = <span class="hljs-number">10</span>
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+<p><img src="/BeautifulMakie/assets/scripts/output/wireTori.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    U &#61; LinRange&#40;-pi, pi, 100&#41; # 50
+    V &#61; LinRange&#40;-pi, pi, 20&#41;
+    x1 &#61; &#91;cos&#40;u&#41; &#43; .5 * cos&#40;u&#41; * cos&#40;v&#41;      for u in U, v in V&#93;
+    y1 &#61; &#91;sin&#40;u&#41; &#43; .5 * sin&#40;u&#41; * cos&#40;v&#41;      for u in U, v in V&#93;
+    z1 &#61; &#91;.5 * sin&#40;v&#41;                        for u in U, v in V&#93;
+    x2 &#61; &#91;1 &#43; cos&#40;u&#41; &#43; .5 * cos&#40;u&#41; * cos&#40;v&#41;  for u in U, v in V&#93;
+    y2 &#61; &#91;.5 * sin&#40;v&#41;                        for u in U, v in V&#93;
+    z2 &#61; &#91;sin&#40;u&#41; &#43; .5 * sin&#40;u&#41; * cos&#40;v&#41;      for u in U, v in V&#93;
+    fig &#61; Figure&#40;resolution &#61;&#40;900,600&#41;&#41;
+    ax &#61; LScene&#40;fig, scenekw &#61; &#40;camera &#61; cam3d&#33;, show_axis &#61; true&#41;&#41;
+    wireframe&#33;&#40;x1,y1,z1, shading &#61; false&#41;
+    axis &#61; ax.scene&#91;OldAxis&#93;
+    tstyle &#61; axis&#91;:names&#93;
+    tstyle&#91;:textsize&#93; &#61; 16
+    tstyle&#91;:gap&#93; &#61; 8
+    axis&#91;:ticks&#93;&#91;:textcolor&#93; &#61; :black
+    axis&#91;:ticks&#93;&#91;:textsize&#93; &#61; 10
+    fig&#91;1,1&#93; &#61; ax
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -257,8 +257,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

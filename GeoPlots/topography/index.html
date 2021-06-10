@@ -218,29 +218,29 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="surface_topography_etopo1_netcdf_file"><a href="#surface_topography_etopo1_netcdf_file" class="header-anchor">Surface, topography ETOPO1, NetCDF file</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/topography.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie, NetCDF
-<span class="hljs-keyword">using</span> YAXArrays.Datasets: open_mfdataset
-<span class="hljs-keyword">let</span>
-    dataset = open_mfdataset(<span class="hljs-string">&quot;./data/ETOPO1_halfdegree.nc&quot;</span>)
-    lon = dataset.lon.values
-    lat = dataset.lat.values
-    data = dataset.ETOPO1avg.data[:,:]
+<p><img src="/BeautifulMakie/assets/scripts/output/topography.png" alt=""> <pre><code class="language-julia">using GLMakie, NetCDF
+using YAXArrays.Datasets: open_mfdataset
+let
+    dataset &#61; open_mfdataset&#40;&quot;./data/ETOPO1_halfdegree.nc&quot;&#41;
+    lon &#61; dataset.lon.values
+    lat &#61; dataset.lat.values
+    data &#61; dataset.ETOPO1avg.data&#91;:,:&#93;
 
-    fig = Figure(resolution = (<span class="hljs-number">1250</span>,<span class="hljs-number">700</span>),fontsize = <span class="hljs-number">25</span>, backgroundcolor = :black)
-    ax = Axis3(fig, aspect = (<span class="hljs-number">1</span>,<span class="hljs-number">0.6</span>,<span class="hljs-number">0.1</span>),azimuth = -<span class="hljs-number">0.65</span><span class="hljs-literal">π</span>, elevation = <span class="hljs-number">0.225</span><span class="hljs-literal">π</span>)
-    pltobj=surface!(ax,lon,lat, data, colormap = :starrynight, backlight = <span class="hljs-number">1.0f0</span>,
-        colorrange =(-<span class="hljs-number">6500</span>,<span class="hljs-number">5500</span>))
-    cbar  =Colorbar(fig,pltobj,label = <span class="hljs-string">&quot;ETOPO1 [m]&quot;</span>,ticklabelsize = <span class="hljs-number">20</span>,
-        tickalign =<span class="hljs-number">1</span>, vertical = <span class="hljs-literal">true</span>, ticksize=<span class="hljs-number">15</span>, labelcolor = :white,
-        ticklabelcolor = :white, tickcolor = :grey90, height = Relative(<span class="hljs-number">0.5</span>))
-    hidespines!(ax)
-    hidedecorations!(ax)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] = cbar
+    fig &#61; Figure&#40;resolution &#61; &#40;1250,700&#41;,fontsize &#61; 25, backgroundcolor &#61; :black&#41;
+    ax &#61; Axis3&#40;fig, aspect &#61; &#40;1,0.6,0.1&#41;,azimuth &#61; -0.65π, elevation &#61; 0.225π&#41;
+    pltobj&#61;surface&#33;&#40;ax,lon,lat, data, colormap &#61; :starrynight, backlight &#61; 1.0f0,
+        colorrange &#61;&#40;-6500,5500&#41;&#41;
+    cbar  &#61;Colorbar&#40;fig,pltobj,label &#61; &quot;ETOPO1 &#91;m&#93;&quot;,ticklabelsize &#61; 20,
+        tickalign &#61;1, vertical &#61; true, ticksize&#61;15, labelcolor &#61; :white,
+        ticklabelcolor &#61; :white, tickcolor &#61; :grey90, height &#61; Relative&#40;0.5&#41;&#41;
+    hidespines&#33;&#40;ax&#41;
+    hidedecorations&#33;&#40;ax&#41;
+    fig&#91;1,1&#93; &#61; ax
+    fig&#91;1,2&#93; &#61; cbar
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [e9467ef8] GLMakie v0.3.3
   [30363a11] NetCDF v0.11.3
   [c21b50f5] YAXArrays v0.1.2
@@ -258,8 +258,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

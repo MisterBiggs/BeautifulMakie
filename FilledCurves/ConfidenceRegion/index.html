@@ -218,22 +218,22 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="confidence_region"><a href="#confidence_region" class="header-anchor">Confidence Region</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/ConfidenceRegion.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    x = y = -<span class="hljs-number">10</span>:<span class="hljs-number">0.11</span>:<span class="hljs-number">10</span>
-    y1d =  sin.(x) ./ x
-    lower = y1d .- <span class="hljs-number">0.1</span>
-    upper = y1d .+ <span class="hljs-number">0.1</span>
-    fig = Figure(resolution = (<span class="hljs-number">600</span>, <span class="hljs-number">400</span>))
-    ax = Axis(fig, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;y&quot;</span>)
-    lines!(x, y1d, color = :black)
-    band!(x, lower, upper; color = (<span class="hljs-string">&quot;#E69F00&quot;</span>, <span class="hljs-number">0.2</span>))
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+<p><img src="/BeautifulMakie/assets/scripts/output/ConfidenceRegion.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    x &#61; y &#61; -10:0.11:10
+    y1d &#61;  sin.&#40;x&#41; ./ x
+    lower &#61; y1d .- 0.1
+    upper &#61; y1d .&#43; 0.1
+    fig &#61; Figure&#40;resolution &#61; &#40;600, 400&#41;&#41;
+    ax &#61; Axis&#40;fig, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;&#41;
+    lines&#33;&#40;x, y1d, color &#61; :black&#41;
+    band&#33;&#40;x, lower, upper; color &#61; &#40;&quot;#E69F00&quot;, 0.2&#41;&#41;
+    fig&#91;1,1&#93; &#61; ax
     fig
-    <span class="hljs-comment">#save(&quot;ConfidenceRegion.png&quot;), fig, px_per_unit = 2.0)</span>
-<span class="hljs-keyword">end</span></code></pre> 
+    #save&#40;&quot;ConfidenceRegion.png&quot;&#41;, fig, px_per_unit &#61; 2.0&#41;
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -249,8 +249,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

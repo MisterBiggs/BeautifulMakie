@@ -218,38 +218,38 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="candle_stick"><a href="#candle_stick" class="header-anchor">Candle stick</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/candlestick.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random, TimeSeries, MarketData, Dates
-<span class="hljs-keyword">let</span>
-    tempo = string.(timestamp(ohlc))
-    lentime = length(tempo)
-    slice_dates = range(<span class="hljs-number">1</span>,lentime, step = lentime÷<span class="hljs-number">20</span>)
+<p><img src="/BeautifulMakie/assets/scripts/output/candlestick.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random, TimeSeries, MarketData, Dates
+let
+    tempo &#61; string.&#40;timestamp&#40;ohlc&#41;&#41;
+    lentime &#61; length&#40;tempo&#41;
+    slice_dates &#61; range&#40;1,lentime, step &#61; lentime÷20&#41;
 
-    colors = values(ohlc.Close) .&gt; values(ohlc.Open)
-    lowV = values(ohlc.Low)
-    highV = values(ohlc.High)
-    linesegs = []
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:lentime
-        push!(linesegs, Point2f0(i, lowV[i]))
-        push!(linesegs, Point2f0(i, highV[i]))
-    <span class="hljs-keyword">end</span>
-    linesegs = Point2f0.(linesegs)
-    cmap = (<span class="hljs-string">&quot;#f64325&quot;</span>, <span class="hljs-string">&quot;#78f518&quot;</span>)
+    colors &#61; values&#40;ohlc.Close&#41; .&gt; values&#40;ohlc.Open&#41;
+    lowV &#61; values&#40;ohlc.Low&#41;
+    highV &#61; values&#40;ohlc.High&#41;
+    linesegs &#61; &#91;&#93;
+    for i in 1:lentime
+        push&#33;&#40;linesegs, Point2f0&#40;i, lowV&#91;i&#93;&#41;&#41;
+        push&#33;&#40;linesegs, Point2f0&#40;i, highV&#91;i&#93;&#41;&#41;
+    end
+    linesegs &#61; Point2f0.&#40;linesegs&#41;
+    cmap &#61; &#40;&quot;#f64325&quot;, &quot;#78f518&quot;&#41;
 
-    fig = Figure(resolution = (<span class="hljs-number">1200</span>, <span class="hljs-number">700</span>), font = <span class="hljs-string">&quot;sans&quot;</span>, fontsize = <span class="hljs-number">20</span>)
-    ax = Axis(fig, backgroundcolor = :black, ygridcolor = <span class="hljs-string">&quot;#65866b&quot;</span>,
-        xgridcolor = <span class="hljs-string">&quot;#65866b&quot;</span>, xgridstyle=:dash, ygridstyle=:dash)
-    barplot!(ax, <span class="hljs-number">1</span>:lentime, values(ohlc.Open), fillto = values(ohlc.Close),
-        color = colors,strokewidth = <span class="hljs-number">0.5</span>, strokecolor = colors, colormap = cmap)
-    linesegments!(ax, linesegs, color = colors, colormap = cmap)
-    xlims!(ax, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>)
-    ylims!(ax, <span class="hljs-number">13</span>,<span class="hljs-number">24</span>)
-    ax.xticks = (slice_dates, tempo[slice_dates])
-    ax.xticklabelrotation = <span class="hljs-literal">π</span>/<span class="hljs-number">4</span>
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+    fig &#61; Figure&#40;resolution &#61; &#40;1200, 700&#41;, font &#61; &quot;sans&quot;, fontsize &#61; 20&#41;
+    ax &#61; Axis&#40;fig, backgroundcolor &#61; :black, ygridcolor &#61; &quot;#65866b&quot;,
+        xgridcolor &#61; &quot;#65866b&quot;, xgridstyle&#61;:dash, ygridstyle&#61;:dash&#41;
+    barplot&#33;&#40;ax, 1:lentime, values&#40;ohlc.Open&#41;, fillto &#61; values&#40;ohlc.Close&#41;,
+        color &#61; colors,strokewidth &#61; 0.5, strokecolor &#61; colors, colormap &#61; cmap&#41;
+    linesegments&#33;&#40;ax, linesegs, color &#61; colors, colormap &#61; cmap&#41;
+    xlims&#33;&#40;ax, 200, 300&#41;
+    ylims&#33;&#40;ax, 13,24&#41;
+    ax.xticks &#61; &#40;slice_dates, tempo&#91;slice_dates&#93;&#41;
+    ax.xticklabelrotation &#61; π/4
+    fig&#91;1,1&#93; &#61; ax
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [945b72a4] MarketData v0.13.6
   [9e3dc215] TimeSeries v0.22.1
@@ -269,8 +269,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

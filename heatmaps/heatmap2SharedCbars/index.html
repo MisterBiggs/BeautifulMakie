@@ -218,37 +218,37 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="heatmaps_shared_colorbars"><a href="#heatmaps_shared_colorbars" class="header-anchor">Heatmaps, shared colorbars</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/heatmap2SharedCbars.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">123</span>)
-    n = <span class="hljs-number">15</span>
-    x, y, color = rand(n), rand(n), rand(n)
-    cmaps=[:cool,:viridis,:plasma,:inferno,:thermal,:leonardo,:winter,:spring,:ice]
+<p><img src="/BeautifulMakie/assets/scripts/output/heatmap2SharedCbars.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;123&#41;
+    n &#61; 15
+    x, y, color &#61; rand&#40;n&#41;, rand&#40;n&#41;, rand&#40;n&#41;
+    cmaps&#61;&#91;:cool,:viridis,:plasma,:inferno,:thermal,:leonardo,:winter,:spring,:ice&#93;
 
-    <span class="hljs-keyword">function</span> FigGridHeatSharedCbar()
-        fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">500</span>))
-        c = <span class="hljs-number">1</span>
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">2</span>, j <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">2</span>:<span class="hljs-number">3</span>
-            ax=Axis(fig[i, j],aspect = <span class="hljs-number">1</span>,xgridvisible = <span class="hljs-literal">false</span>,ygridvisible = <span class="hljs-literal">false</span>)
-            pnts = heatmap!(rand(<span class="hljs-number">10</span>,<span class="hljs-number">10</span>), colormap= cmaps[j], colorrange=(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>))
-            ax.xticks = [<span class="hljs-number">1</span>,<span class="hljs-number">10</span>]
-            ax.yticks = [<span class="hljs-number">1</span>,<span class="hljs-number">10</span>]
-            ax.xticklabelsize = <span class="hljs-number">16</span>
-            ax.yticklabelsize = <span class="hljs-number">16</span>
+    function FigGridHeatSharedCbar&#40;&#41;
+        fig &#61; Figure&#40;resolution &#61; &#40;700, 500&#41;&#41;
+        c &#61; 1
+        for i in 1:2, j in 1:2:3
+            ax&#61;Axis&#40;fig&#91;i, j&#93;,aspect &#61; 1,xgridvisible &#61; false,ygridvisible &#61; false&#41;
+            pnts &#61; heatmap&#33;&#40;rand&#40;10,10&#41;, colormap&#61; cmaps&#91;j&#93;, colorrange&#61;&#40;0, 1&#41;&#41;
+            ax.xticks &#61; &#91;1,10&#93;
+            ax.yticks &#61; &#91;1,10&#93;
+            ax.xticklabelsize &#61; 16
+            ax.yticklabelsize &#61; 16
 
-            cbar = Colorbar(fig, pnts, ticklabelsize = <span class="hljs-number">14</span>, height = Relative(<span class="hljs-number">3</span>/<span class="hljs-number">4</span>),
-            tickwidth = <span class="hljs-number">2</span>)
-            cbar.ticks = [<span class="hljs-number">0</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">1</span>]
-            fig[<span class="hljs-number">1</span>:<span class="hljs-number">2</span>, j+<span class="hljs-number">1</span>] = cbar
-            c+=<span class="hljs-number">1</span>
-        <span class="hljs-keyword">end</span>
+            cbar &#61; Colorbar&#40;fig, pnts, ticklabelsize &#61; 14, height &#61; Relative&#40;3/4&#41;,
+            tickwidth &#61; 2&#41;
+            cbar.ticks &#61; &#91;0, 0.5, 1&#93;
+            fig&#91;1:2, j&#43;1&#93; &#61; cbar
+            c&#43;&#61;1
+        end
         fig
-    <span class="hljs-keyword">end</span>
-    fig = FigGridHeatSharedCbar()
+    end
+    fig &#61; FigGridHeatSharedCbar&#40;&#41;
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -265,8 +265,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

@@ -218,25 +218,25 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="contour_qubit"><a href="#contour_qubit" class="header-anchor">Contour Qubit</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/contourQubit.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    <span class="hljs-keyword">function</span> tα_qubit(β, ψ<span class="hljs-number">1</span>, ψ<span class="hljs-number">2</span>, fα, f)
-        <span class="hljs-number">2</span> + <span class="hljs-number">2</span>*β - cos(ψ<span class="hljs-number">1</span>) - cos(ψ<span class="hljs-number">2</span>) - <span class="hljs-number">2</span>*β*cos(<span class="hljs-literal">π</span>*fα)*cos(<span class="hljs-number">2</span>*<span class="hljs-literal">π</span>*f + <span class="hljs-literal">π</span>*fα - ψ<span class="hljs-number">1</span>- ψ<span class="hljs-number">2</span>)
-    <span class="hljs-keyword">end</span>
-    ψ<span class="hljs-number">1</span> = ψ<span class="hljs-number">2</span> = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>*<span class="hljs-literal">π</span>, <span class="hljs-number">100</span>)
-    z = [tα_qubit(<span class="hljs-number">.61</span>, x, y, <span class="hljs-number">0.2</span>, <span class="hljs-number">.1</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> ψ<span class="hljs-number">1</span>, y <span class="hljs-keyword">in</span> ψ<span class="hljs-number">2</span>]
+<p><img src="/BeautifulMakie/assets/scripts/output/contourQubit.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    function tα_qubit&#40;β, ψ1, ψ2, fα, f&#41;
+        2 &#43; 2*β - cos&#40;ψ1&#41; - cos&#40;ψ2&#41; - 2*β*cos&#40;π*fα&#41;*cos&#40;2*π*f &#43; π*fα - ψ1- ψ2&#41;
+    end
+    ψ1 &#61; ψ2 &#61; LinRange&#40;0, 4*π, 100&#41;
+    z &#61; &#91;tα_qubit&#40;.61, x, y, 0.2, .1&#41; for x in ψ1, y in ψ2&#93;
 
-    fig = Figure(resolution = (<span class="hljs-number">470</span>, <span class="hljs-number">400</span>))
-    ax = Axis(fig, aspect = <span class="hljs-number">1</span>, xlabel = <span class="hljs-string">&quot;ψ1&quot;</span>, ylabel = <span class="hljs-string">&quot;ψ2&quot;</span>)
-    clines = contour!(ψ<span class="hljs-number">1</span>, ψ<span class="hljs-number">2</span>, z,colormap = :plasma,levels = <span class="hljs-number">20</span>,linewidth = <span class="hljs-number">1.5</span>)
-    limits!(ax, <span class="hljs-number">0</span>, <span class="hljs-number">4</span><span class="hljs-literal">π</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span><span class="hljs-literal">π</span>)
-    cbar  = Colorbar(fig, clines, label =<span class="hljs-string">&quot;α-q&quot;</span>, height = Relative(<span class="hljs-number">3.55</span>/<span class="hljs-number">4</span>))
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] = cbar
+    fig &#61; Figure&#40;resolution &#61; &#40;470, 400&#41;&#41;
+    ax &#61; Axis&#40;fig, aspect &#61; 1, xlabel &#61; &quot;ψ1&quot;, ylabel &#61; &quot;ψ2&quot;&#41;
+    clines &#61; contour&#33;&#40;ψ1, ψ2, z,colormap &#61; :plasma,levels &#61; 20,linewidth &#61; 1.5&#41;
+    limits&#33;&#40;ax, 0, 4π, 0, 4π&#41;
+    cbar  &#61; Colorbar&#40;fig, clines, label &#61;&quot;α-q&quot;, height &#61; Relative&#40;3.55/4&#41;&#41;
+    fig&#91;1, 1&#93; &#61; ax
+    fig&#91;1, 2&#93; &#61; cbar
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -252,8 +252,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

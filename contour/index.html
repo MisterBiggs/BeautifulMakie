@@ -218,26 +218,26 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="contour_egg"><a href="#contour_egg" class="header-anchor">Contour egg</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/contour1.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    x = -<span class="hljs-number">1</span>:<span class="hljs-number">0.02</span>:<span class="hljs-number">1</span>
-    y = -<span class="hljs-number">1.5</span>:<span class="hljs-number">0.02</span>:<span class="hljs-number">2</span>
-    egg(x,y) = x^<span class="hljs-number">2</span> + y^<span class="hljs-number">2</span>/(<span class="hljs-number">1.4</span> + y/<span class="hljs-number">5</span>)^<span class="hljs-number">2</span>
-    segg = [egg(x,y) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> x, y <span class="hljs-keyword">in</span> y]
-    fig = Figure(resolution = (<span class="hljs-number">470</span>, <span class="hljs-number">550</span>))
-    ax = Axis(fig, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;y&quot;</span>, backgroundcolor = :black,
-    xgridstyle=:dash, ygridstyle=:dash, xgridcolor = :grey, ygridcolor = :grey)
-    cl =contour!(x, y, segg, linewidth = <span class="hljs-number">0.85</span>,colormap = :viridis,
-                levels = <span class="hljs-number">0</span>:<span class="hljs-number">0.02</span>:<span class="hljs-number">1</span>)
-    cbar = Colorbar(fig, cl, label =<span class="hljs-string">&quot;egg-l&quot;</span>, labelpadding = <span class="hljs-number">0</span>, width = <span class="hljs-number">15</span>,
-                ticksize=<span class="hljs-number">15</span>, tickalign = <span class="hljs-number">1</span>, height = Relative(<span class="hljs-number">1</span>))
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] = cbar
-    colgap!(fig.layout, <span class="hljs-number">7</span>)
+<p><img src="/BeautifulMakie/assets/scripts/output/contour1.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    x &#61; -1:0.02:1
+    y &#61; -1.5:0.02:2
+    egg&#40;x,y&#41; &#61; x^2 &#43; y^2/&#40;1.4 &#43; y/5&#41;^2
+    segg &#61; &#91;egg&#40;x,y&#41; for x in x, y in y&#93;
+    fig &#61; Figure&#40;resolution &#61; &#40;470, 550&#41;&#41;
+    ax &#61; Axis&#40;fig, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;, backgroundcolor &#61; :black,
+    xgridstyle&#61;:dash, ygridstyle&#61;:dash, xgridcolor &#61; :grey, ygridcolor &#61; :grey&#41;
+    cl &#61;contour&#33;&#40;x, y, segg, linewidth &#61; 0.85,colormap &#61; :viridis,
+                levels &#61; 0:0.02:1&#41;
+    cbar &#61; Colorbar&#40;fig, cl, label &#61;&quot;egg-l&quot;, labelpadding &#61; 0, width &#61; 15,
+                ticksize&#61;15, tickalign &#61; 1, height &#61; Relative&#40;1&#41;&#41;
+    fig&#91;1, 1&#93; &#61; ax
+    fig&#91;1, 2&#93; &#61; cbar
+    colgap&#33;&#40;fig.layout, 7&#41;
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -253,8 +253,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

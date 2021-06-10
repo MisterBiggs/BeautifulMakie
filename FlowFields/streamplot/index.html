@@ -218,18 +218,18 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="streamplot"><a href="#streamplot" class="header-anchor">Streamplot</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/streamplot.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">let</span>
-    odeSol(x,y) = Point(-x, <span class="hljs-number">2</span>y) <span class="hljs-comment"># x&#x27;(t) = -x, y&#x27;(t) = 2y</span>
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">450</span>), fontsize = <span class="hljs-number">18</span>, font = <span class="hljs-string">&quot;sans&quot;</span>)
-    ax = Axis(fig, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;y&quot;</span>, backgroundcolor = :black)
-    stplt = streamplot!(ax, odeSol, -<span class="hljs-number">2.</span><span class="hljs-number">.4</span>, -<span class="hljs-number">2.</span><span class="hljs-number">.2</span>, colormap = Reverse(:plasma),
-        gridsize= (<span class="hljs-number">32</span>,<span class="hljs-number">32</span>), arrow_size = <span class="hljs-number">10</span>)
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax
+<p><img src="/BeautifulMakie/assets/scripts/output/streamplot.png" alt=""> <pre><code class="language-julia">using CairoMakie
+let
+    odeSol&#40;x,y&#41; &#61; Point&#40;-x, 2y&#41; # x&#39;&#40;t&#41; &#61; -x, y&#39;&#40;t&#41; &#61; 2y
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 450&#41;, fontsize &#61; 18, font &#61; &quot;sans&quot;&#41;
+    ax &#61; Axis&#40;fig, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;, backgroundcolor &#61; :black&#41;
+    stplt &#61; streamplot&#33;&#40;ax, odeSol, -2..4, -2..2, colormap &#61; Reverse&#40;:plasma&#41;,
+        gridsize&#61; &#40;32,32&#41;, arrow_size &#61; 10&#41;
+    fig&#91;1, 1&#93; &#61; ax
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -245,8 +245,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

@@ -218,95 +218,95 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="penguins_dataset_with_scatters_and_regression_lines"><a href="#penguins_dataset_with_scatters_and_regression_lines" class="header-anchor">Penguins DataSet with scatters and regression lines</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/penguinsDataSetWithChain/output/penguinsDataSetWithChain.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, PalmerPenguins, Colors, Chain, DataFrames, GLM
-<span class="hljs-keyword">let</span>
-    <span class="hljs-literal">ENV</span>[<span class="hljs-string">&quot;DATADEPS_ALWAYS_ACCEPT&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span> <span class="hljs-comment"># Don&#x27;t ask if the datasets should be downloaded</span>
-	penguins = dropmissing(DataFrame(PalmerPenguins.load()))
-    set_theme!(Theme(
-        Axis = (
-            leftspinevisible = <span class="hljs-literal">false</span>,
-            rightspinevisible = <span class="hljs-literal">false</span>,
-            bottomspinevisible = <span class="hljs-literal">false</span>,
-            topspinevisible = <span class="hljs-literal">false</span>,
-            xticksvisible = <span class="hljs-literal">false</span>,
-            yticksvisible = <span class="hljs-literal">false</span>,
-        ),
-    ))
+<p><img src="/BeautifulMakie/assets/scripts/penguinsDataSetWithChain/output/penguinsDataSetWithChain.png" alt=""> <pre><code class="language-julia">using CairoMakie, PalmerPenguins, Colors, Chain, DataFrames, GLM
+let
+    ENV&#91;&quot;DATADEPS_ALWAYS_ACCEPT&quot;&#93; &#61; &quot;true&quot; # Don&#39;t ask if the datasets should be downloaded
+	penguins &#61; dropmissing&#40;DataFrame&#40;PalmerPenguins.load&#40;&#41;&#41;&#41;
+    set_theme&#33;&#40;Theme&#40;
+        Axis &#61; &#40;
+            leftspinevisible &#61; false,
+            rightspinevisible &#61; false,
+            bottomspinevisible &#61; false,
+            topspinevisible &#61; false,
+            xticksvisible &#61; false,
+            yticksvisible &#61; false,
+        &#41;,
+    &#41;&#41;
 
-    <span class="hljs-comment"># These colors were taken from https://allisonhorst.github.io/palmerpenguins/</span>
-	adeliecolor = <span class="hljs-string">colorant&quot;#FC7808&quot;</span>
-	chinstrapcolor = <span class="hljs-string">colorant&quot;#8C00EC&quot;</span>
-	gentoocolor = <span class="hljs-string">colorant&quot;#107A78&quot;</span>
-	(adeliecolor, chinstrapcolor, gentoocolor)
+    # These colors were taken from https://allisonhorst.github.io/palmerpenguins/
+	adeliecolor &#61; colorant&quot;#FC7808&quot;
+	chinstrapcolor &#61; colorant&quot;#8C00EC&quot;
+	gentoocolor &#61; colorant&quot;#107A78&quot;
+	&#40;adeliecolor, chinstrapcolor, gentoocolor&#41;
 
-    style = <span class="hljs-built_in">Dict</span>(
-        <span class="hljs-string">&quot;Adelie&quot;</span> =&gt; (
-            color=(adeliecolor,<span class="hljs-number">0.7</span>),
-            strokecolor=adeliecolor,
-            label=<span class="hljs-string">&quot;Adelie&quot;</span>,
-            marker=:circle,
-            markersize=<span class="hljs-number">20</span>,
-			linewidth = <span class="hljs-number">5</span>
-        ),
-        <span class="hljs-string">&quot;Chinstrap&quot;</span> =&gt; (
-            color=(chinstrapcolor,<span class="hljs-number">0.7</span>),
-            strokecolor=chinstrapcolor,
-            label=<span class="hljs-string">&quot;Chinstrap&quot;</span>,
-            marker=:utriangle,
-            markersize=<span class="hljs-number">20</span>,
-			linewidth = <span class="hljs-number">5</span>
-        ),
-        <span class="hljs-string">&quot;Gentoo&quot;</span> =&gt; (
-            color=(gentoocolor,<span class="hljs-number">0.7</span>),
-            strokecolor=gentoocolor,
-            label=<span class="hljs-string">&quot;Gentoo&quot;</span>,
-            marker=:rect,
-            markersize=<span class="hljs-number">20</span>,
-			linewidth = <span class="hljs-number">5</span>
-        )
-    )
+    style &#61; Dict&#40;
+        &quot;Adelie&quot; &#61;&gt; &#40;
+            color&#61;&#40;adeliecolor,0.7&#41;,
+            strokecolor&#61;adeliecolor,
+            label&#61;&quot;Adelie&quot;,
+            marker&#61;:circle,
+            markersize&#61;20,
+			linewidth &#61; 5
+        &#41;,
+        &quot;Chinstrap&quot; &#61;&gt; &#40;
+            color&#61;&#40;chinstrapcolor,0.7&#41;,
+            strokecolor&#61;chinstrapcolor,
+            label&#61;&quot;Chinstrap&quot;,
+            marker&#61;:utriangle,
+            markersize&#61;20,
+			linewidth &#61; 5
+        &#41;,
+        &quot;Gentoo&quot; &#61;&gt; &#40;
+            color&#61;&#40;gentoocolor,0.7&#41;,
+            strokecolor&#61;gentoocolor,
+            label&#61;&quot;Gentoo&quot;,
+            marker&#61;:rect,
+            markersize&#61;20,
+			linewidth &#61; 5
+        &#41;
+    &#41;
 
-	fig = Figure(resolution = (<span class="hljs-number">1000</span>, <span class="hljs-number">700</span>))
-	ax1 = fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = Axis(fig, title = <span class="hljs-string">&quot;Flipper and bill length&quot;</span>,
-		xlabel=<span class="hljs-string">&quot;Flipper length (mm)&quot;</span>, ylabel=<span class="hljs-string">&quot;Bill length (mm)&quot;</span>)
-	ax1.xticks = <span class="hljs-number">160</span>:<span class="hljs-number">10</span>:<span class="hljs-number">240</span>
-	ax1.yticks = <span class="hljs-number">30</span>:<span class="hljs-number">5</span>:<span class="hljs-number">60</span>
+	fig &#61; Figure&#40;resolution &#61; &#40;1000, 700&#41;&#41;
+	ax1 &#61; fig&#91;1, 1&#93; &#61; Axis&#40;fig, title &#61; &quot;Flipper and bill length&quot;,
+		xlabel&#61;&quot;Flipper length &#40;mm&#41;&quot;, ylabel&#61;&quot;Bill length &#40;mm&#41;&quot;&#41;
+	ax1.xticks &#61; 160:10:240
+	ax1.yticks &#61; 30:5:60
 
-	specie = <span class="hljs-meta">@chain</span> penguins <span class="hljs-keyword">begin</span>
-		filter(:species =&gt; ==(<span class="hljs-string">&quot;Adelie&quot;</span>), _)
-	<span class="hljs-keyword">end</span>
-	X = specie[!,:flipper_length_mm]
-	Y = specie[!,:bill_length_mm]
-	scatter!(ax1, X, Y; style[<span class="hljs-string">&quot;Adelie&quot;</span>]...)
-	ols = lm(<span class="hljs-meta">@formula</span>(Y ~ X), DataFrame(X=X, Y=Y))
-	y = predict(ols)
-	lines!(ax1, X, y; style[<span class="hljs-string">&quot;Adelie&quot;</span>]...)
+	specie &#61; @chain penguins begin
+		filter&#40;:species &#61;&gt; &#61;&#61;&#40;&quot;Adelie&quot;&#41;, _&#41;
+	end
+	X &#61; specie&#91;&#33;,:flipper_length_mm&#93;
+	Y &#61; specie&#91;&#33;,:bill_length_mm&#93;
+	scatter&#33;&#40;ax1, X, Y; style&#91;&quot;Adelie&quot;&#93;...&#41;
+	ols &#61; lm&#40;@formula&#40;Y ~ X&#41;, DataFrame&#40;X&#61;X, Y&#61;Y&#41;&#41;
+	y &#61; predict&#40;ols&#41;
+	lines&#33;&#40;ax1, X, y; style&#91;&quot;Adelie&quot;&#93;...&#41;
 
-	chinstrap = <span class="hljs-meta">@chain</span> penguins <span class="hljs-keyword">begin</span>
-		filter(:species =&gt; ==(<span class="hljs-string">&quot;Chinstrap&quot;</span>), _)
-	<span class="hljs-keyword">end</span>
-	X = chinstrap[!,:flipper_length_mm]
-	Y = chinstrap[!,:bill_length_mm]
-	scatter!(ax1, X,Y; style[<span class="hljs-string">&quot;Chinstrap&quot;</span>]...)
-	ols = lm(<span class="hljs-meta">@formula</span>(Y ~ X), DataFrame(X=X, Y=Y))
-	y = predict(ols)
-	lines!(ax1, X, y; style[<span class="hljs-string">&quot;Chinstrap&quot;</span>]...)
+	chinstrap &#61; @chain penguins begin
+		filter&#40;:species &#61;&gt; &#61;&#61;&#40;&quot;Chinstrap&quot;&#41;, _&#41;
+	end
+	X &#61; chinstrap&#91;&#33;,:flipper_length_mm&#93;
+	Y &#61; chinstrap&#91;&#33;,:bill_length_mm&#93;
+	scatter&#33;&#40;ax1, X,Y; style&#91;&quot;Chinstrap&quot;&#93;...&#41;
+	ols &#61; lm&#40;@formula&#40;Y ~ X&#41;, DataFrame&#40;X&#61;X, Y&#61;Y&#41;&#41;
+	y &#61; predict&#40;ols&#41;
+	lines&#33;&#40;ax1, X, y; style&#91;&quot;Chinstrap&quot;&#93;...&#41;
 
-	gentoo = <span class="hljs-meta">@chain</span> penguins <span class="hljs-keyword">begin</span>
-		filter(:species =&gt; ==(<span class="hljs-string">&quot;Gentoo&quot;</span>), _)
-	<span class="hljs-keyword">end</span>
-	X = gentoo[!,:flipper_length_mm]
-	Y = gentoo[!,:bill_length_mm]
-	scatter!(ax1,X, Y; style[<span class="hljs-string">&quot;Gentoo&quot;</span>]...)
-	ols = lm(<span class="hljs-meta">@formula</span>(Y ~ X), DataFrame(X=X, Y=Y))
-	y = predict(ols)
-	lines!(ax1, X, y; style[<span class="hljs-string">&quot;Gentoo&quot;</span>]...)
-	axislegend(<span class="hljs-string">&quot;Penguin species&quot;</span>, position = :rb)
+	gentoo &#61; @chain penguins begin
+		filter&#40;:species &#61;&gt; &#61;&#61;&#40;&quot;Gentoo&quot;&#41;, _&#41;
+	end
+	X &#61; gentoo&#91;&#33;,:flipper_length_mm&#93;
+	Y &#61; gentoo&#91;&#33;,:bill_length_mm&#93;
+	scatter&#33;&#40;ax1,X, Y; style&#91;&quot;Gentoo&quot;&#93;...&#41;
+	ols &#61; lm&#40;@formula&#40;Y ~ X&#41;, DataFrame&#40;X&#61;X, Y&#61;Y&#41;&#41;
+	y &#61; predict&#40;ols&#41;
+	lines&#33;&#40;ax1, X, y; style&#91;&quot;Gentoo&quot;&#93;...&#41;
+	axislegend&#40;&quot;Penguin species&quot;, position &#61; :rb&#41;
 
-    save(joinpath(<span class="hljs-meta">@__DIR__</span>, <span class="hljs-string">&quot;output&quot;</span>, <span class="hljs-string">&quot;penguinsDataSetWithChain.png&quot;</span>), fig)
-<span class="hljs-keyword">end</span></code></pre> 
+    save&#40;joinpath&#40;@__DIR__, &quot;output&quot;, &quot;penguinsDataSetWithChain.png&quot;&#41;, fig&#41;
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Desktop/BeautifulMakie/_assets/scripts/penguinsDataSetWithChain/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Desktop/BeautifulMakie/_assets/scripts/penguinsDataSetWithChain/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [8be319e6] Chain v0.4.6
   [5ae59095] Colors v0.12.8
@@ -328,8 +328,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

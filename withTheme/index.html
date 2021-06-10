@@ -218,28 +218,28 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="theme_black"><a href="#theme_black" class="header-anchor">Theme Black</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/themeBlack.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie
-<span class="hljs-keyword">function</span> EpicycloidLines()
-    ecycl_x(r,k,θ) = r*(k .+ <span class="hljs-number">1</span>).*cos.(θ) .- r*cos.((k .+ <span class="hljs-number">1</span>) .* θ)
-    ecycl_y(r,k,θ) = r*(k .+ <span class="hljs-number">1</span>).*sin.(θ) .- r*sin.((k .+ <span class="hljs-number">1</span>) .* θ)
-    θ = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>,<span class="hljs-number">6.2</span><span class="hljs-literal">π</span>,<span class="hljs-number">1000</span>)
-    tronLegacy = [<span class="hljs-string">&quot;#FF410DFF&quot;</span>, <span class="hljs-string">&quot;#6EE2FFFF&quot;</span>, <span class="hljs-string">&quot;#F7C530FF&quot;</span>, <span class="hljs-string">&quot;#95CC5EFF&quot;</span>,
-    <span class="hljs-string">&quot;#D0DFE6FF&quot;</span>, <span class="hljs-string">&quot;#F79D1EFF&quot;</span>, <span class="hljs-string">&quot;#748AA6FF&quot;</span>];
+<p><img src="/BeautifulMakie/assets/scripts/output/themeBlack.png" alt=""> <pre><code class="language-julia">using CairoMakie
+function EpicycloidLines&#40;&#41;
+    ecycl_x&#40;r,k,θ&#41; &#61; r*&#40;k .&#43; 1&#41;.*cos.&#40;θ&#41; .- r*cos.&#40;&#40;k .&#43; 1&#41; .* θ&#41;
+    ecycl_y&#40;r,k,θ&#41; &#61; r*&#40;k .&#43; 1&#41;.*sin.&#40;θ&#41; .- r*sin.&#40;&#40;k .&#43; 1&#41; .* θ&#41;
+    θ &#61; LinRange&#40;0,6.2π,1000&#41;
+    tronLegacy &#61; &#91;&quot;#FF410DFF&quot;, &quot;#6EE2FFFF&quot;, &quot;#F7C530FF&quot;, &quot;#95CC5EFF&quot;,
+    &quot;#D0DFE6FF&quot;, &quot;#F79D1EFF&quot;, &quot;#748AA6FF&quot;&#93;;
 
-    fig = Figure(resolution = (<span class="hljs-number">470</span>, <span class="hljs-number">400</span>), font = :sans)
-    ax = Axis(fig, aspect =<span class="hljs-number">1</span>,title = <span class="hljs-string">&quot;Epicycloid&quot;</span>,
-        xlabel = <span class="hljs-string">&quot;x(θ) = r(k+1)cos(θ) -rcos((k+1)θ)&quot;</span>,
-        ylabel =<span class="hljs-string">&quot;y(θ) = r(k+1)cos(θ) -rcos((k+1)θ)&quot;</span>)
-    lins = [lines!(ecycl_x(<span class="hljs-number">2</span>k,k,θ), ecycl_y(<span class="hljs-number">2</span>k,k,θ), linewidth = <span class="hljs-number">1.5</span>,
-            color = tronLegacy[indx]) <span class="hljs-keyword">for</span> (indx,k) <span class="hljs-keyword">in</span> enumerate(<span class="hljs-number">2</span>:<span class="hljs-number">0.5</span>:<span class="hljs-number">5</span>)]
-    leg = Legend(fig, lins, string.(<span class="hljs-number">2</span>:<span class="hljs-number">0.5</span>:<span class="hljs-number">5</span>), <span class="hljs-string">&quot;k , r=2k&quot;</span>, nbanks = <span class="hljs-number">1</span>)
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] = ax
-    fig[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] = leg
+    fig &#61; Figure&#40;resolution &#61; &#40;470, 400&#41;, font &#61; :sans&#41;
+    ax &#61; Axis&#40;fig, aspect &#61;1,title &#61; &quot;Epicycloid&quot;,
+        xlabel &#61; &quot;x&#40;θ&#41; &#61; r&#40;k&#43;1&#41;cos&#40;θ&#41; -rcos&#40;&#40;k&#43;1&#41;θ&#41;&quot;,
+        ylabel &#61;&quot;y&#40;θ&#41; &#61; r&#40;k&#43;1&#41;cos&#40;θ&#41; -rcos&#40;&#40;k&#43;1&#41;θ&#41;&quot;&#41;
+    lins &#61; &#91;lines&#33;&#40;ecycl_x&#40;2k,k,θ&#41;, ecycl_y&#40;2k,k,θ&#41;, linewidth &#61; 1.5,
+            color &#61; tronLegacy&#91;indx&#93;&#41; for &#40;indx,k&#41; in enumerate&#40;2:0.5:5&#41;&#93;
+    leg &#61; Legend&#40;fig, lins, string.&#40;2:0.5:5&#41;, &quot;k , r&#61;2k&quot;, nbanks &#61; 1&#41;
+    fig&#91;1, 1&#93; &#61; ax
+    fig&#91;1, 2&#93; &#61; leg
     fig
-<span class="hljs-keyword">end</span>
-fig = with_theme(EpicycloidLines, theme_black())</code></pre> 
+end
+fig &#61; with_theme&#40;EpicycloidLines, theme_black&#40;&#41;&#41;</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
 </code></pre></div></p>
 <div class="page-foot">
@@ -255,8 +255,8 @@ fig = with_theme(EpicycloidLines, theme_black())</code></pre>
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

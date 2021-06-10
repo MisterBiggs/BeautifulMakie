@@ -218,27 +218,27 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="time_series"><a href="#time_series" class="header-anchor">Time Series</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/timeSeries.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, TimeSeries, MarketData, Dates
-<span class="hljs-keyword">let</span>
-    <span class="hljs-comment"># dummy data</span>
-    dates = Date(<span class="hljs-number">2018</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>):Day(<span class="hljs-number">1</span>):Date(<span class="hljs-number">2019</span>, <span class="hljs-number">12</span>, <span class="hljs-number">31</span>)
-    ta = TimeArray(dates, rand(length(dates)))
-    vals = <span class="hljs-number">0.5</span>*values(ta)
-    tempo = string.(timestamp(ta))
-    lentime = length(tempo)
-    slice_dates = range(<span class="hljs-number">1</span>,lentime, step = lentime÷<span class="hljs-number">11</span>)
+<p><img src="/BeautifulMakie/assets/scripts/output/timeSeries.png" alt=""> <pre><code class="language-julia">using CairoMakie, TimeSeries, MarketData, Dates
+let
+    # dummy data
+    dates &#61; Date&#40;2018, 1, 1&#41;:Day&#40;1&#41;:Date&#40;2019, 12, 31&#41;
+    ta &#61; TimeArray&#40;dates, rand&#40;length&#40;dates&#41;&#41;&#41;
+    vals &#61; 0.5*values&#40;ta&#41;
+    tempo &#61; string.&#40;timestamp&#40;ta&#41;&#41;
+    lentime &#61; length&#40;tempo&#41;
+    slice_dates &#61; range&#40;1,lentime, step &#61; lentime÷11&#41;
 
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">450</span>), font =:sans)
-    ax = Axis(fig, xlabel = <span class="hljs-string">&quot;Date&quot;</span>, ylabel = <span class="hljs-string">&quot;value&quot;</span>)
-    line1 = lines!(ax,<span class="hljs-number">1</span>:lentime, vals, color = :black, linewidth = <span class="hljs-number">0.85</span>)
-    ax.xticks = (slice_dates, tempo[slice_dates])
-    ax.xticklabelrotation = <span class="hljs-literal">π</span>/<span class="hljs-number">4</span>
-    <span class="hljs-comment">#ax.xticklabelalign = (:center, :center)</span>
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 450&#41;, font &#61;:sans&#41;
+    ax &#61; Axis&#40;fig, xlabel &#61; &quot;Date&quot;, ylabel &#61; &quot;value&quot;&#41;
+    line1 &#61; lines&#33;&#40;ax,1:lentime, vals, color &#61; :black, linewidth &#61; 0.85&#41;
+    ax.xticks &#61; &#40;slice_dates, tempo&#91;slice_dates&#93;&#41;
+    ax.xticklabelrotation &#61; π/4
+    #ax.xticklabelalign &#61; &#40;:center, :center&#41;
+    fig&#91;1,1&#93; &#61; ax
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [945b72a4] MarketData v0.13.6
   [9e3dc215] TimeSeries v0.22.1
@@ -257,8 +257,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

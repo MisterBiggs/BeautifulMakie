@@ -218,27 +218,27 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="surface_wireframe_and_contour"><a href="#surface_wireframe_and_contour" class="header-anchor">Surface, Wireframe and Contour</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/surfWireContour.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie
-<span class="hljs-keyword">let</span>
-    x = y =  <span class="hljs-built_in">LinRange</span>(-<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">51</span>)
-    z = (-x .* exp.(-x .^ <span class="hljs-number">2</span> .- (y&#x27;) .^ <span class="hljs-number">2</span>)) .* <span class="hljs-number">4</span>
-    zmin, zmax = minimum(z), maximum(z)
-    cmap = :viridis
-    fig = Figure(resolution = (<span class="hljs-number">900</span>,<span class="hljs-number">900</span>))
-    ax = Axis3(fig, aspect = :data, perspectiveness = <span class="hljs-number">0.5</span>, elevation = <span class="hljs-literal">π</span>/<span class="hljs-number">9</span>,
-        xzpanelcolor= (:black, <span class="hljs-number">0.75</span>), yzpanelcolor= (:black,<span class="hljs-number">0.75</span>),
-        zgridcolor = :grey, ygridcolor = :grey,xgridcolor = :grey)
-    surface!(ax, x, y, z, colormap = cmap, colorrange = (zmin, zmax))
-    xm, ym, zm = minimum(ax.finallimits[])
-    contour!(ax, x, y, z, levels = <span class="hljs-number">20</span>, colormap = cmap, linewidth = <span class="hljs-number">2</span>,
-        colorrange=(zmin, zmax), transformation = (:xy, zm))
-    wireframe!(ax, x, y, z, overdraw = <span class="hljs-literal">true</span>, transparency = <span class="hljs-literal">true</span>,
-        color = (:black, <span class="hljs-number">0.1</span>))
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+<p><img src="/BeautifulMakie/assets/scripts/output/surfWireContour.png" alt=""> <pre><code class="language-julia">using GLMakie
+let
+    x &#61; y &#61;  LinRange&#40;-2, 2, 51&#41;
+    z &#61; &#40;-x .* exp.&#40;-x .^ 2 .- &#40;y&#39;&#41; .^ 2&#41;&#41; .* 4
+    zmin, zmax &#61; minimum&#40;z&#41;, maximum&#40;z&#41;
+    cmap &#61; :viridis
+    fig &#61; Figure&#40;resolution &#61; &#40;900,900&#41;&#41;
+    ax &#61; Axis3&#40;fig, aspect &#61; :data, perspectiveness &#61; 0.5, elevation &#61; π/9,
+        xzpanelcolor&#61; &#40;:black, 0.75&#41;, yzpanelcolor&#61; &#40;:black,0.75&#41;,
+        zgridcolor &#61; :grey, ygridcolor &#61; :grey,xgridcolor &#61; :grey&#41;
+    surface&#33;&#40;ax, x, y, z, colormap &#61; cmap, colorrange &#61; &#40;zmin, zmax&#41;&#41;
+    xm, ym, zm &#61; minimum&#40;ax.finallimits&#91;&#93;&#41;
+    contour&#33;&#40;ax, x, y, z, levels &#61; 20, colormap &#61; cmap, linewidth &#61; 2,
+        colorrange&#61;&#40;zmin, zmax&#41;, transformation &#61; &#40;:xy, zm&#41;&#41;
+    wireframe&#33;&#40;ax, x, y, z, overdraw &#61; true, transparency &#61; true,
+        color &#61; &#40;:black, 0.1&#41;&#41;
+    fig&#91;1,1&#93; &#61; ax
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [e9467ef8] GLMakie v0.3.3
 </code></pre></div></p>
 <div class="page-foot">
@@ -254,8 +254,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

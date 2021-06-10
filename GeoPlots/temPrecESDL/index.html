@@ -218,50 +218,50 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="esdl_data_temperature_precipitation"><a href="#esdl_data_temperature_precipitation" class="header-anchor">ESDL data, temperature &amp; precipitation</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/temPrecESDL.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, ESDL
-<span class="hljs-keyword">let</span>
-    cube = esdc()
-    cubeTemP =subsetcube(cube,variable=[<span class="hljs-string">&quot;air_temperature_2m&quot;</span>, <span class="hljs-string">&quot;precipitation&quot;</span>],
-        time = Date(<span class="hljs-number">2003</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>))
-    <span class="hljs-comment">#data_preci = readcubedata(cubeTemP)</span>
-    <span class="hljs-comment">#datpreci = data_preci.data</span>
-    lon = getAxis(<span class="hljs-string">&quot;lon&quot;</span>, cubeTemP).values
-    lat = getAxis(<span class="hljs-string">&quot;lat&quot;</span>, cubeTemP).values
-    <span class="hljs-comment">#time = getAxis(&quot;time&quot;, cube).values;</span>
-    precipitation = cubeTemP[var=<span class="hljs-string">&quot;precipitation&quot;</span>].data[:,:]
-    temperature = cubeTemP[var=<span class="hljs-string">&quot;air_temperature_2m&quot;</span>].data[:,:]
+<p><img src="/BeautifulMakie/assets/scripts/output/temPrecESDL.png" alt=""> <pre><code class="language-julia">using CairoMakie, ESDL
+let
+    cube &#61; esdc&#40;&#41;
+    cubeTemP &#61;subsetcube&#40;cube,variable&#61;&#91;&quot;air_temperature_2m&quot;, &quot;precipitation&quot;&#93;,
+        time &#61; Date&#40;2003,1,1&#41;&#41;
+    #data_preci &#61; readcubedata&#40;cubeTemP&#41;
+    #datpreci &#61; data_preci.data
+    lon &#61; getAxis&#40;&quot;lon&quot;, cubeTemP&#41;.values
+    lat &#61; getAxis&#40;&quot;lat&quot;, cubeTemP&#41;.values
+    #time &#61; getAxis&#40;&quot;time&quot;, cube&#41;.values;
+    precipitation &#61; cubeTemP&#91;var&#61;&quot;precipitation&quot;&#93;.data&#91;:,:&#93;
+    temperature &#61; cubeTemP&#91;var&#61;&quot;air_temperature_2m&quot;&#93;.data&#91;:,:&#93;
 
-    fig = Figure(resolution = (<span class="hljs-number">1250</span>, <span class="hljs-number">1200</span>), font = <span class="hljs-string">&quot;sans&quot;</span>, fontsize = <span class="hljs-number">24</span>)
-    ax1 = Axis(fig, xlabel = <span class="hljs-string">&quot;lon&quot;</span>, ylabel = <span class="hljs-string">&quot;lat&quot;</span>)
-    ax2 = Axis(fig, xlabel = <span class="hljs-string">&quot;lon&quot;</span>, ylabel = <span class="hljs-string">&quot;lat&quot;</span>)
+    fig &#61; Figure&#40;resolution &#61; &#40;1250, 1200&#41;, font &#61; &quot;sans&quot;, fontsize &#61; 24&#41;
+    ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;lon&quot;, ylabel &#61; &quot;lat&quot;&#41;
+    ax2 &#61; Axis&#40;fig, xlabel &#61; &quot;lon&quot;, ylabel &#61; &quot;lat&quot;&#41;
 
-    map1 = heatmap!(ax1, lon, lat, temperature, colormap = :plasma)
-    cbar1 = Colorbar(fig, map1, label = <span class="hljs-string">&quot;temperature&quot;</span>, ticklabelsize = <span class="hljs-number">18</span>,
-        labelpadding = <span class="hljs-number">5</span>, width = <span class="hljs-number">10</span>)
-    map2 = heatmap!(ax2, lon, lat, precipitation, colormap = :turbo,
-        colorrange = (<span class="hljs-number">5</span>,<span class="hljs-number">30</span>))
-    cbar2 = Colorbar(fig, map2, label = <span class="hljs-string">&quot;precipitation&quot;</span>, ticklabelsize = <span class="hljs-number">18</span>,
-            labelpadding = <span class="hljs-number">5</span>, width = <span class="hljs-number">10</span>) <span class="hljs-comment">#scale = log10 not working properly</span>
+    map1 &#61; heatmap&#33;&#40;ax1, lon, lat, temperature, colormap &#61; :plasma&#41;
+    cbar1 &#61; Colorbar&#40;fig, map1, label &#61; &quot;temperature&quot;, ticklabelsize &#61; 18,
+        labelpadding &#61; 5, width &#61; 10&#41;
+    map2 &#61; heatmap&#33;&#40;ax2, lon, lat, precipitation, colormap &#61; :turbo,
+        colorrange &#61; &#40;5,30&#41;&#41;
+    cbar2 &#61; Colorbar&#40;fig, map2, label &#61; &quot;precipitation&quot;, ticklabelsize &#61; 18,
+            labelpadding &#61; 5, width &#61; 10&#41; #scale &#61; log10 not working properly
 
-    ax1.xticks = -<span class="hljs-number">180</span>:<span class="hljs-number">60</span>:<span class="hljs-number">180</span>
-    ax1.yticks = -<span class="hljs-number">90</span>:<span class="hljs-number">30</span>:<span class="hljs-number">90</span>
-    ax1.xtickformat = <span class="hljs-string">&quot;{:d}ᵒ&quot;</span>
-    ax1.ytickformat = <span class="hljs-string">&quot;{:d}ᵒ&quot;</span>
-    ax2.xticks = -<span class="hljs-number">180</span>:<span class="hljs-number">60</span>:<span class="hljs-number">180</span>
-    ax2.yticks = -<span class="hljs-number">90</span>:<span class="hljs-number">30</span>:<span class="hljs-number">90</span>
-    ax2.xtickformat = <span class="hljs-string">&quot;{:d}ᵒ&quot;</span>
-    ax2.ytickformat = <span class="hljs-string">&quot;{:d}ᵒ&quot;</span>
-    hidespines!(ax1, :t, :r)
-    hidexdecorations!(ax1, ticks = <span class="hljs-literal">false</span>)
-    hidespines!(ax2, :t, :r)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax1
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] = cbar1
-    fig[<span class="hljs-number">2</span>,<span class="hljs-number">1</span>] = ax2
-    fig[<span class="hljs-number">2</span>,<span class="hljs-number">2</span>] = cbar2
+    ax1.xticks &#61; -180:60:180
+    ax1.yticks &#61; -90:30:90
+    ax1.xtickformat &#61; &quot;&#123;:d&#125;ᵒ&quot;
+    ax1.ytickformat &#61; &quot;&#123;:d&#125;ᵒ&quot;
+    ax2.xticks &#61; -180:60:180
+    ax2.yticks &#61; -90:30:90
+    ax2.xtickformat &#61; &quot;&#123;:d&#125;ᵒ&quot;
+    ax2.ytickformat &#61; &quot;&#123;:d&#125;ᵒ&quot;
+    hidespines&#33;&#40;ax1, :t, :r&#41;
+    hidexdecorations&#33;&#40;ax1, ticks &#61; false&#41;
+    hidespines&#33;&#40;ax2, :t, :r&#41;
+    fig&#91;1,1&#93; &#61; ax1
+    fig&#91;1,2&#93; &#61; cbar1
+    fig&#91;2,1&#93; &#61; ax2
+    fig&#91;2,2&#93; &#61; cbar2
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [359177bc] ESDL v0.9.0 `https://github.com/esa-esdl/ESDL.jl#master`
 </code></pre></div></p>
@@ -278,8 +278,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

@@ -218,28 +218,28 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="moon"><a href="#moon" class="header-anchor">Moon</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/moon.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> GLMakie, FileIO
-<span class="hljs-keyword">let</span>
-    moon = load(download(<span class="hljs-string">&quot;https://svs.gsfc.nasa.gov/vis/a000000/a004600/a004675/phases.0001_print.jpg&quot;</span>))
-    n = <span class="hljs-number">1024</span> <span class="hljs-comment"># 2048</span>
-    θ = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>,<span class="hljs-literal">pi</span>,n)
-    φ = <span class="hljs-built_in">LinRange</span>(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>*<span class="hljs-literal">pi</span>,<span class="hljs-number">2</span>*n)
-    x = [cos(φ)*sin(θ) <span class="hljs-keyword">for</span> θ <span class="hljs-keyword">in</span> θ, φ <span class="hljs-keyword">in</span> φ]
-    y = [sin(φ)*sin(θ) <span class="hljs-keyword">for</span> θ <span class="hljs-keyword">in</span> θ, φ <span class="hljs-keyword">in</span> φ]
-    z = [cos(θ) <span class="hljs-keyword">for</span> θ <span class="hljs-keyword">in</span> θ, φ <span class="hljs-keyword">in</span> φ]
-    fig = Figure(resolution = (<span class="hljs-number">900</span>,<span class="hljs-number">900</span>), backgroundcolor = <span class="hljs-string">&quot;#748AA6&quot;</span>)
-    ax = Axis3(fig, aspect = :data, viewmode = :fitzoom, <span class="hljs-comment">#perspectiveness = 0.5,</span>
-        azimuth = <span class="hljs-number">0.01</span><span class="hljs-literal">π</span>, elevation = <span class="hljs-number">0.85</span><span class="hljs-literal">π</span>,)
-    surface!(ax, x, y, z, color = moon, shading = <span class="hljs-literal">true</span>,
-        lightposition = Vec3f0(-<span class="hljs-number">2</span>, -<span class="hljs-number">3</span>, -<span class="hljs-number">3</span>), ambient = Vec3f0(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>),
-        backlight = <span class="hljs-number">1.5f0</span>)
-    hidedecorations!(ax)
-    hidespines!(ax)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax
+<p><img src="/BeautifulMakie/assets/scripts/output/moon.png" alt=""> <pre><code class="language-julia">using GLMakie, FileIO
+let
+    moon &#61; load&#40;download&#40;&quot;https://svs.gsfc.nasa.gov/vis/a000000/a004600/a004675/phases.0001_print.jpg&quot;&#41;&#41;
+    n &#61; 1024 # 2048
+    θ &#61; LinRange&#40;0,pi,n&#41;
+    φ &#61; LinRange&#40;0,2*pi,2*n&#41;
+    x &#61; &#91;cos&#40;φ&#41;*sin&#40;θ&#41; for θ in θ, φ in φ&#93;
+    y &#61; &#91;sin&#40;φ&#41;*sin&#40;θ&#41; for θ in θ, φ in φ&#93;
+    z &#61; &#91;cos&#40;θ&#41; for θ in θ, φ in φ&#93;
+    fig &#61; Figure&#40;resolution &#61; &#40;900,900&#41;, backgroundcolor &#61; &quot;#748AA6&quot;&#41;
+    ax &#61; Axis3&#40;fig, aspect &#61; :data, viewmode &#61; :fitzoom, #perspectiveness &#61; 0.5,
+        azimuth &#61; 0.01π, elevation &#61; 0.85π,&#41;
+    surface&#33;&#40;ax, x, y, z, color &#61; moon, shading &#61; true,
+        lightposition &#61; Vec3f0&#40;-2, -3, -3&#41;, ambient &#61; Vec3f0&#40;0.8, 0.8, 0.8&#41;,
+        backlight &#61; 1.5f0&#41;
+    hidedecorations&#33;&#40;ax&#41;
+    hidespines&#33;&#40;ax&#41;
+    fig&#91;1,1&#93; &#61; ax
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [5789e2e9] FileIO v1.9.1
   [e9467ef8] GLMakie v0.3.3
   [6218d12a] ImageMagick v1.2.1
@@ -258,8 +258,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

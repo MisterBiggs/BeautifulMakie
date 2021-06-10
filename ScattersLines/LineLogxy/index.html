@@ -218,20 +218,20 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="log_scale_in_x_and_y"><a href="#log_scale_in_x_and_y" class="header-anchor">Log scale in x and y</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/LineLogxy.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">123</span>)
-    x = <span class="hljs-number">0.001</span>:<span class="hljs-number">0.05</span>:<span class="hljs-number">10</span>
-    y = x.^<span class="hljs-number">2</span> .+ abs.(<span class="hljs-number">2</span>*randn(length(x)))
-    lines(x, y, color = :navy, figure = (resolution = (<span class="hljs-number">700</span>,<span class="hljs-number">450</span>),),
-        axis = (xscale = log10, yscale = log10, xlabel = <span class="hljs-string">&quot;x&quot;</span>, ylabel = <span class="hljs-string">&quot;y&quot;</span>,
-        xgridstyle=:dash, ygridstyle=:dash, xminorticksvisible = <span class="hljs-literal">true</span>,
-        xminorticks = IntervalsBetween(<span class="hljs-number">9</span>), yminorticksvisible = <span class="hljs-literal">true</span>,
-        yminorticks = IntervalsBetween(<span class="hljs-number">9</span>)))
-    current_figure()
-<span class="hljs-keyword">end</span></code></pre> 
+<p><img src="/BeautifulMakie/assets/scripts/output/LineLogxy.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;123&#41;
+    x &#61; 0.001:0.05:10
+    y &#61; x.^2 .&#43; abs.&#40;2*randn&#40;length&#40;x&#41;&#41;&#41;
+    lines&#40;x, y, color &#61; :navy, figure &#61; &#40;resolution &#61; &#40;700,450&#41;,&#41;,
+        axis &#61; &#40;xscale &#61; log10, yscale &#61; log10, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;,
+        xgridstyle&#61;:dash, ygridstyle&#61;:dash, xminorticksvisible &#61; true,
+        xminorticks &#61; IntervalsBetween&#40;9&#41;, yminorticksvisible &#61; true,
+        yminorticks &#61; IntervalsBetween&#40;9&#41;&#41;&#41;
+    current_figure&#40;&#41;
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -248,8 +248,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

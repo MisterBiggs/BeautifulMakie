@@ -218,34 +218,34 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="histograms_bins_and_counts"><a href="#histograms_bins_and_counts" class="header-anchor">Histograms, bins and counts</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/histograms.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, Random
-<span class="hljs-keyword">let</span>
-    Random.seed!(<span class="hljs-number">13</span>)
-    n = <span class="hljs-number">3000</span>
-    data = randn(n)
-    fig = Figure(resolution = (<span class="hljs-number">1200</span>, <span class="hljs-number">800</span>), font = <span class="hljs-string">&quot;sans&quot;</span>, fontsize = <span class="hljs-number">20</span>)
-    ax1 = Axis(fig, xlabel = <span class="hljs-string">&quot;value&quot;</span>, ylabel = <span class="hljs-string">&quot;samples&quot;</span> )
-    ax2 = Axis(fig, xlabel = <span class="hljs-string">&quot;value&quot;</span>, ylabel = <span class="hljs-string">&quot;counts&quot;</span> )
-    ax3 = Axis(fig, xlabel = <span class="hljs-string">&quot;value&quot;</span>, ylabel = <span class="hljs-string">&quot;counts&quot;</span>)
-    ax4 = Axis(fig, xlabel = <span class="hljs-string">&quot;value&quot;</span>, ylabel = <span class="hljs-string">&quot;counts&quot;</span> )
-    <span class="hljs-comment">#scatter plot</span>
-    scatter!(ax1, data, <span class="hljs-number">1</span>:n, markersize = <span class="hljs-number">4</span>, color = :black)
-    hist!(ax2, data, label = <span class="hljs-string">&quot;default&quot;</span>)
-    hist!(ax3, data, bins = <span class="hljs-number">20</span>, color = :orange, strokewidth = <span class="hljs-number">1</span>,
-    strokecolor = :black, label = <span class="hljs-string">&quot;20 bins&quot;</span>)
-    hist!(ax4, data, bins = [-<span class="hljs-number">4</span>, -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>], color = :gray90,
-    strokewidth = <span class="hljs-number">1</span>, strokecolor = :black, label = <span class="hljs-string">&quot;manual bins&quot;</span>)
-    axislegend(ax2, position = :rt)
-    axislegend(ax3, position = :rt)
-    axislegend(ax4, position = :rt)
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = ax1
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>] = ax2
-    fig[<span class="hljs-number">2</span>,<span class="hljs-number">1</span>] = ax3
-    fig[<span class="hljs-number">2</span>,<span class="hljs-number">2</span>] = ax4
+<p><img src="/BeautifulMakie/assets/scripts/output/histograms.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+let
+    Random.seed&#33;&#40;13&#41;
+    n &#61; 3000
+    data &#61; randn&#40;n&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;1200, 800&#41;, font &#61; &quot;sans&quot;, fontsize &#61; 20&#41;
+    ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;value&quot;, ylabel &#61; &quot;samples&quot; &#41;
+    ax2 &#61; Axis&#40;fig, xlabel &#61; &quot;value&quot;, ylabel &#61; &quot;counts&quot; &#41;
+    ax3 &#61; Axis&#40;fig, xlabel &#61; &quot;value&quot;, ylabel &#61; &quot;counts&quot;&#41;
+    ax4 &#61; Axis&#40;fig, xlabel &#61; &quot;value&quot;, ylabel &#61; &quot;counts&quot; &#41;
+    #scatter plot
+    scatter&#33;&#40;ax1, data, 1:n, markersize &#61; 4, color &#61; :black&#41;
+    hist&#33;&#40;ax2, data, label &#61; &quot;default&quot;&#41;
+    hist&#33;&#40;ax3, data, bins &#61; 20, color &#61; :orange, strokewidth &#61; 1,
+    strokecolor &#61; :black, label &#61; &quot;20 bins&quot;&#41;
+    hist&#33;&#40;ax4, data, bins &#61; &#91;-4, -2, -1, 0, 1, 2, 4&#93;, color &#61; :gray90,
+    strokewidth &#61; 1, strokecolor &#61; :black, label &#61; &quot;manual bins&quot;&#41;
+    axislegend&#40;ax2, position &#61; :rt&#41;
+    axislegend&#40;ax3, position &#61; :rt&#41;
+    axislegend&#40;ax4, position &#61; :rt&#41;
+    fig&#91;1,1&#93; &#61; ax1
+    fig&#91;1,2&#93; &#61; ax2
+    fig&#91;2,1&#93; &#61; ax3
+    fig&#91;2,2&#93; &#61; ax4
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [9a3f8284] Random
 </code></pre></div></p>
@@ -262,8 +262,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 

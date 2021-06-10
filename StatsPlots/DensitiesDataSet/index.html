@@ -218,42 +218,42 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="density_plots_mtcars_dataset"><a href="#density_plots_mtcars_dataset" class="header-anchor">Density plots, mtcars dataset</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/DensitiesDataSet.png" alt=""> <pre><code class="julia hljs"><span class="hljs-keyword">using</span> CairoMakie, RDatasets, Colors, ColorSchemes
-<span class="hljs-keyword">let</span>
-    cars = dataset(<span class="hljs-string">&quot;datasets&quot;</span>, <span class="hljs-string">&quot;mtcars&quot;</span>)
-    byCat = cars.Cyl
-    categ = unique(byCat)
-    fig = Figure(resolution = (<span class="hljs-number">700</span>, <span class="hljs-number">850</span>), font = <span class="hljs-string">&quot;sans&quot;</span>)
-    ax1 = Axis(fig, xlabel = <span class="hljs-string">&quot;MPG&quot;</span>, ylabel = <span class="hljs-string">&quot;density&quot;</span>, xgridstyle=:dash,
-            ygridstyle=:dash, rightspinevisible = <span class="hljs-literal">false</span>, topspinevisible = <span class="hljs-literal">false</span>)
-    ax2 = Axis(fig, xlabel = <span class="hljs-string">&quot;MPG&quot;</span>, ylabel = <span class="hljs-string">&quot;density&quot;</span>)
-    colors1 = ColorScheme(range(<span class="hljs-string">colorant&quot;#65ADC2&quot;</span>, <span class="hljs-string">colorant&quot;#E84646&quot;</span>,
-                    length=length(categ)))
-    colors2 = ColorScheme(range(<span class="hljs-string">colorant&quot;orange&quot;</span>, <span class="hljs-string">colorant&quot;dodgerblue&quot;</span>,
-                    length=length(categ)))
-    legends1 = []
-    legends2 = []
-    <span class="hljs-keyword">for</span> (i,c) <span class="hljs-keyword">in</span> enumerate(categ)
-        indc = findall(x-&gt;x == c, byCat)
-        line1 = density!(ax1, cars.MPG[indc], color = (colors1[i],<span class="hljs-number">0.5</span>),
-                    strokewidth=<span class="hljs-number">1.25</span>, strokecolor = colors1[i])
-        line2 = density!(ax2, cars.MPG[indc], color = (colors2[i],<span class="hljs-number">0.5</span>),
-                    strokewidth=<span class="hljs-number">1.25</span>, strokecolor = colors2[i])
-        push!(legends1, line1)
-        push!(legends2, line2)
-    <span class="hljs-keyword">end</span>
-    leg1 = Legend(fig, legends1, string.(categ), <span class="hljs-string">&quot;Cyl&quot;</span>, orientation = :horizontal,
-    tellheight = <span class="hljs-literal">true</span>,tellwidth = <span class="hljs-literal">false</span>,framevisible = <span class="hljs-literal">false</span>,titleposition = :left)
-    leg2 = Legend(fig, legends2, string.(categ), <span class="hljs-string">&quot;Cyl&quot;</span>)
+<p><img src="/BeautifulMakie/assets/scripts/output/DensitiesDataSet.png" alt=""> <pre><code class="language-julia">using CairoMakie, RDatasets, Colors, ColorSchemes
+let
+    cars &#61; dataset&#40;&quot;datasets&quot;, &quot;mtcars&quot;&#41;
+    byCat &#61; cars.Cyl
+    categ &#61; unique&#40;byCat&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;700, 850&#41;, font &#61; &quot;sans&quot;&#41;
+    ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;MPG&quot;, ylabel &#61; &quot;density&quot;, xgridstyle&#61;:dash,
+            ygridstyle&#61;:dash, rightspinevisible &#61; false, topspinevisible &#61; false&#41;
+    ax2 &#61; Axis&#40;fig, xlabel &#61; &quot;MPG&quot;, ylabel &#61; &quot;density&quot;&#41;
+    colors1 &#61; ColorScheme&#40;range&#40;colorant&quot;#65ADC2&quot;, colorant&quot;#E84646&quot;,
+                    length&#61;length&#40;categ&#41;&#41;&#41;
+    colors2 &#61; ColorScheme&#40;range&#40;colorant&quot;orange&quot;, colorant&quot;dodgerblue&quot;,
+                    length&#61;length&#40;categ&#41;&#41;&#41;
+    legends1 &#61; &#91;&#93;
+    legends2 &#61; &#91;&#93;
+    for &#40;i,c&#41; in enumerate&#40;categ&#41;
+        indc &#61; findall&#40;x-&gt;x &#61;&#61; c, byCat&#41;
+        line1 &#61; density&#33;&#40;ax1, cars.MPG&#91;indc&#93;, color &#61; &#40;colors1&#91;i&#93;,0.5&#41;,
+                    strokewidth&#61;1.25, strokecolor &#61; colors1&#91;i&#93;&#41;
+        line2 &#61; density&#33;&#40;ax2, cars.MPG&#91;indc&#93;, color &#61; &#40;colors2&#91;i&#93;,0.5&#41;,
+                    strokewidth&#61;1.25, strokecolor &#61; colors2&#91;i&#93;&#41;
+        push&#33;&#40;legends1, line1&#41;
+        push&#33;&#40;legends2, line2&#41;
+    end
+    leg1 &#61; Legend&#40;fig, legends1, string.&#40;categ&#41;, &quot;Cyl&quot;, orientation &#61; :horizontal,
+    tellheight &#61; true,tellwidth &#61; false,framevisible &#61; false,titleposition &#61; :left&#41;
+    leg2 &#61; Legend&#40;fig, legends2, string.&#40;categ&#41;, &quot;Cyl&quot;&#41;
 
-    fig[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>] = leg1
-    fig[<span class="hljs-number">2</span>,<span class="hljs-number">1</span>] = ax1
-    fig[<span class="hljs-number">3</span>,<span class="hljs-number">1</span>] = ax2
-    fig[<span class="hljs-number">3</span>,<span class="hljs-number">2</span>] = leg2
+    fig&#91;1,1&#93; &#61; leg1
+    fig&#91;2,1&#93; &#61; ax1
+    fig&#91;3,1&#93; &#61; ax2
+    fig&#91;3,2&#93; &#61; leg2
     fig
-<span class="hljs-keyword">end</span></code></pre> 
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext hljs">      Status `~/Documents/BeautifulMakie/Project.toml`
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.7
   [35d6a980] ColorSchemes v3.12.1
   [ce6b1742] RDatasets v0.7.5
@@ -271,8 +271,8 @@
     </div> <!-- end of class page-wrap-->
     
     
-      
-
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
       <!-- http://tutsplus.github.io/clipboard/ -->
 
