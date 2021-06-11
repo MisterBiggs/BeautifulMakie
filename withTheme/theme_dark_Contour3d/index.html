@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/franklin.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/jtd.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
-   <title>penguinsAoGsides3d</title>  
+   <title>theme_dark_Contour3d</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -47,7 +47,7 @@
 				<!-- HOME -->
           <li class="menu-list-item "><a href="/BeautifulMakie/" class="menu-list-link">• Home</a>
 					<!-- WORKFLOW -->
- 		  <li class="menu-list-parent active"><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
+ 		  <li class="menu-list-parent "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
  			  <ul class="menu-list-child-list ">
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">Single line</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/Fig2Lines/" class="menu-list-link">Two lines</a>
@@ -63,7 +63,7 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/irisDataSet/" class="menu-list-link">Iris DataSet</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsDataSetWithChain/" class="menu-list-link">Penguins DataSet with scatters and regression lines</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsAoGsides/" class="menu-list-link">Penguins with AlgebraOfGraphics</a>
-				<li class="menu-list-item active"><a href="/BeautifulMakie/ScattersLines/penguinsAoGsides3d/" class="menu-list-link">Penguins with AlgebraOfGraphics, 3d plot included</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsAoGsides3d/" class="menu-list-link">Penguins with AlgebraOfGraphics, 3d plot included</a>
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/BubblePlot/" class="menu-list-link">Bubble Plot</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/LineLogx/" class="menu-list-link">Log scale in x</a>
@@ -176,10 +176,10 @@
 
 					</ul>
 
-					<li class="menu-list-parent "><a href="/BeautifulMakie/withTheme/" class="menu-list-link">• with_theme </a>
+					<li class="menu-list-parent active"><a href="/BeautifulMakie/withTheme/" class="menu-list-link">• with_theme </a>
 						<ul class="menu-list-child-list ">
 						<li class="menu-list-item "><a href="/BeautifulMakie/withTheme/" class="menu-list-link">theme_black</a>
-						<li class="menu-list-item "><a href="/BeautifulMakie/withTheme/theme_dark_Contour3d/" class="menu-list-link">theme_dark, surface,Contour3d & streamplot</a>
+						<li class="menu-list-item active"><a href="/BeautifulMakie/withTheme/theme_dark_Contour3d/" class="menu-list-link">theme_dark, surface,Contour3d & streamplot</a>
 						</ul>
 
 						<li class="menu-list-parent "><a href="/BeautifulMakie/animations/" class="menu-list-link">• Animations </a>
@@ -219,56 +219,45 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="penguins_dataset_with_3d_plot_side_density_and_histogram"><a href="#penguins_dataset_with_3d_plot_side_density_and_histogram" class="header-anchor">Penguins DataSet with 3d plot, side density and histogram</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/penguinsAoG/output/penguinsAoGsides3d.png" alt=""> <pre><code class="language-julia">using PalmerPenguins, DataFrames, AlgebraOfGraphics, CairoMakie
+<div class="franklin-content"><h2 id="theme_dark_surfacecontour3d_streamplot"><a href="#theme_dark_surfacecontour3d_streamplot" class="header-anchor">theme_dark, surface,Contour3d &amp; streamplot</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/theme_dark_Contour3d.png" alt=""> <pre><code class="language-julia"># example modified from  mthelm85
+using GLMakie, ForwardDiff
+GLMakie.activate&#33;&#40;&#41;
 let
-    penguins &#61; dropmissing&#40;DataFrame&#40;PalmerPenguins.load&#40;&#41;&#41;&#41;
-    ychi &#61; filter&#40;:species &#61;&gt; x -&gt; x &#61;&#61; &quot;Chinstrap&quot;, penguins&#41;&#91;&#33;,:bill_depth_mm&#93;
-    yade &#61; filter&#40;:species &#61;&gt; x -&gt; x &#61;&#61; &quot;Adelie&quot;, penguins&#41;&#91;&#33;,:bill_depth_mm&#93;
-    ygen &#61; filter&#40;:species &#61;&gt; x -&gt; x &#61;&#61; &quot;Gentoo&quot;, penguins&#41;&#91;&#33;,:bill_depth_mm&#93;
+    f&#40;x,y&#41; &#61; -5*x*y*exp&#40;-x^2-y^2&#41;
+    x &#61; -1:0.05:1.0
+    y &#61; -1:0.05:1.0
+    z &#61; &#91;f&#40;i,j&#41; for i in x, j in y&#93;
+    # This is the same function as above, just modified so that it will
+    # work with ForwardDiff
+    g&#40;x,y&#41; &#61; &#91;-5*x*y*exp&#40;-x^2-y^2&#41;&#93;
+    J&#40;xx,yy&#41; &#61; ForwardDiff.jacobian&#40;x -&gt; g&#40;x&#91;1&#93;, x&#91;2&#93;&#41;, &#91;xx,yy&#93;&#41;
+    field&#40;i,j&#41; &#61; Point&#40;J&#40;i,j&#41;&#91;1&#93;, J&#40;i,j&#41;&#91;2&#93;&#41;
 
-    penguin_bill &#61; data&#40;penguins&#41; * mapping&#40; :bill_length_mm  &#61;&gt; &quot;bill length mm&quot;,
-        :bill_depth_mm  &#61;&gt; &quot;bill depth mm&quot;&#41;
-
-    layers &#61; AlgebraOfGraphics.density&#40;&#41; * visual&#40;Contour&#41; &#43; linear&#40;&#41; &#43;
-                visual&#40;alpha &#61; 0.5, markersize &#61; 15&#41;
-    aesPoints &#61; penguin_bill * layers * mapping&#40;color &#61; :species, marker &#61; :species,&#41;
-    aesHist &#61; data&#40;penguins&#41; * mapping&#40;:bill_length_mm &#61;&gt; &quot;bill length mm&quot;,
-        color &#61; :species, stack &#61; :species&#41; * AlgebraOfGraphics.histogram&#40;;bins &#61; 20&#41;
-
-    estilo &#61; &#40;color&#61;&#91;&quot;#FC7808&quot;, &quot;#8C00EC&quot;, &quot;#107A78&quot;&#93;,
-                marker&#61;&#91;:circle, :utriangle, :rect&#93;&#41;
-
-    layer &#61; AlgebraOfGraphics.density&#40;&#41; * visual&#40;Wireframe, linewidth&#61;0.05&#41;
-    plt3d &#61; penguin_bill * layer * mapping&#40;color &#61; :species&#41;
-    # the actual plot with AoG and Makie
-    set_aog_theme&#33;&#40;&#41;
-    fig &#61; Figure&#40;; resolution &#61; &#40;700, 700&#41;&#41;
-    aes3d &#61; draw&#33;&#40;fig&#91;2,1&#93;, plt3d; axis &#61; &#40;type &#61; Axis3,&#41;, palettes &#61; estilo&#41;
-    aesH &#61; draw&#33;&#40;fig&#91;1,1&#93;, aesHist, palettes &#61; estilo&#41;
-    ax1 &#61; Axis&#40;aesH&#91;1,1&#93;&#41;
-    ax2 &#61; Axis&#40;aes3d&#91;1,1&#93;&#41;
-
-    ax3 &#61; Axis&#40;fig&#91;2,2&#93;, ylabel &#61; &quot;bill depth mm&quot;&#41;
-    chin &#61; density&#33;&#40;ax3, ychi, direction &#61; :y, color &#61;&#40;&quot;#8C00EC&quot;, 0.25&#41;,
-        strokewidth &#61; 1, strokecolor &#61; &quot;#8C00EC&quot;&#41;
-    ade &#61; density&#33;&#40;ax3, yade, direction &#61; :y, color &#61;&#40;&quot;#FC7808&quot;, 0.25&#41;,
-        strokewidth &#61; 1, strokecolor &#61; &quot;#FC7808&quot;&#41;
-    gen &#61; density&#33;&#40;ax3, ygen, direction &#61; :y, color &#61;&#40;&quot;#107A78&quot;, 0.25&#41;,
-        strokewidth &#61; 1, strokecolor &#61; &quot;#107A78&quot;&#41;
-    leg &#61; Legend&#40;fig, &#91;chin,ade,gen&#93;, &#91;&quot;Chinstrap&quot;, &quot;Adelie&quot;, &quot;Gentoo&quot;&#93;,&#41;
-    fig&#91;1,2&#93; &#61; leg
-    colsize&#33;&#40;fig.layout, 1, Relative&#40;3/4&#41;&#41;
-    rowsize&#33;&#40;fig.layout, 1, Relative&#40;1/4&#41;&#41;
-    fig
+    zmin, zmax &#61; minimum&#40;z&#41;, maximum&#40;z&#41;
+    cmap &#61; :viridis
+    function plot&#40;&#41;
+        fig &#61; Figure&#40;resolution &#61; &#40;1200,600&#41;&#41;
+        ax1 &#61; Axis3&#40;fig, aspect &#61; &#40;1,1,1&#41;, perspectiveness &#61; 0.5,
+            elevation &#61; π/3.5, azimuth &#61; 0.1π, &#41;
+        ax2 &#61; Axis&#40;fig, aspect &#61; DataAspect&#40;&#41;, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;&#41;
+        surface&#33;&#40;ax1, x, y, z, colormap &#61; cmap, colorrange &#61; &#40;zmin, zmax&#41;&#41;
+        contour3d&#33;&#40;ax1, x, y, z .&#43; 0.005, levels &#61; 15, linewidth &#61; 2, color&#61;&#40;:white, 0.5&#41;&#41;
+        wireframe&#33;&#40;ax1, x, y, z, overdraw &#61; false, transparency &#61; true, color &#61; &#40;:black, 0.1&#41;&#41;
+        streamplot&#33;&#40;ax1, field, -1..1, -1..1, colormap &#61; cmap, gridsize&#61; &#40;40,40&#41;,
+            arrow_size &#61; 0.05,linewidth&#61;1, transformation &#61; &#40;:xy, -zmax&#41;&#41;
+        streamplot&#33;&#40;ax2, field, -1..1, -1..1, colormap &#61; cmap, gridsize&#61; &#40;40,40&#41;,
+                arrow_size &#61; 0.03,linewidth&#61;1&#41;
+        fig&#91;1,1&#93; &#61; ax1
+        fig&#91;1,2&#93; &#61; ax2
+        fig
+    end
+    fig &#61; with_theme&#40;plot, theme_dark&#40;&#41;&#41;
 end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext">      Status `~/Desktop/BeautifulMakie/_assets/scripts/penguinsAoG/Project.toml`
-  [cbdf2221] AlgebraOfGraphics v0.4.4
-  [13f3f980] CairoMakie v0.5.9
-  [a93c6f00] DataFrames v1.1.1
-  [b1bec4e5] LIBSVM v0.6.0
-  [8b842266] PalmerPenguins v0.1.2
+ <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
+  [13f3f980] CairoMakie v0.5.7
+  [f6369f11] ForwardDiff v0.10.18
 </code></pre></div></p>
 <div class="page-foot">
 
