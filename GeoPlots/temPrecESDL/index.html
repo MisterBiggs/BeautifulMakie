@@ -228,8 +228,8 @@ let
     lon &#61; getAxis&#40;&quot;lon&quot;, cubeTemP&#41;.values
     lat &#61; getAxis&#40;&quot;lat&quot;, cubeTemP&#41;.values
     #time &#61; getAxis&#40;&quot;time&quot;, cube&#41;.values;
-    precipitation &#61; cubeTemP&#91;var&#61;&quot;precipitation&quot;&#93;.data&#91;:,:&#93;
-    temperature &#61; cubeTemP&#91;var&#61;&quot;air_temperature_2m&quot;&#93;.data&#91;:,:&#93;
+    precipitation &#61; cubeTemP&#91;var&#61;&quot;precipitation&quot;&#93;.data&#91;:,end:-1:1&#93;
+    temperature &#61; cubeTemP&#91;var&#61;&quot;air_temperature_2m&quot;&#93;.data&#91;:,end:-1:1&#93;
 
     fig &#61; Figure&#40;resolution &#61; &#40;1250, 1200&#41;, font &#61; &quot;sans&quot;, fontsize &#61; 24&#41;
     ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;lon&quot;, ylabel &#61; &quot;lat&quot;&#41;
@@ -268,7 +268,7 @@ end</code></pre>
 <div class="page-foot">
 
   <div align="right">
-     Last Updated: June 12, 2021
+     Last Updated: June 14, 2021
   </div>
 
 </div>
