@@ -218,24 +218,24 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="heatmap_with_an_irregular_grid_log_scales"><a href="#heatmap_with_an_irregular_grid_log_scales" class="header-anchor">Heatmap with an irregular grid, log scales</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/heatmapLogIrregular.png" alt=""> <pre><code class="language-julia">using CairoMakie, Colors, ColorSchemes, Random
+<p><img src="/BeautifulMakie/assets/scripts/output/heatmapLogIrregular.png" alt=""> <pre><code class="language-julia">using GLMakie, Colors, ColorSchemes, Random
 let
     Random.seed&#33;&#40;38&#41;
     x &#61; y &#61; 1:100
     z &#61; exp10.&#40;2*rand&#40;100,100&#41;&#41;
-    fig &#61; Figure&#40;resolution &#61; &#40;450, 400&#41;&#41;
+    fig &#61; Figure&#40;resolution &#61; &#40;850, 800&#41;, fontsize &#61; 20&#41;
     ax &#61; Axis&#40;fig, xscale &#61; log10, yscale &#61; log10, aspect &#61; 1, xlabel &#61; &quot;x&quot;,
         ylabel &#61; &quot;y&quot;, yminorticksvisible &#61; true, xminorticksvisible &#61; true,
         yminorticks &#61; IntervalsBetween&#40;9&#41;,xminorticks &#61; IntervalsBetween&#40;9&#41;&#41;
     cmap &#61; cgrad&#40;:CMRmap, scale &#61; :log&#41;
     hmap &#61; heatmap&#33;&#40;x,y,z, colormap &#61; cmap, colorrange &#61; &#40;1,100&#41;&#41;
-    cbar &#61; Colorbar&#40;fig, hmap, label &#61; &quot;z values&quot;, width &#61; 15, ticksize&#61;15,
-        minorticks &#61; IntervalsBetween&#40;9&#41;, minorticksvisible&#61;true,labelsize&#61;12,
-        ticklabelsize &#61; 12,tickalign &#61; 1, minortickalign &#61;1,
-        height &#61; Relative&#40;0.91&#41;,scale &#61; log10&#41; # log10 colorbar
-    ax.xticks &#61; &#91;1,10,100&#93;
-    ax.yticks &#61; &#91;1,10,100&#93;
-    cbar.ticks &#61; &#91;1,10,100&#93;
+    cbar &#61; Colorbar&#40;fig, hmap, label &#61; &quot;z values&quot;, width &#61; 25, ticksize&#61;25,
+        minorticks &#61; IntervalsBetween&#40;9&#41;, minorticksvisible&#61;true,labelsize&#61;18,
+        ticklabelsize &#61; 18,tickalign &#61; 1, minortickalign &#61;1,
+        height &#61; Relative&#40;0.87&#41;,scale &#61; log10&#41; # log10 colorbar ticks
+    #ax.xticks &#61; &#91;1,10,100&#93;
+    #ax.yticks &#61; &#91;1,10,100&#93;
+    #cbar.ticks &#61; &#91;1,10,100&#93;
     fig&#91;1, 1&#93; &#61; ax
     fig&#91;1, 2&#93; &#61; cbar
     fig
@@ -243,14 +243,14 @@ end</code></pre></p>
 <p>
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
  <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
-  [13f3f980] CairoMakie v0.5.10
   [35d6a980] ColorSchemes v3.12.1
+  [e9467ef8] GLMakie v0.3.4
   [9a3f8284] Random
 </code></pre></div></p>
 <div class="page-foot">
 
   <div align="right">
-     Last Updated: June 14, 2021
+     Last Updated: June 16, 2021
   </div>
 
 </div>
