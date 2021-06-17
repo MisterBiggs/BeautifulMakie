@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/franklin.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/jtd.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
-   <title>MulticoloredLinesLegOut</title>  
+   <title>temCubeESDL</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -45,7 +45,7 @@
 				<!-- HOME -->
           <li class="menu-list-item "><a href="/BeautifulMakie/" class="menu-list-link">• Home</a>
 					<!-- WORKFLOW -->
- 		  <li class="menu-list-parent active"><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
+ 		  <li class="menu-list-parent "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
  			  <ul class="menu-list-child-list ">
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">Single line</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/Fig2Lines/" class="menu-list-link">Two lines</a>
@@ -70,7 +70,7 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/ScatterLogxyCbar/" class="menu-list-link">Log scale in x and y, scatters and colormap</a>
 
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/linesAndScattersLegOut/" class="menu-list-link">Lines and scatters (legend out)</a>
-				<li class="menu-list-item active"><a href="/BeautifulMakie/ScattersLines/MulticoloredLinesLegOut/" class="menu-list-link">Multicolored lines (legend out)</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/MulticoloredLinesLegOut/" class="menu-list-link">Multicolored lines (legend out)</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/MulticoloredLinesCbarOut/" class="menu-list-link">Multicolored lines (colorbar out)</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/LinesAndMulticoloredLineCbarOut/" class="menu-list-link">Lines and multicolored lines</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/MultipleMulticoloredLineCbarOut/" class="menu-list-link">Multiple lines with different colormaps</a>
@@ -160,13 +160,13 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/line3D/" class="menu-list-link">Line in 3D</a>
 
 				</ul>
-				<li class="menu-list-parent "><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">• Geo plots</a>
+				<li class="menu-list-parent active"><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">• Geo plots</a>
 					<ul class="menu-list-child-list ">
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">Earth 3D</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/moon/" class="menu-list-link">The moon</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/landSea/" class="menu-list-link">Land, Sea and Lakes</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/temPrecESDL/" class="menu-list-link">ESDL data, temperature & precipitation</a>
-					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/temCubeESDL/" class="menu-list-link">ESDL data, temperature cube</a>
+					<li class="menu-list-item active"><a href="/BeautifulMakie/GeoPlots/temCubeESDL/" class="menu-list-link">ESDL data, temperature cube</a>
 
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/gppBeer2010/" class="menu-list-link">GPP Beer 2010, NetCDF file</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/topography/" class="menu-list-link">Surface, topography ETOPO1, NetCDF file</a>
@@ -218,37 +218,127 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="multicolored_lines_leg_out"><a href="#multicolored_lines_leg_out" class="header-anchor">Multicolored Lines Leg Out</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/MulticoloredLinesLegOut.png" alt=""> <pre><code class="language-julia">using CairoMakie, ColorSchemes
+<div class="franklin-content"><h2 id="esdl_data_temperature_cube"><a href="#esdl_data_temperature_cube" class="header-anchor">ESDL data, temperature cube</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/temCubeESDL.png" alt=""> <pre><code class="language-julia">using ESDL, GLMakie
+# this is raw approach to plot data cubes
 let
-    xs &#61; 0:0.01:1
-    p &#61; -10:1:10
-    p&#61; filter&#40;x-&gt;x &#33;&#61; 0,collect&#40;p&#41;&#41;
-    ys &#61; zeros&#40;length&#40;xs&#41;, length&#40;p&#41;&#41;
-    for &#40;indx,i&#41; in enumerate&#40;p&#41;
-        if i &lt;&#61; -1
-            ys&#91;:,indx&#93;&#61; xs .^&#40;1/abs&#40;i&#41;&#41;
-        elseif i&gt;&#61; 1
-            ys&#91;:,indx&#93;&#61; xs .^i
-        end
-    end
-    cbarPal &#61; :thermal
-    cmap &#61; get&#40;colorschemes&#91;cbarPal&#93;, LinRange&#40;0,1,length&#40;p&#41;&#41;&#41;
+    cube &#61; esdc&#40;&#41;
+    #YAXArray with the following dimensions
+    #lon                 Axis with 1440 Elements from -179.875 to 179.875
+    #lat                 Axis with 720 Elements from 89.875 to -89.875
+    #time                Axis with 1702 Elements from 1980-01-05T00:00:00 to 2016-12-30T00:00:00
+    #Variable            Axis with 75 elements: soil_moisture leaf_area_index .. snow_sublimation Rg
+    #Total size: 493.03 GB
+    #then from here we just call what we need. 
+    function getCubeFaces&#40;datCubes, timeRange, lonRange, latRange;
+        variable &#61; &quot;air_temperature_2m&quot; &#41;
+        #front face
+        cubef &#61; datCubes&#91;
+            var  &#61; variable,
+            time &#61; timeRange&#91;1&#93;,
+            lon  &#61; lonRange,
+            lat  &#61; latRange&#93;.data&#91;:,:&#93;
+        #back face
+        cubeb &#61; datCubes&#91;
+            var  &#61; variable,
+            time &#61; timeRange&#91;2&#93;,
+            lon  &#61; lonRange,
+            lat  &#61; latRange&#93;.data&#91;:,:&#93;;
+        #rigth face
+        cuber &#61; datCubes&#91;
+            var  &#61; variable,
+            time &#61; timeRange,
+            lon  &#61; lonRange&#91;2&#93;,
+            lat  &#61; latRange&#93;.data&#91;:,:&#93;;
+        #left face
+        cubel &#61; datCubes&#91;
+            var   &#61; variable,
+            time  &#61; timeRange,
+            lon   &#61; lonRange&#91;1&#93;,
+            lat   &#61; latRange&#93;.data&#91;:,:&#93;;
+        #top face
+        cubet &#61; datCubes&#91;
+            var  &#61; variable,
+            time &#61; timeRange,
+            lon  &#61; lonRange,
+            lat  &#61; latRange&#91;2&#93;&#93;.data&#91;:,:&#93;;
+        #bottom face
+        cubebt &#61; datCubes&#91;
+            var  &#61; variable,
+            time &#61; timeRange,
+            lon  &#61; lonRange,
+            lat  &#61; latRange&#91;1&#93;&#93;.data&#91;:,:&#93;
 
-    fig &#61; Figure&#40;resolution &#61; &#40;700, 450&#41;, font &#61;:sans, fontsize &#61; 18&#41;
-    ax &#61; Axis&#40;fig, aspect &#61; 1, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;xᵖ&quot;&#41;
-    lins &#61; &#91;lines&#33;&#40;xs, ys&#91;:,v&#93;, color &#61; cmap&#91;v&#93;&#41; for v in 1:length&#40;p&#41;&#93;
-    leg &#61; Legend&#40;fig, lins, string.&#40;p&#41;, &quot;p&quot;, nbanks &#61; 2, labelsize &#61; 12,
-     valign &#61; :center&#41;
-    fig&#91;1, 1&#93; &#61; ax
-    fig&#91;1, 2&#93; &#61; leg
-    fig
-    #save&#40;&quot;MulticoloredLinesLegOut.png&quot;, fig, px_per_unit &#61; 2&#41;
+        cubef  &#61; replace&#40;cubef&#91;:,end:-1:1&#93;, missing &#61;&gt; NaN&#41;
+        cubeb  &#61; replace&#40;cubeb&#91;:,end:-1:1&#93;, missing &#61;&gt; NaN&#41;
+        cubet  &#61; replace&#40;cubet&#39;, missing &#61;&gt; NaN&#41;
+        cubebt &#61; replace&#40;cubebt&#39;, missing &#61;&gt; NaN&#41;
+        cubel  &#61; replace&#40;cubel&#39;&#91;:,end:-1:1&#93;, missing &#61;&gt; NaN&#41;
+        cuber &#61; replace&#40;cuber&#39;&#91;:,end:-1:1&#93;, missing &#61;&gt; NaN&#41; #
+        return cubef, cubeb, cuber, cubel, cubet, cubebt
+    end
+
+    function cube&#33;&#40;ax; a1 &#61; 1, a2 &#61; 1, timeLonLat &#61; &#40;40,50,20&#41;, cxyz &#61; &#40;0,0,0&#41;,
+        cmap &#61; :plasma, transparent &#61; false, limits &#61; limits,
+        topF    &#61; randn&#40;timeLonLat&#91;1&#93;, timeLonLat&#91;2&#93;&#41;,
+        bottomF &#61; randn&#40;timeLonLat&#91;1&#93;, timeLonLat&#91;2&#93;&#41;,
+        frontF  &#61; randn&#40;timeLonLat&#91;2&#93;, timeLonLat&#91;3&#93;&#41;,
+        backF   &#61; randn&#40;timeLonLat&#91;2&#93;, timeLonLat&#91;3&#93;&#41;,
+        leftF   &#61; randn&#40;timeLonLat&#91;1&#93;, timeLonLat&#91;3&#93;&#41;,
+        rightF  &#61;  randn&#40;timeLonLat&#91;1&#93;, timeLonLat&#91;3&#93;&#41;&#41; # highLimit&#61;0, lowLimit&#61;1
+
+        highLimit &#61; maximum&#40;maximum.&#40;x-&gt;isnan&#40;x&#41; ? -Inf : x, &#40;topF, bottomF, frontF, backF, leftF, rightF&#41;&#41;&#41;
+        lowLimit &#61;  minimum&#40;minimum.&#40;x-&gt;isnan&#40;x&#41; ?  Inf : x, &#40;topF, bottomF, frontF, backF, leftF, rightF&#41;&#41;&#41;
+
+        x &#61; LinRange&#40;-a1, a1, size&#40;topF&#41;&#91;1&#93;&#41;
+        y &#61; LinRange&#40;-a1, a1, size&#40;topF&#41;&#91;2&#93;&#41;
+        z &#61; LinRange&#40;-a1, a1, size&#40;leftF&#41;&#91;2&#93;&#41;
+
+        bsurf &#61; heatmap&#33;&#40;ax, y .&#43; cxyz&#91;2&#93;, z .&#43; cxyz&#91;3&#93;, backF, transformation&#61;&#40;:yz, -a2 &#43; cxyz&#91;1&#93;&#41;,
+        colormap &#61; cmap, transparency &#61; transparent, limits &#61; limits, colorrange &#61; &#40;lowLimit, highLimit&#41;&#41; # back, limits &#61; FRect&#40;&#40;-1,-1,-1&#41;, &#40;2,2,2&#41;&#41;
+        heatmap&#33;&#40;ax, x .&#43; cxyz&#91;1&#93;, z .&#43; cxyz&#91;3&#93;, leftF, transformation&#61;&#40;:xz, -a2 &#43; cxyz&#91;2&#93;&#41;,
+            colormap &#61; cmap, transparency &#61; transparent, colorrange &#61; &#40;lowLimit, highLimit&#41;&#41; # left
+        heatmap&#33;&#40;ax, x .&#43; cxyz&#91;1&#93;, y .&#43; cxyz&#91;2&#93;, bottomF, transformation&#61;&#40;:xy, -a2 &#43; cxyz&#91;3&#93;&#41;,
+            colormap &#61; cmap, transparency &#61; transparent, colorrange &#61; &#40;lowLimit, highLimit&#41;&#41; # bottom
+        heatmap&#33;&#40;ax, y .&#43; cxyz&#91;2&#93;, z .&#43; cxyz&#91;3&#93;, frontF, transformation&#61;&#40;:yz,  a2 &#43; cxyz&#91;1&#93;&#41;,
+            colormap &#61; cmap, transparency &#61; transparent, colorrange &#61; &#40;lowLimit, highLimit&#41;&#41; # front
+        heatmap&#33;&#40;ax, x .&#43; cxyz&#91;1&#93;, z .&#43; cxyz&#91;3&#93;, rightF, transformation&#61;&#40;:xz,  a2 &#43; cxyz&#91;2&#93;&#41;,
+            colormap &#61; cmap, transparency &#61; transparent, colorrange &#61; &#40;lowLimit, highLimit&#41;&#41; # right
+        heatmap&#33;&#40;ax, x .&#43; cxyz&#91;1&#93;, y .&#43; cxyz&#91;2&#93;, topF, transformation &#61; &#40;:xy,  a2 &#43; cxyz&#91;3&#93;&#41;,
+            colormap &#61; cmap, transparency &#61; transparent, colorrange &#61; &#40;lowLimit, highLimit&#41;&#41; # top
+        bsurf
+    end
+
+    ## Just tell me your variable, time range, lon range and lat range.
+    timeRange &#61; &#40;Date&#40;&quot;2003-01-01&quot;&#41;, Date&#40;&quot;2003-12-31&quot;&#41;&#41;#&#40;Date&#40;&quot;2003-12-31&quot;&#41;, Date&#40;&quot;2010-01-23&quot;&#41;&#41;
+    lonRange &#61; &#40;-20, 60&#41;
+    latRange &#61; &#40;-40, 40&#41;
+    allFaces &#61; getCubeFaces&#40;cube, timeRange, lonRange, latRange; variable &#61; &quot;air_temperature_2m&quot;&#41;
+    cFront, cBack, cRight, cLeft, cTop, cBottom &#61; allFaces;
+    ## Just tell me your variable, time, lon and lat.
+    function cubePlot&#40;&#41;
+        limits &#61; Node&#40;Rect&#40;Vec3f0&#40;-1&#41;, Vec3f0&#40;2&#41;&#41;&#41;
+        fig &#61; Figure&#40;resolution &#61; &#40;850, 800&#41;&#41;
+        ax &#61; Axis3&#40;fig, aspect &#61; :data, perspectiveness &#61; 0.5, xlabel &#61; &quot;time&quot;,
+            ylabel &#61; &quot;longitude&quot;, zlabel &#61; &quot;latitude&quot;&#41;
+        cbox &#61; cube&#33;&#40;ax; a1 &#61; 1, a2 &#61; 1, frontF &#61; cFront, backF &#61; cBack,
+            topF &#61; cTop, bottomF &#61; cBottom, leftF   &#61; cLeft, rightF  &#61; cRight,
+            limits &#61; limits, cmap &#61; :CMRmap, transparent&#61;false&#41;
+        ax.yticks &#61; &#40;-1:2:1,string.&#40;&#91;lonRange&#91;1&#93;, lonRange&#91;2&#93;&#93;&#41;&#41;
+        ax.zticks &#61; &#40;-1:2:1,string.&#40;&#91;latRange&#91;1&#93;, latRange&#91;2&#93;&#93;&#41;&#41;
+        ax.xticks &#61; &#40;-1:2:1,string.&#40;&#91;timeRange&#91;1&#93;,timeRange&#91;2&#93;&#93;&#41;&#41;
+        cbar  &#61; Colorbar&#40;fig, cbox,  label &#61; &quot;temperature&quot;, height &#61; Relative&#40;0.5&#41;&#41;
+        #limits&#91;&#93; &#61; Rect&#40;Vec3f0&#40;-2,-2,-2&#41;, Vec3f0&#40;4.5&#41;&#41;
+        fig&#91;1, 1&#93; &#61; ax
+        fig&#91;1, 2&#93; &#61; cbar
+        fig
+    end
+    fig &#61; with_theme&#40;cubePlot, theme_black&#40;&#41;&#41;
 end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
  <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
-  [13f3f980] CairoMakie v0.5.10
-  [35d6a980] ColorSchemes v3.12.1
+  [359177bc] ESDL v0.9.0 `https://github.com/esa-esdl/ESDL.jl#master`
+  [e9467ef8] GLMakie v0.3.4
 </code></pre></div></p>
 <div class="page-foot">
 
