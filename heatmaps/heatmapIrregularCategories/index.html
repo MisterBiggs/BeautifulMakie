@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/franklin.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/jtd.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
-   <title>ScattersCmaps</title>  
+   <title>heatmapIrregularCategories</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -45,7 +45,7 @@
 				<!-- HOME -->
           <li class="menu-list-item "><a href="/BeautifulMakie/" class="menu-list-link">• Home</a>
 					<!-- WORKFLOW -->
- 		  <li class="menu-list-parent active"><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
+ 		  <li class="menu-list-parent "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
  			  <ul class="menu-list-child-list ">
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">Single line</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/Fig2Lines/" class="menu-list-link">Two lines</a>
@@ -57,7 +57,7 @@
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/lineScatter/" class="menu-list-link">Line with scatter</a>
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/linesScatters/" class="menu-list-link">Lines with scatters</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/linesAndScatters/" class="menu-list-link">Lines and scatters</a>
-				<li class="menu-list-item active"><a href="/BeautifulMakie/ScattersLines/ScattersCmaps/" class="menu-list-link">Scatters and colormaps</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/ScattersCmaps/" class="menu-list-link">Scatters and colormaps</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/irisDataSet/" class="menu-list-link">Iris DataSet</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsDataSetWithChain/" class="menu-list-link">Penguins DataSet with scatters and regression lines</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsAoGsides/" class="menu-list-link">Penguins with AlgebraOfGraphics</a>
@@ -115,12 +115,12 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/yerrorbars/" class="menu-list-link">Simple y error bars + colormap</a>
  			  </ul>
 
-			<li class="menu-list-parent "><a href="/BeautifulMakie/heatmaps/" class="menu-list-link">• Heatmaps plots</a>
+			<li class="menu-list-parent active"><a href="/BeautifulMakie/heatmaps/" class="menu-list-link">• Heatmaps plots</a>
 				<ul class="menu-list-child-list ">
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/" class="menu-list-link">Simple heatmap</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapIrregular/" class="menu-list-link">Heatmap with an irregular grid</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapLogIrregular/" class="menu-list-link">Heatmap with an irregular grid, log scales</a>
-				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapIrregularCategories/" class="menu-list-link">Heatmap with an irregular grid, categorical ticks (center & edge)</a>
+				<li class="menu-list-item active"><a href="/BeautifulMakie/heatmaps/heatmapIrregularCategories/" class="menu-list-link">Heatmap with an irregular grid, categorical ticks (center & edge)</a>
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapText/" class="menu-list-link">Heatmap with text annotations</a>
 
@@ -220,38 +220,46 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="scatters_and_colormaps"><a href="#scatters_and_colormaps" class="header-anchor">Scatters and colormaps</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/ScattersCmaps.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+<div class="franklin-content"><h2 id="heatmap_with_an_irregular_grid_categorical_ticks"><a href="#heatmap_with_an_irregular_grid_categorical_ticks" class="header-anchor">Heatmap with an irregular grid, categorical ticks</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/heatmapIrregularCategories.png" alt=""> <pre><code class="language-julia"># Example by @walra356 &#40;modified&#41;
+using CairoMakie, Random
 let
-    Random.seed&#33;&#40;123&#41;
-    n &#61; 50
-    x, y, color &#61; rand&#40;n&#41;, rand&#40;n&#41;, rand&#40;n&#41;
-    cmaps &#61;&#91;:cool,:viridis,:plasma,:inferno,:thermal,:leonardo,:winter,:spring,:ice&#93;
-    markers &#61; &#91;:&#43;,:diamond,:star4,:rtriangle,:rect,:circle,:pentagon,:cross,:star5&#93;
-
-    function FigGridScatters&#40;&#41;
-        fig &#61; Figure&#40;resolution &#61; &#40;1200, 800&#41;&#41;
-        c &#61; 1
-        for i in 1:2, j in 1:2:5
-            ax &#61; Axis&#40;fig&#91;i, j&#93;,aspect &#61; 1,xgridstyle&#61;:dash,ygridstyle&#61;:dash,
-                                xtickalign&#61;1, ytickalign&#61;1&#41;
-            pnts &#61; scatter&#33;&#40;x, y.^c, color &#61; color, colormap&#61;cmaps&#91;c&#93;,
-                markersize &#61; 15, marker &#61; markers&#91;c&#93;, strokewidth&#61;0&#41;
-            limits&#33;&#40;ax, -0.1,1.1,-0.1,1.1&#41;
-            ax.xticks &#61; &#91;0,1&#93;
-            ax.yticks &#61; &#91;0,1&#93;
-            ax.xticklabelsize &#61; 20
-            ax.yticklabelsize &#61; 20
-            cbar &#61; Colorbar&#40;fig, pnts,height &#61; Relative&#40;0.75&#41;, tickwidth &#61; 2,
-                            tickalign&#61;1, width &#61; 14, ticksize&#61;14&#41;
-            fig&#91;i, j&#43;1&#93; &#61; cbar
-            c&#43;&#61;1
-        end
-        fig
+    Random.seed&#33;&#40;13&#41;
+    n&#61; 5
+    x &#61; rand&#40;n&#41;                        # specify x steplength
+    y &#61; rand&#40;n&#41;                        # specify y steplength
+    σ &#61; rand&#40;length&#40;x&#41;, length&#40;y&#41;&#41;      # beware of dims
+    # custom ticks
+    function steps&#40;x::Vector&#123;T&#125; where T&lt;:Real&#41;
+    sum&#40;x .&lt; 0&#41; &#61;&#61; 0 || error&#40;&quot;Error: &#36;x - nagative step length not allowed&quot;&#41;
+    &#40;s &#61; append&#33;&#40;eltype&#40;x&#41;&#91;0&#93;,x&#41;; &#91;Base.sum&#40;s&#91;1:i&#93;&#41; for i ∈ Base.eachindex&#40;s&#41;&#93;&#41;
     end
-    fig &#61; FigGridScatters&#40;&#41;
-    #save&#40;&quot;FigLineScatter.png&quot;, fig, px_per_unit &#61; 2&#41;
-end</code></pre> 
+    function stepcenters&#40;x::Vector&#123;T&#125; where T&lt;:Real&#41;
+    δ &#61; x .* 0.5
+    s &#61; append&#33;&#40;eltype&#40;x&#41;&#91;0&#93;,x&#41;
+    &#91;Base.sum&#40;s&#91;1:i&#93;&#41; for i ∈ Base.eachindex&#40;x&#41;&#93; .&#43; δ
+    end
+    stepedges&#40;x::Vector&#123;T&#125; where T&lt;:Real&#41; &#61; steps&#40;x&#41;
+
+    # the actual plot
+    theme &#61; Theme&#40;fontsize &#61; 16, colormap &#61; :gist_earth, resolution &#61; &#40;750,450&#41;&#41;
+    set_theme&#33;&#40;theme&#41;
+
+    attr1 &#61; &#40;xticks &#61; &#40;stepcenters&#40;x&#41;,string.&#40;1:n&#41;&#41;,
+        yticks &#61; &#40;stepcenters&#40;y&#41;, string.&#40;1:n&#41;&#41;, xlabel &#61; &quot;cat&quot;, &#41;
+    attr2 &#61; &#40;xticks &#61; &#40;stepedges&#40;x&#41;,string.&#40;0:n&#41;&#41;,
+        yticks &#61; &#40;stepedges&#40;y&#41;, string.&#40;0:n&#41;&#41;, xlabel&#61;&quot;cat&quot;, &#41;
+
+    fig &#61; Figure&#40;&#41;
+    ax1 &#61; Axis&#40;fig; attr1...&#41;
+    ax2 &#61; Axis&#40;fig; attr2...&#41;
+    heatmap&#33;&#40;ax1, steps&#40;x&#41;, steps&#40;y&#41;, σ&#41;
+    heatmap&#33;&#40;ax2, steps&#40;x&#41;, steps&#40;y&#41;, σ&#41;
+    fig&#91;1,1&#93; &#61; ax1
+    fig&#91;1,2&#93; &#61; ax2
+    fig
+end</code></pre></p>
+<p>
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
  <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
   [13f3f980] CairoMakie v0.5.10
