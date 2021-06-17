@@ -220,7 +220,7 @@
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="esdl_data_temperature_cube"><a href="#esdl_data_temperature_cube" class="header-anchor">ESDL data, temperature cube</a></h2>
 <p><img src="/BeautifulMakie/assets/scripts/output/temCubeESDL.png" alt=""> <pre><code class="language-julia">using ESDL, GLMakie
-# this is raw approach to plot data cubes
+# this is a raw approach to plot data cubes
 let
     cube &#61; esdc&#40;&#41;
     #YAXArray with the following dimensions
@@ -229,7 +229,7 @@ let
     #time                Axis with 1702 Elements from 1980-01-05T00:00:00 to 2016-12-30T00:00:00
     #Variable            Axis with 75 elements: soil_moisture leaf_area_index .. snow_sublimation Rg
     #Total size: 493.03 GB
-    #then from here we just call what we need. 
+    #then from here we just call what we need.
     function getCubeFaces&#40;datCubes, timeRange, lonRange, latRange;
         variable &#61; &quot;air_temperature_2m&quot; &#41;
         #front face
