@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/franklin.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/jtd.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
-   <title>themeBlack</title>  
+   <title>theme_dark_astronauts</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -179,9 +179,9 @@
 
 					<li class="menu-list-parent active"><a href="/BeautifulMakie/withTheme/" class="menu-list-link">• with_theme </a>
 						<ul class="menu-list-child-list ">
-						<li class="menu-list-item active"><a href="/BeautifulMakie/withTheme/" class="menu-list-link">theme_black</a>
+						<li class="menu-list-item "><a href="/BeautifulMakie/withTheme/" class="menu-list-link">theme_black</a>
 						<li class="menu-list-item "><a href="/BeautifulMakie/withTheme/theme_dark_Contour3d/" class="menu-list-link">theme_dark, surface,Contour3d & streamplot</a>
-						<li class="menu-list-item "><a href="/BeautifulMakie/withTheme/theme_dark_astronauts/" class="menu-list-link">theme_dark, surface, astronauts</a>
+						<li class="menu-list-item active"><a href="/BeautifulMakie/withTheme/theme_dark_astronauts/" class="menu-list-link">theme_dark, surface, astronauts</a>
 
 						</ul>
 
@@ -222,30 +222,126 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="theme_black"><a href="#theme_black" class="header-anchor">Theme Black</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/themeBlack.png" alt=""> <pre><code class="language-julia">using CairoMakie
-function EpicycloidLines&#40;&#41;
-    ecycl_x&#40;r,k,θ&#41; &#61; r*&#40;k .&#43; 1&#41;.*cos.&#40;θ&#41; .- r*cos.&#40;&#40;k .&#43; 1&#41; .* θ&#41;
-    ecycl_y&#40;r,k,θ&#41; &#61; r*&#40;k .&#43; 1&#41;.*sin.&#40;θ&#41; .- r*sin.&#40;&#40;k .&#43; 1&#41; .* θ&#41;
-    θ &#61; LinRange&#40;0,6.2π,1000&#41;
-    tronLegacy &#61; &#91;&quot;#FF410DFF&quot;, &quot;#6EE2FFFF&quot;, &quot;#F7C530FF&quot;, &quot;#95CC5EFF&quot;,
-    &quot;#D0DFE6FF&quot;, &quot;#F79D1EFF&quot;, &quot;#748AA6FF&quot;&#93;;
+<div class="franklin-content"><h2 id="theme_dark_astronauts"><a href="#theme_dark_astronauts" class="header-anchor">theme_dark, astronauts</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/theme_dark_astronauts.png" alt=""> <pre><code class="language-julia"># by lazarusA &amp; Julius Krumbiegel
+using CairoMakie, HTTP, CSV, DataFrames, DataFramesMeta, Suppressor
+using Images, ColorSchemes, Colors, Statistics
+using Lazy: @&gt;
+CairoMakie.activate&#33;&#40;&#41;
+let
+    data_url &#61; &quot;https://bit.ly/3kmlGn2&quot;
+    @suppress begin
+        global astronauts
+        astronauts &#61; CSV.File&#40;HTTP.download&#40;data_url&#41;&#41; |&gt; DataFrame
+    end
+    offhr, rPts, α &#61; 3.5, 45, 35
+    astro &#61; @&gt; begin
+        astronauts
+        @orderby&#40;:year_of_mission&#41;
+        @where&#40;:total_eva_hrs .&gt; 0.0&#41;
+        @transform&#40;ntotEVA &#61; :total_eva_hrs/ maximum&#40;:total_eva_hrs&#41;&#41;
+        @transform&#40;θ &#61; LinRange&#40;0, 2π - 2π/length&#40;:name&#41;, length&#40;:name&#41;&#41;&#41;
+        @transform&#40;align &#61; tuple.&#40;ifelse.&#40;π/2 .&lt; :θ .&lt; 3π/2, ^&#40;:right&#41;, ^&#40;:left&#41;&#41;, ^&#40;:center&#41;&#41;&#41;
+        @transform&#40;texttheta &#61; ifelse.&#40;π/2 .&lt; :θ .&lt; 3π/2, :θ .&#43; π, :θ&#41;&#41;
+        @transform&#40;evaM &#61; log10.&#40;&#40;60 * :eva_hrs_mission/median&#40;60 * :eva_hrs_mission&#41;&#41; .&#43; offhr&#41;&#41;
+        @transform&#40;xM &#61; rPts * :evaM .* cos.&#40;:θ&#41;, yM &#61; rPts * :evaM .* sin.&#40;:θ&#41;&#41;
+        @transform&#40;xMnm &#61; rPts * &#40;:evaM .- :total_number_of_missions .* :evaM./α&#41; .* cos.&#40;:θ&#41;&#41;
+        @transform&#40;yMnm &#61; rPts * &#40;:evaM .- :total_number_of_missions .* :evaM./α&#41; .* sin.&#40;:θ&#41;&#41;
+    end
+    valYear &#61; @&gt; begin astro
+            @where&#40;&#91;true; :year_of_mission&#91;2:end&#93; .&#33;&#61; :year_of_mission&#91;1:end-1&#93;&#93;&#41;
+        end
+    vehicles &#61; @&gt; begin astro
+            @where&#40;&#91;true; :ascend_shuttle&#91;2:end&#93; .&#33;&#61; :ascend_shuttle&#91;1:end-1&#93;&#93;&#41;
+        end
+    tierra &#61; &quot;https://climate.nasa.gov/system/internal_resources/details/original/309_ImageWall5_768px-60.jpg&quot;
+    @suppress begin
+        global imgEarth
+        tierra &#61; HTTP.download&#40;tierra&#41;
+        imgEarth &#61; load&#40;tierra&#41;
+    end
+    x, y &#61; astro.xM, astro.yM # end points
+    xs, ys &#61; astro.xMnm, astro.yMnm # short lines starts
+    xo &#61; yo &#61; zeros&#40;length&#40;x&#41;&#41; # origin
+    xnb, ynb &#61; 90 * cos.&#40;astro.θ&#41;, 90 * sin.&#40;astro.θ&#41;
+    xne, yne &#61; 100 * cos.&#40;astro.θ&#41;, 100 * sin.&#40;astro.θ&#41;
+    ps, cp &#61; 0.5 .&#43; 3astro.ntotEVA, astro.total_eva_hrs ; # point size, color palette
+    gridLines &#61; LinRange&#40;log10&#40;offhr&#41;, maximum&#40;astro.evaM&#41;, 6&#41;
+    horas &#61; &#40;10 .^ gridLines .- offhr&#41;*median&#40;60*astro.eva_hrs_mission&#41;/60
+    xg &#61; &#91;rPts * gl .* cos.&#40;astro.θ&#41; for gl in gridLines&#93;
+    yg &#61; &#91;rPts * gl .* sin.&#40;astro.θ&#41; for gl in gridLines&#93;;
+    function segments&#33;&#40;xs, xf, ys, yf, cp, ps; αc &#61; 1, pal &#61; :rainbow2&#41;
+        cpal &#61; get&#40;colorschemes&#91;pal&#93;, cp, :extrema&#41;
+        for k in 1:length&#40;xs&#41;
+            lines&#33;&#40;&#91;xs&#91;k&#93;, xf&#91;k&#93;&#93;, &#91;ys&#91;k&#93;, yf&#91;k&#93;&#93;, color &#61; &#40;cpal&#91;k&#93;, αc&#41;, linewidth &#61; ps&#91;k&#93;&#41;
+        end
+    end
 
-    fig &#61; Figure&#40;resolution &#61; &#40;470, 400&#41;, font &#61; :sans&#41;
-    ax &#61; Axis&#40;fig, aspect &#61;1,title &#61; &quot;Epicycloid&quot;,
-        xlabel &#61; &quot;x&#40;θ&#41; &#61; r&#40;k&#43;1&#41;cos&#40;θ&#41; -rcos&#40;&#40;k&#43;1&#41;θ&#41;&quot;,
-        ylabel &#61;&quot;y&#40;θ&#41; &#61; r&#40;k&#43;1&#41;cos&#40;θ&#41; -rcos&#40;&#40;k&#43;1&#41;θ&#41;&quot;&#41;
-    lins &#61; &#91;lines&#33;&#40;ecycl_x&#40;2k,k,θ&#41;, ecycl_y&#40;2k,k,θ&#41;, linewidth &#61; 1.5,
-            color &#61; tronLegacy&#91;indx&#93;&#41; for &#40;indx,k&#41; in enumerate&#40;2:0.5:5&#41;&#93;
-    leg &#61; Legend&#40;fig, lins, string.&#40;2:0.5:5&#41;, &quot;k , r&#61;2k&quot;, nbanks &#61; 1&#41;
-    fig&#91;1, 1&#93; &#61; ax
-    fig&#91;1, 2&#93; &#61; leg
-    fig
-end
-fig &#61; with_theme&#40;EpicycloidLines, theme_black&#40;&#41;&#41;</code></pre> 
+    with_theme&#40;theme_black&#40;&#41;&#41; do
+        fig &#61; Figure&#40;resolution &#61; &#40;1200, 1200&#41;&#41;
+        cmap &#61; :rainbow2
+        ax &#61; Makie.Axis&#40;fig&#91;1, 1&#93;,
+            title &#61; &quot;ASTRONAUTS&#39; EXTRAVEHICULAR ACTIVITIES&quot;,
+            autolimitaspect &#61; 1&#41;
+        hidespines&#33;&#40;ax&#41;
+        hidedecorations&#33;&#40;ax&#41;
+        image&#33;&#40;-20..20, -17..17, rotr90&#40;imgEarth&#41;&#41;
+        text&#33;&#40;astro.name, position &#61; @.&#40;Point&#40;cos&#40;astro.θ&#41;, sin&#40;astro.θ&#41;&#41; * 85&#41;,
+            rotation &#61; astro.texttheta, textsize &#61; 6, align &#61; astro.align&#41;
+        text&#33;&#40;string.&#40;valYear.year_of_mission&#41;,
+            position &#61; @.&#40;Point&#40;cos&#40;valYear.θ&#41;, sin&#40;valYear.θ&#41;&#41; * 65&#41;,
+            rotation &#61; valYear.texttheta, textsize &#61; 10, align &#61; valYear.align&#41;
+        text&#33;&#40;vehicles.ascend_shuttle,
+            position &#61; @.&#40;Point&#40;cos&#40;vehicles.θ&#41;, sin&#40;vehicles.θ&#41;&#41; * 75&#41;,
+            rotation &#61; vehicles.texttheta, textsize &#61; 6, align &#61; vehicles.align&#41;
+
+        pltobj &#61; scatter&#33;&#40;ax, astro&#91;:,:xM&#93;, astro&#91;:,:yM&#93;, color &#61; cp,
+            colormap &#61; cmap, markersize &#61; 3*ps, strokewidth &#61; 0&#41;
+
+        segments&#33;&#40;xo, xs, yo, ys, cp, ps/2; αc &#61; 0.15, pal &#61; cmap&#41;
+        segments&#33;&#40;xs, x, ys, y, cp, ps/2; pal &#61; cmap&#41;
+        segments&#33;&#40;xnb, xne, ynb, yne, cp, ps/3; αc &#61; 0.5&#41;
+
+        Colorbar&#40;fig&#91;1,1&#93;, pltobj,
+            label &#61; &quot;Total duration of all extravehicular activities in hours&quot;,
+            tellheight &#61; false, tellwidth &#61; false, ticklabelsize &#61; 12, flipaxis &#61; true,
+            vertical &#61; false, ticksize&#61;15, tickalign &#61; 1, width &#61; Relative&#40;1.5/4&#41;,
+            halign &#61; :right, valign &#61; :bottom, labelsize &#61; 12&#41;
+
+        for &#40;indx, gl&#41; in enumerate&#40;gridLines&#41;
+            xg, yg &#61; rPts * gl .* cos.&#40;astro.θ&#41;, rPts * gl .* sin.&#40;astro.θ&#41;
+            hrs &#61; Int64&#40;round&#40;horas&#91;indx&#93;, digits &#61; 0&#41;&#41;
+            lines&#33;&#40;xg, yg, linewidth &#61; 0.5, linestyle &#61; :dash, color &#61; :white&#41;
+            text&#33;&#40;string.&#40;hrs&#41;, position &#61; &#40;xg&#91;1&#93; &#43; 0.5, y&#91;1&#93;&#43;0.5&#41;,
+                color &#61; &quot;#FFDD33&quot;, textsize &#61; 14&#41;
+        end
+        lines&#33;&#40;&#91;rPts*gridLines&#91;1&#93;, rPts*gridLines&#91;end&#93;&#93;,&#91;0,0&#93;,linestyle &#61; :dash,
+            linewidth &#61; 2, color &#61;  &quot;#FFDD33&quot;&#41;
+        text&#33;&#40;&quot;evaM &#40;hrs&#41;&quot;, position &#61; &#40;47, -3.5&#41;, color &#61; &quot;#FFDD33&quot;, textsize &#61; 16&#41;
+        text&#33;&#40;&quot;evaM ≡ Duration of extravehicular \n activities during the mission in hours&quot;,
+            position &#61; &#40;rPts*gridLines&#91;end-2&#93;, 90&#41;, color &#61; &quot;#FFDD33&quot;, textsize &#61; 16&#41;
+        text&#33;&#40;&quot;using Makie&quot;, position &#61; &#40;-99, -94&#41;, textsize &#61; 18, color &#61; :white&#41;
+        text&#33;&#40;&quot;Visualization by @LazarusAlon and Julius Krumbiegel &quot;,
+            position &#61; &#40;-99, -97&#41;, textsize &#61; 12, color &#61; &quot;#61AFEF&quot;&#41;
+        text&#33;&#40;&quot;Data - Astronaut Database - Mariya Stavnichuk and Tatsuya Corlett&quot;,
+            position &#61; &#40;-99, -99&#41;, textsize &#61; 10&#41;
+        limits&#33;&#40;ax, -100, 100, -100, 100&#41;
+    end
+
+end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
  <div class="code-output"><pre><code class="plaintext">      Status `~/Documents/BeautifulMakie/Project.toml`
-  [13f3f980] CairoMakie v0.5.10
+  [336ed68f] CSV v0.8.5
+  [13f3f980] CairoMakie v0.6.1
+  [35d6a980] ColorSchemes v3.12.1
+  [5ae59095] Colors v0.12.8
+  [a93c6f00] DataFrames v1.1.1
+  [1313f7d8] DataFramesMeta v0.7.0
+  [cd3eb016] HTTP v0.9.10
+  [916415d5] Images v0.24.1
+  [50d2b5c4] Lazy v0.15.1
+  [fd094767] Suppressor v0.2.0
+  [10745b16] Statistics
 </code></pre></div></p>
 <div class="page-foot">
 
