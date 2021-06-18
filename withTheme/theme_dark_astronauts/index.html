@@ -224,7 +224,7 @@
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="theme_dark_astronauts"><a href="#theme_dark_astronauts" class="header-anchor">theme_dark, astronauts</a></h2>
 <p><img src="/BeautifulMakie/assets/scripts/output/theme_dark_astronauts.png" alt=""> <pre><code class="language-julia"># by lazarusA &amp; Julius Krumbiegel
-using CairoMakie, HTTP, CSV, DataFrames, DataFramesMeta, Suppressor
+using Makie, CairoMakie, HTTP, CSV, DataFrames, DataFramesMeta, Suppressor
 using Images, ColorSchemes, Colors, Statistics
 using Lazy: @&gt;
 CairoMakie.activate&#33;&#40;&#41;
@@ -260,27 +260,35 @@ let
         tierra &#61; HTTP.download&#40;tierra&#41;
         imgEarth &#61; load&#40;tierra&#41;
     end
+    function getPoints&#40;xi,yi,xf,yf&#41;
+        xyos &#61; &#91;&#93;
+        for i in 1:length&#40;xo&#41;
+            push&#33;&#40;xyos, &#91;xi&#91;i&#93;, yi&#91;i&#93;&#93;&#41;
+            push&#33;&#40;xyos, &#91;xf&#91;i&#93;, yf&#91;i&#93;&#93;&#41;
+        end
+        xyos
+    end
     x, y &#61; astro.xM, astro.yM # end points
     xs, ys &#61; astro.xMnm, astro.yMnm # short lines starts
     xo &#61; yo &#61; zeros&#40;length&#40;x&#41;&#41; # origin
     xnb, ynb &#61; 90 * cos.&#40;astro.θ&#41;, 90 * sin.&#40;astro.θ&#41;
     xne, yne &#61; 100 * cos.&#40;astro.θ&#41;, 100 * sin.&#40;astro.θ&#41;
-    ps, cp &#61; 0.5 .&#43; 3astro.ntotEVA, astro.total_eva_hrs ; # point size, color palette
+    ps, colorp &#61; 0.5 .&#43; 3astro.ntotEVA, astro.total_eva_hrs ; # point size, color palette
     gridLines &#61; LinRange&#40;log10&#40;offhr&#41;, maximum&#40;astro.evaM&#41;, 6&#41;
     horas &#61; &#40;10 .^ gridLines .- offhr&#41;*median&#40;60*astro.eva_hrs_mission&#41;/60
     xg &#61; &#91;rPts * gl .* cos.&#40;astro.θ&#41; for gl in gridLines&#93;
-    yg &#61; &#91;rPts * gl .* sin.&#40;astro.θ&#41; for gl in gridLines&#93;;
-    function segments&#33;&#40;xs, xf, ys, yf, cp, ps; αc &#61; 1, pal &#61; :rainbow2&#41;
-        cpal &#61; get&#40;colorschemes&#91;pal&#93;, cp, :extrema&#41;
-        for k in 1:length&#40;xs&#41;
-            lines&#33;&#40;&#91;xs&#91;k&#93;, xf&#91;k&#93;&#93;, &#91;ys&#91;k&#93;, yf&#91;k&#93;&#93;, color &#61; &#40;cpal&#91;k&#93;, αc&#41;, linewidth &#61; ps&#91;k&#93;&#41;
-        end
-    end
+    yg &#61; &#91;rPts * gl .* sin.&#40;astro.θ&#41; for gl in gridLines&#93;
+    # in order to use linesegments &#40;faster to plot&#41;
+    xyos &#61; getPoints&#40;xo,yo,xs,ys&#41;
+    xys  &#61; getPoints&#40;xs,ys,x,y&#41;
+    xybe &#61; getPoints&#40;xnb,ynb,xne,yne&#41;
+    cpDo &#61; repeat&#40;colorp, inner&#61;2&#41;
+    psDo &#61; repeat&#40;ps, inner&#61;2&#41;;
 
     with_theme&#40;theme_black&#40;&#41;&#41; do
         fig &#61; Figure&#40;resolution &#61; &#40;1200, 1200&#41;&#41;
         cmap &#61; :rainbow2
-        ax &#61; Makie.Axis&#40;fig&#91;1, 1&#93;,
+        ax &#61; CairoMakie.Axis&#40;fig&#91;1, 1&#93;,
             title &#61; &quot;ASTRONAUTS&#39; EXTRAVEHICULAR ACTIVITIES&quot;,
             autolimitaspect &#61; 1&#41;
         hidespines&#33;&#40;ax&#41;
@@ -292,15 +300,15 @@ let
             position &#61; @.&#40;Point&#40;cos&#40;valYear.θ&#41;, sin&#40;valYear.θ&#41;&#41; * 65&#41;,
             rotation &#61; valYear.texttheta, textsize &#61; 10, align &#61; valYear.align&#41;
         text&#33;&#40;vehicles.ascend_shuttle,
-            position &#61; @.&#40;Point&#40;cos&#40;vehicles.θ&#41;, sin&#40;vehicles.θ&#41;&#41; * 75&#41;,
+            position &#61; @.&#40;Point&#40;cos&#40;vehicles.θ&#41;, sin&#40;vehicles.θ&#41;&#41; * 73&#41;,
             rotation &#61; vehicles.texttheta, textsize &#61; 6, align &#61; vehicles.align&#41;
 
-        pltobj &#61; scatter&#33;&#40;ax, astro&#91;:,:xM&#93;, astro&#91;:,:yM&#93;, color &#61; cp,
+        pltobj &#61; scatter&#33;&#40;ax, astro&#91;:,:xM&#93;, astro&#91;:,:yM&#93;, color &#61; colorp,
             colormap &#61; cmap, markersize &#61; 3*ps, strokewidth &#61; 0&#41;
 
-        segments&#33;&#40;xo, xs, yo, ys, cp, ps/2; αc &#61; 0.15, pal &#61; cmap&#41;
-        segments&#33;&#40;xs, x, ys, y, cp, ps/2; pal &#61; cmap&#41;
-        segments&#33;&#40;xnb, xne, ynb, yne, cp, ps/3; αc &#61; 0.5&#41;
+        linesegments&#33;&#40;Point2f0.&#40;xyos&#41;, color &#61; cpDo, linewidth &#61; psDo/2, colormap &#61; &#40;cmap, 0.15&#41;&#41;
+        linesegments&#33;&#40;Point2f0.&#40;xys&#41;, color &#61; cpDo, linewidth &#61; psDo/2,colormap &#61; cmap&#41;
+        linesegments&#33;&#40;Point2f0.&#40;xybe&#41;, color &#61; cpDo, linewidth &#61; psDo/3, colormap &#61; &#40;cmap,0.5&#41;&#41;
 
         Colorbar&#40;fig&#91;1,1&#93;, pltobj,
             label &#61; &quot;Total duration of all extravehicular activities in hours&quot;,
