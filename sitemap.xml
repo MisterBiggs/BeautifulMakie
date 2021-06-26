@@ -194,6 +194,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/heatmaps/heatmapScaleDetail/index.html</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://lazarusa.github.io/BeautifulMakie/surfWireLines/tesseralSphericalH/index.html</loc>
     <lastmod>2021-06-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -260,6 +266,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/heatmaps/heatmapScaleCrosshair/index.html</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://lazarusa.github.io/BeautifulMakie/index.html</loc>
     <lastmod>2021-06-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -273,6 +285,12 @@
 </url>
 <url>
     <loc>https://lazarusa.github.io/BeautifulMakie/heatmaps/heatmapText/index.html</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/heatmaps/heatmapScaleSections/index.html</loc>
     <lastmod>2021-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -357,6 +375,12 @@
 </url>
 <url>
     <loc>https://lazarusa.github.io/BeautifulMakie/surfWireLines/line3D/index.html</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/heatmaps/heatmapScaleAdd/index.html</loc>
     <lastmod>2021-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
