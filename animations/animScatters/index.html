@@ -231,20 +231,21 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="animation_scatters_size"><a href="#animation_scatters_size" class="header-anchor">Animation scatters size</a></h2>
-<p>
+
 <video controls width="100%">
-    <source src=" /BeautifulMakie/assets/scripts/output/animScatters.mp4"
+    <source src="/BeautifulMakie/assets/scripts/output/animScatters.mp4"
             type="video/mp4">
     Sorry, your browser doesn't support embedded videos.
 </video>
- <pre><code class="language-julia">#by Lazaro Alonso
+
+<p><pre><code class="language-julia">#by Lazaro Alonso
 using CairoMakie, Random
 CairoMakie.activate&#33;&#40;&#41;
 let
     Random.seed&#33;&#40;123&#41;
     npts &#61; 100
     initms &#61; 8*rand&#40;npts&#41;
-    msize &#61; Node&#40;initms&#41; # this is variable that will change
+    msize &#61; Node&#40;initms&#41; # this is the variable that will change
     with_theme&#40;theme_dark&#40;&#41;&#41; do
         # first frame, initial plot
         fig, ax &#61; scatter&#40;2*rand&#40;npts&#41;, rand&#40;npts&#41;, markersize &#61; msize,
