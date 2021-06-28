@@ -231,7 +231,13 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="animation_scatters_size"><a href="#animation_scatters_size" class="header-anchor">Animation scatters size</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/animScatters.mp4" alt=""> <pre><code class="language-julia">#by Lazaro Alonso
+<p>
+<video controls width="100%">
+    <source src=" /assets/scripts/output/animScatters.mp4"
+            type="video/mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
+ <pre><code class="language-julia">#by Lazaro Alonso
 using CairoMakie, Random
 CairoMakie.activate&#33;&#40;&#41;
 let
@@ -247,7 +253,8 @@ let
             axis &#61; &#40;xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;,&#41;&#41;
         limits&#33;&#40;ax, 0,2,0,1&#41;
         # the animation is done by updating the node values
-        record&#40;fig,joinpath&#40;@__DIR__, &quot;output&quot;, &quot;animScatters.mp4&quot;&#41;, framerate &#61; 24&#41; do io
+        record&#40;fig,joinpath&#40;@__DIR__, &quot;output&quot;, &quot;animScatters.mp4&quot;&#41;,
+            framerate &#61; 24, profile &#61; &quot;main&quot;&#41; do io
             for i in 1:0.1:8
                 msize&#91;&#93; &#61; i*initms
                 recordframe&#33;&#40;io&#41;  # record a new frame
