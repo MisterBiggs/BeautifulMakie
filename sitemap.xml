@@ -14,12 +14,6 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://lazarusa.github.io/BeautifulMakie/StatsPlots/stripedBar/index.html</loc>
-    <lastmod>2021-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://lazarusa.github.io/BeautifulMakie/GeoPlots/topographySphere/index.html</loc>
     <lastmod>2021-07-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -260,13 +254,19 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://lazarusa.github.io/BeautifulMakie/contour/ContourOverHeatmap/index.html</loc>
+    <loc>https://lazarusa.github.io/BeautifulMakie/StatsPlots/strippedBar/index.html</loc>
     <lastmod>2021-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://lazarusa.github.io/BeautifulMakie/ScattersLines/ScatterLogxyCbar/index.html</loc>
+    <lastmod>2021-07-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://lazarusa.github.io/BeautifulMakie/contour/ContourOverHeatmap/index.html</loc>
     <lastmod>2021-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/minimal-mistakes.css">
 
-   <title>stripedBar</title>  
+   <title>strippedBar</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -124,7 +124,7 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BarViolinDataSet/" class="menu-list-link">Bars and Violins using RDatasets</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/DensitiesDataSet/" class="menu-list-link">Density plots using RDatasets</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BoxErrorBars/" class="menu-list-link">Boxes and y error bars</a>
-				<li class="menu-list-item active"><a href="/BeautifulMakie/StatsPlots/stripedBar/" class="menu-list-link">Striped bar patterns</a>
+				<li class="menu-list-item active"><a href="/BeautifulMakie/StatsPlots/strippedBar/" class="menu-list-link">Stripped bar patterns</a>
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/xBoxErrorBars/" class="menu-list-link">x-error boxes and y-error bars</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BoxErrorBarsCmap/" class="menu-list-link">Boxes and y error bars, colormap</a>
@@ -247,25 +247,25 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="striped_bar_patterns"><a href="#striped_bar_patterns" class="header-anchor">Striped bar patterns</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/stripedBar.png" alt=""> <pre><code class="language-julia"># by lazarusA 
+<div class="franklin-content"><h2 id="stripped_bar_patterns"><a href="#stripped_bar_patterns" class="header-anchor">Stripped bar patterns</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/strippedBar.png" alt=""> <pre><code class="language-julia"># by lazarusA
 # striped bar, this currently fails with CairoMakie
 # https://discourse.julialang.org/t/striped-colors-for-e-g-bar-plots-in-julia/64435/3
 using Makie, GLMakie, Random
 let
     Random.seed&#33;&#40;13&#41;
-    # patterns 
-    # &#96;&#39;/&#39;&#96;, &#96;&#39;\\&#39;&#96;, &#96;&#39;-&#39;&#96;, &#96;&#39;|&#39;&#96;, &#96;&#39;x&#39;&#96;, and &#96;&#39;&#43;&#39;&#96; 
-    directions &#61; &#91;Vec2f0&#40;1&#41;, Vec2f0&#40;1, -1&#41;, Vec2f0&#40;1, 0&#41;, Vec2f0&#40;0, 1&#41;, 
+    # patterns
+    # &#96;&#39;/&#39;&#96;, &#96;&#39;\\&#39;&#96;, &#96;&#39;-&#39;&#96;, &#96;&#39;|&#39;&#96;, &#96;&#39;x&#39;&#96;, and &#96;&#39;&#43;&#39;&#96;
+    directions &#61; &#91;Vec2f0&#40;1&#41;, Vec2f0&#40;1, -1&#41;, Vec2f0&#40;1, 0&#41;, Vec2f0&#40;0, 1&#41;,
         &#91;Vec2f0&#40;1&#41;, Vec2f0&#40;1, -1&#41;&#93;, &#91;Vec2f0&#40;1, 0&#41;, Vec2f0&#40;0, 1&#41;&#93;&#93;
     colors &#61; &#91;:white, :orange, &#40;:green,0.5&#41;, :yellow, &#40;:blue, 0.85&#41;,:black&#93;
-    patternColors &#61; &#91;Makie.LinePattern&#40;direction&#61; hatch; width&#61;5, tilesize&#61;&#40;20,20&#41;, 
-        linecolor &#61; colors&#91;indx&#93;, background_color &#61; colors&#91;end-indx&#43;1&#93;&#41; 
+    patternColors &#61; &#91;Makie.LinePattern&#40;direction&#61; hatch; width&#61;5, tilesize&#61;&#40;20,20&#41;,
+        linecolor &#61; colors&#91;indx&#93;, background_color &#61; colors&#91;end-indx&#43;1&#93;&#41;
         for &#40;indx, hatch&#41; in enumerate&#40;directions&#41;&#93;
-    
-    fig, ax, pltobj &#61; barplot&#40;1:2, strokewidth&#61;2, color&#61;&#91;&quot;grey&quot;,&quot;orange&quot;&#93;, 
+
+    fig, ax, pltobj &#61; barplot&#40;1:2, strokewidth&#61;2, color&#61;&#91;&quot;grey&quot;,&quot;orange&quot;&#93;,
         figure &#61; &#40;resolution &#61; &#40;900,600&#41;,&#41;&#41;
-    
+
     for &#40;idx, pattern&#41; in enumerate&#40;patternColors&#41;
         barplot&#33;&#40;ax, &#91;idx&#43;2&#93;, &#91;idx*&#40;2rand&#40;&#41;&#43;1&#41;&#93;, color &#61; pattern, strokewidth &#61; 2&#41;
     end
