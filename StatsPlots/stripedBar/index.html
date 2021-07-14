@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/minimal-mistakes.css">
 
-   <title>heatmapCbarBottom</title>  
+   <title>stripedBar</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -112,7 +112,7 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/FlowFields/complexPolyaField/" class="menu-list-link">Complex function and Pólya Field</a>
 
 				</ul>
-			<li class="menu-list-parent "><a href="/BeautifulMakie/StatsPlots/" class="menu-list-link">• Statistical plots</a>
+			<li class="menu-list-parent active"><a href="/BeautifulMakie/StatsPlots/" class="menu-list-link">• Statistical plots</a>
  			  <ul class="menu-list-child-list ">
  				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/" class="menu-list-link">Histograms, bins and counts</a>
  				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/histogramsNorms/" class="menu-list-link">Histograms and normalization</a>
@@ -124,7 +124,7 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BarViolinDataSet/" class="menu-list-link">Bars and Violins using RDatasets</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/DensitiesDataSet/" class="menu-list-link">Density plots using RDatasets</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BoxErrorBars/" class="menu-list-link">Boxes and y error bars</a>
-				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/stripedBar/" class="menu-list-link">Striped bar patterns</a>
+				<li class="menu-list-item active"><a href="/BeautifulMakie/StatsPlots/stripedBar/" class="menu-list-link">Striped bar patterns</a>
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/xBoxErrorBars/" class="menu-list-link">x-error boxes and y-error bars</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BoxErrorBarsCmap/" class="menu-list-link">Boxes and y error bars, colormap</a>
@@ -132,7 +132,7 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/yerrorbars/" class="menu-list-link">Simple y error bars + colormap</a>
  			  </ul>
 
-			<li class="menu-list-parent active"><a href="/BeautifulMakie/heatmaps/" class="menu-list-link">• Heatmaps plots</a>
+			<li class="menu-list-parent "><a href="/BeautifulMakie/heatmaps/" class="menu-list-link">• Heatmaps plots</a>
 				<ul class="menu-list-child-list ">
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/" class="menu-list-link">Simple heatmap</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapIrregular/" class="menu-list-link">Heatmap with an irregular grid</a>
@@ -143,7 +143,7 @@
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapCbarLeft/" class="menu-list-link">Heatmap, left colorbar</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapCbarTop/" class="menu-list-link">Heatmap, top colorbar</a>
-				<li class="menu-list-item active"><a href="/BeautifulMakie/heatmaps/heatmapCbarBottom/" class="menu-list-link">Heatmap, bottom colorbar</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapCbarBottom/" class="menu-list-link">Heatmap, bottom colorbar</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapxyz/" class="menu-list-link">Heatmap with x,y,z values</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapGrid/" class="menu-list-link">Grid of Heatmaps</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmap2SharedCbars/" class="menu-list-link">Heatmaps, shared colorbars</a>
@@ -247,25 +247,33 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="heatmap_bottom_colorbar"><a href="#heatmap_bottom_colorbar" class="header-anchor">Heatmap, bottom colorbar</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/heatmapCbarBottom.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
+<div class="franklin-content"><h2 id="striped_bar_patterns"><a href="#striped_bar_patterns" class="header-anchor">Striped bar patterns</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/stripedBar.png" alt=""> <pre><code class="language-julia"># by lazarusA 
+# striped bar, this currently fails with CairoMakie
+# https://discourse.julialang.org/t/striped-colors-for-e-g-bar-plots-in-julia/64435/3
+using Makie, GLMakie, Random
 let
-    Random.seed&#33;&#40;123&#41;
-    fig &#61; Figure&#40;resolution &#61; &#40;400, 427&#41;&#41;
-    ax &#61; Axis&#40;fig,  aspect &#61; 1, xlabel &#61; &quot;x&quot;, ylabel &#61; &quot;y&quot;&#41;
-    hmap &#61; heatmap&#33;&#40;rand&#40;20,20&#41;, colormap &#61; :lajolla&#41;
-    cbar &#61; Colorbar&#40;fig, hmap, label &#61; &quot;values&quot;, height &#61; 15, vertical &#61; false,
-     flipaxis &#61; false, ticksize&#61;15, tickalign &#61; 1, width &#61; Relative&#40;3.55/4&#41;&#41;
-    fig&#91;1, 1&#93; &#61; ax
-    fig&#91;2, 1&#93; &#61; cbar
-    rowgap&#33;&#40;fig.layout, 7&#41;
+    Random.seed&#33;&#40;13&#41;
+    # patterns 
+    # &#96;&#39;/&#39;&#96;, &#96;&#39;\\&#39;&#96;, &#96;&#39;-&#39;&#96;, &#96;&#39;|&#39;&#96;, &#96;&#39;x&#39;&#96;, and &#96;&#39;&#43;&#39;&#96; 
+    directions &#61; &#91;Vec2f0&#40;1&#41;, Vec2f0&#40;1, -1&#41;, Vec2f0&#40;1, 0&#41;, Vec2f0&#40;0, 1&#41;, 
+        &#91;Vec2f0&#40;1&#41;, Vec2f0&#40;1, -1&#41;&#93;, &#91;Vec2f0&#40;1, 0&#41;, Vec2f0&#40;0, 1&#41;&#93;&#93;
+    colors &#61; &#91;:white, :orange, &#40;:green,0.5&#41;, :yellow, &#40;:blue, 0.85&#41;,:black&#93;
+    patternColors &#61; &#91;Makie.LinePattern&#40;direction&#61; hatch; width&#61;5, tilesize&#61;&#40;20,20&#41;, 
+        linecolor &#61; colors&#91;indx&#93;, background_color &#61; colors&#91;end-indx&#43;1&#93;&#41; 
+        for &#40;indx, hatch&#41; in enumerate&#40;directions&#41;&#93;
+    
+    fig, ax, pltobj &#61; barplot&#40;1:2, strokewidth&#61;2, color&#61;&#91;&quot;grey&quot;,&quot;orange&quot;&#93;, 
+        figure &#61; &#40;resolution &#61; &#40;900,600&#41;,&#41;&#41;
+    
+    for &#40;idx, pattern&#41; in enumerate&#40;patternColors&#41;
+        barplot&#33;&#40;ax, &#91;idx&#43;2&#93;, &#91;idx*&#40;2rand&#40;&#41;&#43;1&#41;&#93;, color &#61; pattern, strokewidth &#61; 2&#41;
+    end
+    ax.xticks &#61; &#40;1:8, &#91;&quot;grey&quot;, &quot;orange&quot;, &quot;/&quot;, &quot;\\&quot;, &quot;-&quot;, &quot;|&quot;, &quot;x&quot;, &quot;&#43;&quot;&#93;&#41;
     fig
 end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
- <div class="code-output"><pre><code class="plaintext">      Status `~/Desktop/BeautifulMakie/_assets/Project.toml`
-  [13f3f980] CairoMakie v0.6.2
-  [9a3f8284] Random
-</code></pre></div></p>
+ <div class="code-output"></div></p>
 <div class="page-foot">
 
   <div align="right">
