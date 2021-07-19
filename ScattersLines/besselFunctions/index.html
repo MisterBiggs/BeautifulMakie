@@ -65,6 +65,7 @@
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">Single line</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/latexSample/" class="menu-list-link">LaTeX example</a>
 				<li class="menu-list-item active"><a href="/BeautifulMakie/ScattersLines/besselFunctions/" class="menu-list-link">Bessel Functions, LaTeX legends</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/besselSecondKind/" class="menu-list-link">Bessel Second Kind, LaTeX legends line styles</a>
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/Fig2Lines/" class="menu-list-link">Two lines</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/twinAxis/" class="menu-list-link">Twin Axis</a>
@@ -251,9 +252,9 @@
 
 <!-- Content appended here (in class franklin-content) -->
 <div class="franklin-content"><h2 id="bessel_functions_latex_legends"><a href="#bessel_functions_latex_legends" class="header-anchor">Bessel Functions, LaTeX legends</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/latexSample/output/besselFunctions.png" alt=""> <pre><code class="language-julia">using CairoMakie, LaTeXStrings, SpecialFunctions
+<p><img src="/BeautifulMakie/assets/scripts/latexSample/output/besselFunctions.png" alt=""> <pre><code class="language-julia"># by Lazaro Alonso 
+using CairoMakie, LaTeXStrings, SpecialFunctions
 let 
-    x &#61; 0:0.05:4π
     fig &#61; Figure&#40;resolution &#61; &#40;600,400&#41;, font &#61; &quot;CMU Serif&quot;&#41; # probably you need to install this font in your system 
     ax &#61; Axis&#40;fig, xlabel &#61; L&quot;x&quot;, ylabel &#61; L&quot;J_&#123;\nu&#125;&#40;x&#41;&quot;, ylabelsize &#61; 22, 
         xlabelsize&#61; 22, xgridstyle&#61;:dash, ygridstyle&#61;:dash, xtickalign &#61; 1, 
