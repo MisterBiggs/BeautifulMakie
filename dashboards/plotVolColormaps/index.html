@@ -261,11 +261,11 @@ function plotVolColormaps&#40;; rseed &#61; 123&#41;
     cs &#61; collect&#40;keys&#40;colorschemes&#41;&#41;
     cmapIdx &#61; Node&#40;1&#41; 
     cmap &#61; @lift&#40;cs&#91;&#36;cmapIdx&#93;&#41; # @lift&#40;Reverse&#40;cs&#91;&#36;cmapIdx&#93;&#41;&#41;
-    colors &#61; @lift&#40;to_colormap&#40;&#36;cmap, 101&#41;&#41;
-    n &#61; @lift&#40;length&#40;&#36;colors&#41;&#41;
+    ncolors &#61; 101
+    colors &#61; @lift&#40;to_colormap&#40;&#36;cmap, ncolors&#41;&#41;
     # some transparencies in the colors
     g&#40;x&#41; &#61; 0.5 &#43; 0.5*tanh&#40;&#40;x&#43;3&#41;/3&#41;
-    alphas &#61; g.&#40;-10:0.2:10&#41;
+    alphas &#61; g.&#40;LinRange&#40;-10,10, ncolors&#41;&#41;
     cmap_alpha &#61; @lift&#40;RGBAf0.&#40;&#36;colors, alphas&#41;&#41;
     # the actual figure
     n &#61; 15
