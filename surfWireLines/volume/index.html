@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/minimal-mistakes.css">
 
-   <title>contourQubit</title>  
+   <title>volume</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -160,16 +160,16 @@
 
 				</ul>
 
-				<li class="menu-list-parent active"><a href="/BeautifulMakie/contour/" class="menu-list-link">• Contour plots</a>
+				<li class="menu-list-parent "><a href="/BeautifulMakie/contour/" class="menu-list-link">• Contour plots</a>
 					<ul class="menu-list-child-list ">
 					<li class="menu-list-item "><a href="/BeautifulMakie/contour/" class="menu-list-link">Simple countour</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/contour/ContourOverHeatmap/" class="menu-list-link">Contour lines Over Heatmap</a>
 
-					<li class="menu-list-item active"><a href="/BeautifulMakie/contour/contourQubit/" class="menu-list-link">Contour Qubit</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/contour/contourQubit/" class="menu-list-link">Contour Qubit</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/contour/ContourComplexF/" class="menu-list-link">Contour Complex Functiont</a>
 
 					</ul>
-			<li class="menu-list-parent "><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">• 3D plots</a>
+			<li class="menu-list-parent active"><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">• 3D plots</a>
 				<ul class="menu-list-child-list ">
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">Surface branching</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/surfWireContour/" class="menu-list-link">Surface, Wireframe and Contour</a>
@@ -185,7 +185,7 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/wireSurfToris/" class="menu-list-link">Wireframe and Surface Tori</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/tesseralSphericalH/" class="menu-list-link">Tesseral Spherical Harmonics</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/RGBcube/" class="menu-list-link">RGB cube</a>
-				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/volume/" class="menu-list-link">volume, x,y,z, f(x,y,z)</a>
+				<li class="menu-list-item active"><a href="/BeautifulMakie/surfWireLines/volume/" class="menu-list-link">volume, x,y,z, f(x,y,z)</a>
 	
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/line3D/" class="menu-list-link">Line in 3D</a>
 
@@ -262,27 +262,25 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="contour_qubit"><a href="#contour_qubit" class="header-anchor">Contour Qubit</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/contourQubit.png" alt=""> <pre><code class="language-julia">using CairoMakie
+<div class="franklin-content"><h2 id="volume_xyz_fxyz"><a href="#volume_xyz_fxyz" class="header-anchor">volume, x,y,z, f&#40;x,y,z&#41;</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/volume.png" alt=""> <pre><code class="language-julia"># by Lazaro Alonso
+using GLMakie
 let
-    function tα_qubit&#40;β, ψ1, ψ2, fα, f&#41;
-        2 &#43; 2*β - cos&#40;ψ1&#41; - cos&#40;ψ2&#41; - 2*β*cos&#40;π*fα&#41;*cos&#40;2*π*f &#43; π*fα - ψ1- ψ2&#41;
-    end
-    ψ1 &#61; ψ2 &#61; LinRange&#40;0, 4*π, 100&#41;
-    z &#61; &#91;tα_qubit&#40;.61, x, y, 0.2, .1&#41; for x in ψ1, y in ψ2&#93;
+    x &#61; 1:10
+    y &#61; 1:10
+    z &#61; 1:10
+    f&#40;x,y,z&#41; &#61; x^2 &#43; y^2 &#43; z^2
+    vol &#61; &#91;f&#40;ix,iy,iz&#41; for ix in x, iy in y, iz in z&#93;
+    fig, ax, _ &#61; volume&#40;x, y, z, vol, colormap &#61; :plasma, colorrange &#61; &#40;minimum&#40;vol&#41;, maximum&#40;vol&#41;&#41;,
+        figure &#61; &#40;; resolution &#61; &#40;800,800&#41;&#41;,  
+        axis&#61;&#40;; type&#61;Axis3, perspectiveness &#61; 0.5,  azimuth &#61; 7.19, elevation &#61; 0.57,  
+            aspect &#61; &#40;1,1,1&#41;&#41;&#41;
 
-    fig &#61; Figure&#40;resolution &#61; &#40;470, 400&#41;&#41;
-    ax &#61; Axis&#40;fig, aspect &#61; 1, xlabel &#61; &quot;ψ1&quot;, ylabel &#61; &quot;ψ2&quot;&#41;
-    clines &#61; contour&#33;&#40;ψ1, ψ2, z,colormap &#61; :plasma,levels &#61; 20,linewidth &#61; 1.5&#41;
-    limits&#33;&#40;ax, 0, 4π, 0, 4π&#41;
-    cbar  &#61; Colorbar&#40;fig, clines, label &#61;&quot;α-q&quot;, height &#61; Relative&#40;3.55/4&#41;&#41;
-    fig&#91;1, 1&#93; &#61; ax
-    fig&#91;1, 2&#93; &#61; cbar
     fig
 end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
  <div class="code-output"><pre><code class="plaintext code-output">      Status `~/Desktop/BeautifulMakie/_assets/Project.toml`
-  [13f3f980] CairoMakie v0.6.3
+  [e9467ef8] GLMakie v0.4.4
 </code></pre></div></p>
 <div class="page-foot">
 
