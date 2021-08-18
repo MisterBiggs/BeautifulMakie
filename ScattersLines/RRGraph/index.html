@@ -320,7 +320,7 @@ function plotGraph&#40;adjacencyM, x, y&#41;
         linewidth &#61; abs.&#40;weights&#41;/2, colorrange &#61; &#40;adjmin, adjmax&#41;, 
         figure &#61; &#40;;resolution &#61; &#40;500,400&#41;&#41;, axis &#61; &#40;;aspect &#61; DataAspect&#40;&#41;&#41;&#41;
     scatter&#33;&#40;ax, x, y, color &#61; diagValues, markersize &#61; 3*abs.&#40;diagValues&#41;,
-        colormap &#61; cmap&#41;
+        colorrange &#61; &#40;adjmin, adjmax&#41;, colormap &#61; cmap&#41;
     limits&#33;&#40;ax, -0.02,1.02,-0.02,1.02&#41;
     Colorbar&#40;fig&#91;1,2&#93;, pltobj, label &#61; &quot;weights&quot;&#41;
     fig
