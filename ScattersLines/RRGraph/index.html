@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/minimal-mistakes.css">
 
-   <title>BoxPlot</title>  
+   <title>RRGraph</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -60,7 +60,7 @@
 				<!-- HOME -->
       <!--    <li class="menu-list-item {{ispage index}}active{{end}}"><a href="/BeautifulMakie/" class="menu-list-link">• Home</a> -->
 					<!-- WORKFLOW -->
- 		  <li class="menu-list-parent "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
+ 		  <li class="menu-list-parent active"><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
  			  <ul class="menu-list-child-list ">
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">Single line</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/latexSample/" class="menu-list-link">LaTeX example</a>
@@ -77,7 +77,7 @@
  				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/linesScatters/" class="menu-list-link">Lines with scatters</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/linesAndScatters/" class="menu-list-link">Lines and scatters</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/ScattersCmaps/" class="menu-list-link">Scatters and colormaps</a>
-				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/RRGraph/"class="menu-list-link">RRGraph</a>
+				<li class="menu-list-item active"><a href="/BeautifulMakie/ScattersLines/RRGraph/"class="menu-list-link">RRGraph</a>
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/irisDataSet/" class="menu-list-link">Iris DataSet</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsDataSetWithChain/" class="menu-list-link">Penguins DataSet with scatters and regression lines</a>
@@ -118,12 +118,12 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/FlowFields/complexPolyaField/" class="menu-list-link">Complex function and Pólya Field</a>
 
 				</ul>
-			<li class="menu-list-parent active"><a href="/BeautifulMakie/StatsPlots/" class="menu-list-link">• Statistical plots</a>
+			<li class="menu-list-parent "><a href="/BeautifulMakie/StatsPlots/" class="menu-list-link">• Statistical plots</a>
  			  <ul class="menu-list-child-list ">
  				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/" class="menu-list-link">Histograms, bins and counts</a>
  				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/histogramsNorms/" class="menu-list-link">Histograms and normalization</a>
  				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/histDensity/" class="menu-list-link">Histogram and pdf => density!</a>
- 				<li class="menu-list-item active"><a href="/BeautifulMakie/StatsPlots/BoxPlot/" class="menu-list-link">Box Plots, vertical and horizontal</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BoxPlot/" class="menu-list-link">Box Plots, vertical and horizontal</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/candlestick/" class="menu-list-link">Candle stick</a>
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/ViolinPlot/" class="menu-list-link">Violin Plot</a>
@@ -266,36 +266,73 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="box_plots_vertical_and_horizontal"><a href="#box_plots_vertical_and_horizontal" class="header-anchor">Box Plots, vertical and horizontal</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/BoxPlot.png" alt=""> <pre><code class="language-julia">using CairoMakie, Random
-let
-    Random.seed&#33;&#40;13&#41;
-    n &#61; 3000
-    data &#61; randn&#40;n&#41;
-    a &#61; fill&#40;1, n&#41;
-    fig &#61; Figure&#40;resolution &#61; &#40;700, 800&#41;, font &#61; &quot;sans&quot;&#41;
-    ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;variable&quot;, ylabel &#61; &quot;values&quot;,
-                xticks &#61; &#40;&#91;1&#93;,&#91;&quot;normal Distribution&quot;&#93;&#41; &#41;
-    ax2 &#61; Axis&#40;fig, xlabel &#61; &quot;values&quot;, ylabel &#61; &quot;variable&quot;,
-        yticks &#61; &#40;&#91;1&#93;,&#91;&quot;normal Distribution&quot;&#93;&#41;, yticklabelrotation &#61; pi/2&#41;
-    boxplot&#33;&#40;ax1, a, data; whiskerwidth &#61; 1, width &#61; 0.35,color &#61; &#40;:red, 0.45&#41;,
-                whiskercolor &#61; &#40;:red, 1&#41;, mediancolor &#61; :red, markersize &#61; 8,
-                strokecolor &#61; :black, strokewidth &#61; 1, label &#61; &quot;vertical&quot;&#41;
-    limits&#33;&#40;ax1, 0,2,-5,5&#41;
-    boxplot&#33;&#40;ax2,a,data;orientation&#61;:horizontal, whiskerwidth &#61; 1, width &#61; 0.35,
-            color &#61; &#40;:navy, 0.45&#41;,whiskercolor &#61; &#40;:navy, 1&#41;,mediancolor &#61; :navy,
-                markersize &#61; 8, strokecolor &#61; :black, strokewidth &#61; 1,
-                label &#61; &quot;horizontal&quot;&#41;
-    limits&#33;&#40;ax2, -5,5,0,2&#41;
-    axislegend&#40;ax1, position &#61; :rt&#41;
-    axislegend&#40;ax2, position &#61; :rt&#41;
-    fig&#91;1,1&#93; &#61; ax1
-    fig&#91;2,1&#93; &#61; ax2
+<div class="franklin-content"><h2 id="weighted_random-geometric_graph"><a href="#weighted_random-geometric_graph" class="header-anchor">Weighted random-geometric Graph</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/RRGraph.png" alt=""> <pre><code class="language-julia"># by Lazaro Alonso
+# port of the original code used in:
+# L Alonso, et. al. Weighted random-geometric and random-rectangular graphs: spectral 
+# and eigenfunction properties of the adjacency matrix, Journal of Complex Networks, Volume 6, Issue 5,
+# October 2018, Pages 753–766, https://doi.org/10.1093/comnet/cnx053
+
+using LinearAlgebra, Random, CairoMakie
+CairoMakie.activate&#33;&#40;&#41;
+function RRGAdjacencyM&#40;;lengthBase &#61; 1, radius &#61; 0.1, nodes &#61; 500, rseed &#61; 123&#41;
+    Random.seed&#33;&#40;rseed&#41;
+    xy &#61; rand&#40;nodes, 2&#41;
+    x &#61; lengthBase .* xy&#91;:,1&#93;
+    y &#61; xy&#91;:,2&#93; ./ lengthBase
+    matrixAdjDiag &#61; Diagonal&#40;√2 * randn&#40;nodes&#41;&#41;
+    matrixAdj &#61; zeros&#40;nodes, nodes&#41;
+    for point in 1:nodes-1
+        distance &#61; sqrt.&#40;&#40;x&#91;point &#43; 1:end&#93; .- x&#91;point&#93;&#41;.^2 .&#43; &#40;y&#91;point &#43; 1:end&#93; .- y&#91;point&#93;&#41;.^2&#41;
+        dindx &#61; findall&#40;distance .&lt;&#61; radius&#41; .&#43; point
+        if length&#40;dindx&#41; &gt; 0
+            rnd &#61; randn&#40;length&#40;dindx&#41;&#41;
+            matrixAdj&#91;point, dindx&#93; &#61; rnd
+            matrixAdj&#91;dindx, point&#93; &#61; rnd
+        end
+    end
+    return &#40;matrixAdj .&#43; matrixAdjDiag, x, y&#41;
+end
+adjacencyM, x, y &#61; RRGAdjacencyM&#40;&#41;
+
+function getGraphEdges&#40;adjMatrix, x, y&#41;
+    xyos &#61; &#91;&#93;
+    weights &#61; &#91;&#93; 
+    for i in 1:length&#40;x&#41;, j in i&#43;1:length&#40;x&#41;
+        if adjMatrix&#91;i,j&#93; &#33;&#61; 0.0
+            push&#33;&#40;xyos, &#91;x&#91;i&#93;, y&#91;i&#93;&#93;&#41;
+            push&#33;&#40;xyos, &#91;x&#91;j&#93;, y&#91;j&#93;&#93;&#41;
+            push&#33;&#40;weights, adjMatrix&#91;i,j&#93;&#41;
+            push&#33;&#40;weights, adjMatrix&#91;i,j&#93;&#41;
+        end
+    end
+    return &#40;Point2f0.&#40;xyos&#41;, Float32.&#40;weights&#41;&#41;
+end
+
+function plotGraph&#40;adjacencyM, x, y&#41;
+    cmap &#61; &#40;:Spectral_11, 0.75&#41;
+    adjmin &#61; minimum&#40;adjacencyM&#41;
+    adjmax &#61; maximum&#40;adjacencyM&#41;
+    diagValues &#61; diag&#40;adjacencyM&#41;
+    segm, weights &#61; getGraphEdges&#40;adjacencyM, x, y&#41;
+    
+    fig, ax, pltobj &#61; linesegments&#40;segm, color &#61; weights, colormap &#61; cmap, 
+        linewidth &#61; abs.&#40;weights&#41;/2, colorrange &#61; &#40;adjmin, adjmax&#41;, 
+        figure &#61; &#40;;resolution &#61; &#40;500,400&#41;&#41;, axis &#61; &#40;;aspect &#61; DataAspect&#40;&#41;&#41;&#41;
+    scatter&#33;&#40;ax, x, y, color &#61; diagValues, markersize &#61; 3*abs.&#40;diagValues&#41;,
+        colormap &#61; cmap&#41;
+    limits&#33;&#40;ax, -0.02,1.02,-0.02,1.02&#41;
+    Colorbar&#40;fig&#91;1,2&#93;, pltobj, label &#61; &quot;weights&quot;&#41;
     fig
+end
+#plotGraph&#40;adjacencyM, x, y&#41;
+rrgraph &#61; with_theme&#40;theme_black&#40;&#41;&#41; do
+    plotGraph&#40;adjacencyM, x, y&#41;
 end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
  <div class="code-output"><pre><code class="plaintext code-output">      Status `~/Desktop/BeautifulMakie/_assets/Project.toml`
   [13f3f980] CairoMakie v0.6.3
+  [37e2e46d] LinearAlgebra
   [9a3f8284] Random
 </code></pre></div></p>
 <div class="page-foot">
