@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/minimal-mistakes.css">
 
-   <title>topography</title>  
+   <title>RRGraph3D</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -171,10 +171,10 @@
 					<li class="menu-list-item "><a href="/BeautifulMakie/contour/ContourComplexF/" class="menu-list-link">Contour Complex Functiont</a>
 
 					</ul>
-			<li class="menu-list-parent "><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">• 3D plots</a>
+			<li class="menu-list-parent active"><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">• 3D plots</a>
 				<ul class="menu-list-child-list ">
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">Surface branching</a>
-				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/RRGraph3D/" class="menu-list-link">RRGraph3D</a>
+				<li class="menu-list-item active"><a href="/BeautifulMakie/surfWireLines/RRGraph3D/" class="menu-list-link">RRGraph3D</a>
 
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/surfWireContour/" class="menu-list-link">Surface, Wireframe and Contour</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/surfaceConstraints/" class="menu-list-link">Surface and Constraints</a>
@@ -195,7 +195,7 @@
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/line3D/" class="menu-list-link">Line in 3D</a>
 
 				</ul>
-				<li class="menu-list-parent active"><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">• Geo plots</a>
+				<li class="menu-list-parent "><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">• Geo plots</a>
 					<ul class="menu-list-child-list ">
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">Earth 3D</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/moon/" class="menu-list-link">The moon</a>
@@ -204,7 +204,7 @@
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/temCubeESDL/" class="menu-list-link">ESDL data, temperature cube</a>
 
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/gppBeer2010/" class="menu-list-link">GPP Beer 2010, NetCDF file</a>
-					<li class="menu-list-item active"><a href="/BeautifulMakie/GeoPlots/topography/" class="menu-list-link">Surface, topography ETOPO1, NetCDF file</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/topography/" class="menu-list-link">Surface, topography ETOPO1, NetCDF file</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/topographySphere/" class="menu-list-link">Surface sphere, topography ETOPO1, NetCDF file</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/topoLinesFuji/" class="menu-list-link">Topography, Lines Fuji, .tif file</a>
 
@@ -268,33 +268,80 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="surface_topography_etopo1_netcdf_file"><a href="#surface_topography_etopo1_netcdf_file" class="header-anchor">Surface, topography ETOPO1, NetCDF file</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/topography.png" alt=""> <pre><code class="language-julia">using GLMakie, NetCDF
-using YAXArrays.Datasets: open_mfdataset
-let
-    dataset &#61; open_mfdataset&#40;&quot;./data/ETOPO1_halfdegree.nc&quot;&#41;
-    lon &#61; dataset.lon.values
-    lat &#61; dataset.lat.values
-    data &#61; dataset.ETOPO1avg.data&#91;:,:&#93;
+<div class="franklin-content"><h2 id="weighted_random-geometric_graph_3d"><a href="#weighted_random-geometric_graph_3d" class="header-anchor">Weighted random-geometric Graph 3D</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/RRGraph3D.png" alt=""> <pre><code class="language-julia"># by Lazaro Alonso
+# port and extended from the original code used in:
+# L Alonso, et. al. Weighted random-geometric and random-rectangular graphs: spectral 
+# and eigenfunction properties of the adjacency matrix, Journal of Complex Networks, Volume 6, Issue 5,
+# October 2018, Pages 753–766, https://doi.org/10.1093/comnet/cnx053
 
-    fig &#61; Figure&#40;resolution &#61; &#40;1250,700&#41;,fontsize &#61; 25, backgroundcolor &#61; :black&#41;
-    ax &#61; Axis3&#40;fig, aspect &#61; &#40;1,0.6,0.1&#41;,azimuth &#61; -0.65π, elevation &#61; 0.225π&#41;
-    pltobj&#61;surface&#33;&#40;ax,lon,lat, data, colormap &#61; :starrynight, backlight &#61; 1.0f0,
-        colorrange &#61;&#40;-6500,5500&#41;&#41;
-    cbar  &#61;Colorbar&#40;fig,pltobj,label &#61; &quot;ETOPO1 &#91;m&#93;&quot;,ticklabelsize &#61; 20,
-        tickalign &#61;1, vertical &#61; true, ticksize&#61;15, labelcolor &#61; :white,
-        ticklabelcolor &#61; :white, tickcolor &#61; :grey90, height &#61; Relative&#40;0.5&#41;&#41;
-    hidespines&#33;&#40;ax&#41;
-    hidedecorations&#33;&#40;ax&#41;
-    fig&#91;1,1&#93; &#61; ax
-    fig&#91;1,2&#93; &#61; cbar
+using LinearAlgebra, Random, GLMakie
+function RRGAdjacencyM3D&#40;;radius &#61; 0.17, nodes &#61; 500, rseed &#61; 123&#41;
+    Random.seed&#33;&#40;rseed&#41;
+    xy &#61; rand&#40;nodes, 3&#41;
+    x &#61; xy&#91;:,1&#93;
+    y &#61; xy&#91;:,2&#93; 
+    z &#61; xy&#91;:,3&#93;
+
+    matrixAdjDiag &#61; Diagonal&#40;√2 * randn&#40;nodes&#41;&#41;
+    matrixAdj &#61; zeros&#40;nodes, nodes&#41;
+    for point in 1:nodes-1
+        xseps &#61; &#40;x&#91;point &#43; 1:end&#93; .- x&#91;point&#93;&#41;.^2
+        yseps &#61; &#40;y&#91;point &#43; 1:end&#93; .- y&#91;point&#93;&#41;.^2
+        zseps &#61; &#40;z&#91;point &#43; 1:end&#93; .- z&#91;point&#93;&#41;.^2
+        
+        distance &#61; sqrt.&#40;xseps.&#43; yseps .&#43; zseps&#41;
+        dindx &#61; findall&#40;distance .&lt;&#61; radius&#41; .&#43; point
+        if length&#40;dindx&#41; &gt; 0
+            rnd &#61; randn&#40;length&#40;dindx&#41;&#41;
+            matrixAdj&#91;point, dindx&#93; &#61; rnd
+            matrixAdj&#91;dindx, point&#93; &#61; rnd
+        end
+    end
+    return &#40;matrixAdj .&#43; matrixAdjDiag, x, y, z&#41;
+end
+adjacencyM3D, x, y, z &#61; RRGAdjacencyM3D&#40;&#41;
+
+function getGraphEdges3D&#40;adjMatrix3D, x, y, z&#41;
+    xyzos &#61; &#91;&#93;
+    weights &#61; &#91;&#93; 
+    for i in 1:length&#40;x&#41;, j in i&#43;1:length&#40;x&#41;
+        if adjMatrix3D&#91;i,j&#93; &#33;&#61; 0.0
+            push&#33;&#40;xyzos, &#91;x&#91;i&#93;, y&#91;i&#93;, z&#91;i&#93;&#93;&#41;
+            push&#33;&#40;xyzos, &#91;x&#91;j&#93;, y&#91;j&#93;, z&#91;j&#93;&#93;&#41;
+            push&#33;&#40;weights, adjMatrix3D&#91;i,j&#93;&#41;
+            push&#33;&#40;weights, adjMatrix3D&#91;i,j&#93;&#41;
+        end
+    end
+    return &#40;Point3f0.&#40;xyzos&#41;, Float32.&#40;weights&#41;&#41;
+end
+
+function plotGraph3D&#40;adjacencyM3D, x, y, z&#41;
+    cmap &#61; &#40;:Spectral_11, 0.75&#41;
+    adjmin &#61; minimum&#40;adjacencyM3D&#41;
+    adjmax &#61; maximum&#40;adjacencyM3D&#41;
+    diagValues &#61; diag&#40;adjacencyM3D&#41;
+    segm, weights &#61; getGraphEdges3D&#40;adjacencyM3D, x, y, z&#41;
+    
+    fig, ax, pltobj &#61; linesegments&#40;segm, color &#61; weights, colormap &#61; cmap, 
+        linewidth &#61; abs.&#40;weights&#41;, colorrange &#61; &#40;adjmin, adjmax&#41;, 
+        figure &#61; &#40;;resolution &#61; &#40;1000,800&#41;&#41;, 
+        axis &#61; &#40;; type &#61; Axis3, aspect &#61;&#40;1,1,1&#41;, perspectiveness &#61; 0.5&#41;&#41;
+    meshscatter&#33;&#40;ax, x, y, z, color &#61; diagValues, markersize &#61; abs.&#40;diagValues&#41;./90,
+        colorrange &#61; &#40;adjmin, adjmax&#41;, colormap &#61; cmap&#41;
+    #limits&#33;&#40;ax, -0.02,1.02,-0.02,1.02&#41;
+    Colorbar&#40;fig&#91;1,2&#93;, pltobj, label &#61; &quot;weights&quot;, height &#61; Relative&#40;0.5&#41;&#41;
     fig
+end
+#plotGraph&#40;adjacencyM, x, y&#41;
+rrgraph3D &#61; with_theme&#40;theme_black&#40;&#41;&#41; do
+    plotGraph3D&#40;adjacencyM3D, x, y, z&#41;
 end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
  <div class="code-output"><pre><code class="plaintext code-output">      Status `~/Desktop/BeautifulMakie/_assets/Project.toml`
   [e9467ef8] GLMakie v0.4.4
-  [30363a11] NetCDF v0.11.3
-  [c21b50f5] YAXArrays v0.1.3
+  [37e2e46d] LinearAlgebra
+  [9a3f8284] Random
 </code></pre></div></p>
 <div class="page-foot">
 
