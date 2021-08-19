@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
   <link rel="stylesheet" href="/BeautifulMakie/css/minimal-mistakes.css">
 
-   <title>tesseralSphericalH</title>  
+   <title>delaunayTriangulation</title>  
 
   <!-- LUNR -->
  <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
@@ -101,13 +101,13 @@
 
  			  </ul>
 
-			<li class="menu-list-parent "><a href="/BeautifulMakie/FilledCurves/" class="menu-list-link">• Filled Curves</a>
+			<li class="menu-list-parent active"><a href="/BeautifulMakie/FilledCurves/" class="menu-list-link">• Filled Curves</a>
  			  <ul class="menu-list-child-list ">
  				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/" class="menu-list-link">Filled Line</a>
  				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/FilledLines/" class="menu-list-link">Filled Lines, bell shaped curves</a>
  				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/Bands/" class="menu-list-link">Bands</a>
  				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/ConfidenceRegion/" class="menu-list-link">Confidence Region</a>
-				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/delaunayTriangulation/" class="menu-list-link">Delaunay Triangulation</a>
+				<li class="menu-list-item active"><a href="/BeautifulMakie/FilledCurves/delaunayTriangulation/" class="menu-list-link">Delaunay Triangulation</a>
 
  			  </ul>
 
@@ -173,7 +173,7 @@
 					<li class="menu-list-item "><a href="/BeautifulMakie/contour/ContourComplexF/" class="menu-list-link">Contour Complex Functiont</a>
 
 					</ul>
-			<li class="menu-list-parent active"><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">• 3D plots</a>
+			<li class="menu-list-parent "><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">• 3D plots</a>
 				<ul class="menu-list-child-list ">
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">Surface branching</a>
 				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/RRGraph3D/" class="menu-list-link">RRGraph3D</a>
@@ -270,79 +270,40 @@
 
 
 <!-- Content appended here (in class franklin-content) -->
-<div class="franklin-content"><h2 id="tesseral_spherical_harmonics"><a href="#tesseral_spherical_harmonics" class="header-anchor">Tesseral Spherical Harmonics</a></h2>
-<p><img src="/BeautifulMakie/assets/scripts/output/tesseralSphericalH.png" alt=""> <pre><code class="language-julia">using Legendre, GLMakie
-using GeometryBasics, LinearAlgebra, StatsBase
-using Makie: get_dim, surface_normals
+<div class="franklin-content"><h2 id="delaunay_triangulation"><a href="#delaunay_triangulation" class="header-anchor">Delaunay Triangulation</a></h2>
+<p>used like a set that contains beta skeletons in :  <a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.100.062309">L. Alonso et al. Geometrical and spectral study of β-skeleton graphs</a></p>
+<p><img src="/BeautifulMakie/assets/scripts/output/delaunayTriangulation.png" alt=""> <pre><code class="language-julia"># by Lazaro Alonso 
+
+using CairoMakie, Random
+using GR: delaunay
+using Makie.GeometryBasics: Polygon
+
 let
-    function Y&#40;θ, ϕ, l, m&#41;
-        if m &lt; 0
-            return &#40;-1&#41;^m * √2 * Nlm&#40;l, abs&#40;m&#41;&#41; * Plm&#40;l, abs&#40;m&#41;, cos&#40;θ&#41;&#41; * sin&#40;abs&#40;m&#41;*ϕ&#41;
-        elseif m &#61;&#61; 0
-            return sqrt&#40;&#40;2*l&#43;1&#41;/4π&#41;*Plm&#40;l, m, cos&#40;θ&#41;&#41;
-        else
-            return &#40;-1&#41;^m * √2 * Nlm&#40;l, m&#41; * Plm&#40;l, m, cos&#40;θ&#41;&#41; * cos&#40;m*ϕ&#41;
-        end
+    Random.seed&#33;&#40;123&#41;
+    function pointsDelaunay&#40;nodes::Int64&#41;
+        points &#61; rand&#40;nodes, 2&#41;
+        n, tri &#61; delaunay&#40;points&#91;:,1&#93;, points&#91;:,2&#93;&#41;
+        return &#40;n, tri, points&#41;
     end
-    function getMesh&#40;x,y,z&#41;
-        positions &#61; vec&#40;map&#40;CartesianIndices&#40;z&#41;&#41; do i
-        GeometryBasics.Point&#123;3, Float32&#125;&#40;
-            get_dim&#40;x, i, 1, size&#40;z&#41;&#41;,
-            get_dim&#40;y, i, 2, size&#40;z&#41;&#41;,
-            z&#91;i&#93;&#41;
-        end&#41;
-        faces &#61; decompose&#40;GLTriangleFace, Rect2D&#40;0f0, 0f0, 1f0, 1f0&#41;, size&#40;z&#41;&#41;
-        normals &#61; surface_normals&#40;x, y, z&#41;
-        vertices &#61; GeometryBasics.meta&#40;positions; normals&#61;normals&#41;
-        meshObj &#61; GeometryBasics.Mesh&#40;vertices, faces&#41;
-        meshObj
-    end
-    # Grids of polar and azimuthal angles
-    θ &#61; LinRange&#40;0, π, 200&#41;
-    ϕ &#61; LinRange&#40;0, 2π, 200&#41;
-    x &#61; &#91;sin&#40;θ&#41;*sin&#40;ϕ&#41; for θ in θ, ϕ in ϕ&#93;
-    y &#61; &#91;sin&#40;θ&#41;*cos&#40;ϕ&#41; for θ in θ, ϕ in ϕ&#93;
-    z &#61; &#91;cos&#40;θ&#41;        for θ in θ, ϕ in ϕ&#93;
-    l &#61; 4
-    m &#61; 1
-    ambient &#61;  Vec3f0&#40;0.75, 0.75, 0.75&#41;
-    cmap &#61; &#40;:dodgerblue, :white&#41;
-    fig &#61; Figure&#40;resolution &#61; &#40;1200, 800&#41;, backgroundcolor &#61; :black&#41;
+    n, tri, points &#61; pointsDelaunay&#40;2000&#41;
+    # vector of polygons
+    polys &#61; &#91;Polygon&#40;&#91;Point2f0&#40;points&#91;tri&#91;k,:&#93;,:&#93;&#91;i,:&#93;&#41; for i in 1:3&#93;&#41; 
+        for k in 1:size&#40;tri&#41;&#91;1&#93;&#93;
 
-    Ygrid &#61; &#91;Y&#40;θ, ϕ, l, m&#41; for θ in θ, ϕ in ϕ&#93;
-    Ylm &#61; abs.&#40;Ygrid&#41;
-    Ygrid2 &#61; vec&#40;Ygrid&#41;
-
-    ax1 &#61; Axis3&#40;fig, aspect &#61; :data&#41;
-    ax2 &#61; Axis3&#40;fig, aspect &#61; :data&#41;
-    pltobj1 &#61; mesh&#33;&#40;ax1, getMesh&#40;x, y, z&#41;, color &#61; Ygrid2, colormap &#61; cmap,
-        ambient &#61; ambient&#41;
-    pltobj2 &#61; mesh&#33;&#40;ax2, getMesh&#40;Ylm .* x, Ylm .* y, Ylm .* z&#41;, color &#61; Ygrid2,
-        colormap &#61; cmap,  ambient &#61; ambient&#41;
-    hidespines&#33;&#40;ax1&#41;
-    hidedecorations&#33;&#40;ax1&#41;
-    hidespines&#33;&#40;ax2&#41;
-    hidedecorations&#33;&#40;ax2&#41;
-    cbar &#61; Colorbar&#40;fig, pltobj1, label &#61; &quot;Yₗₘ&#40;θ,ϕ&#41;&quot;, tickwidth &#61; 2,
-        labelcolor &#61; :white, ticklabelcolor &#61; :white, tickcolor &#61; :grey,
-        width &#61; 25,ticklabelsize &#61; 30,labelsize &#61; 30,ticksize&#61;25,tickalign &#61; 1&#41;
-    fig&#91;1,1&#93; &#61; ax1
-    fig&#91;1,2&#93; &#61; ax2
-    fig&#91;1,3&#93; &#61; cbar
-    fig&#91;0,1:2&#93; &#61; Label&#40;fig, &quot;Tesseral Spherical Harmonics l &#61; &#36;&#40;l&#41;, m &#61; &#36;&#40;m&#41;&quot;,
-        textsize &#61; 30, color &#61; &#40;:white, 0.85&#41;&#41;
-    fig
-    colgap&#33;&#40;fig.layout, 2&#41;
-    fig
+    #poly&#40;points, tri, strokewidth &#61; 1&#41; # also works, but just one color    
+    poly&#40;polys, color&#61;rand&#40;size&#40;tri&#41;&#91;1&#93;&#41;, strokewidth &#61; 0.5, 
+        colormap &#61; :linear_worb_100_25_c53_n256, 
+        figure &#61; &#40;;resolution&#61;&#40;800,800&#41;, fontsize &#61; 22&#41;, 
+        axis &#61; &#40;;aspect &#61; DataAspect&#40;&#41;, title &#61; &quot;Delaunay triangulation&quot;&#41;&#41;
+    limits&#33;&#40;0,1,0,1&#41;
+    current_figure&#40;&#41;
 end</code></pre> 
 <span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
  <div class="code-output"><pre><code class="plaintext code-output">      Status `~/Desktop/BeautifulMakie/_assets/Project.toml`
-  [e9467ef8] GLMakie v0.4.4
-  [5c1252a2] GeometryBasics v0.3.12
-  [7642852e] Legendre v0.2.2 `https://github.com/jmert/Legendre.jl#master`
+  [13f3f980] CairoMakie v0.6.3
+  [28b8d3ca] GR v0.49.1
   [ee78f7c6] Makie v0.15.0
-  [2913bbd2] StatsBase v0.33.8
-  [37e2e46d] LinearAlgebra
+  [9a3f8284] Random
 </code></pre></div></p>
 <div class="page-foot">
 
