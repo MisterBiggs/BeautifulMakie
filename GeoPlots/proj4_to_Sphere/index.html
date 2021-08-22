@@ -201,6 +201,11 @@
 					<ul class="menu-list-child-list ">
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">Earth 3D</a>
 					<li class="menu-list-item active"><a href="/BeautifulMakie/GeoPlots/proj4_to_Sphere/" class="menu-list-link">Proj4.jl and OSM agg to Sphere</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/submarineCables/"
+							class="menu-list-link">GeoMakie, submarine Cables 2D</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/submarineCables3D/"
+							class="menu-list-link">GeoMakie, Submarine Cables 3D</a>
+
 
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/moon/" class="menu-list-link">The moon</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/landSea/" class="menu-list-link">Land, Sea and Lakes</a>
@@ -278,7 +283,7 @@ using GLMakie, Proj4, NPZ, FileIO
 using Colors, ColorSchemes
 GLMakie.activate&#33;&#40;&#41;
 let
-    # this data can be download from here:
+    # download the data from here:
     # https://github.com/lazarusA/BeautifulMakie/tree/main/_assets/data
 
     x &#61; npzread&#40;&quot;./data/aggregationOSMx.npy&quot;&#41;
@@ -333,7 +338,7 @@ end</code></pre>
 <div class="page-foot">
 
   <div align="right">
-     Last Updated: August 21, 2021
+     Last Updated: August 22, 2021
   </div>
 
 <script type='text/javascript' id='clustrmaps'

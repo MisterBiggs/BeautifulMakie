@@ -201,6 +201,11 @@
 					<ul class="menu-list-child-list ">
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">Earth 3D</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/proj4_to_Sphere/" class="menu-list-link">Proj4.jl and OSM agg to Sphere</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/submarineCables/"
+							class="menu-list-link">GeoMakie, submarine Cables 2D</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/submarineCables3D/"
+							class="menu-list-link">GeoMakie, Submarine Cables 3D</a>
+
 
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/moon/" class="menu-list-link">The moon</a>
 					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/landSea/" class="menu-list-link">Land, Sea and Lakes</a>
@@ -283,8 +288,8 @@ let
     lon &#61; getAxis&#40;&quot;lon&quot;, cubeTemP&#41;.values
     lat &#61; getAxis&#40;&quot;lat&quot;, cubeTemP&#41;.values
     #time &#61; getAxis&#40;&quot;time&quot;, cube&#41;.values;
-    precipitation &#61; cubeTemP&#91;var&#61;&quot;precipitation&quot;&#93;.data&#91;:,end:-1:1&#93;
-    temperature &#61; cubeTemP&#91;var&#61;&quot;air_temperature_2m&quot;&#93;.data&#91;:,end:-1:1&#93;
+    precipitation &#61; cubeTemP&#91;var&#61;&quot;precipitation&quot;&#93;.data&#91;:,:&#93;
+    temperature &#61; cubeTemP&#91;var&#61;&quot;air_temperature_2m&quot;&#93;.data&#91;:,:&#93;
 
     fig &#61; Figure&#40;resolution &#61; &#40;1250, 1200&#41;, font &#61; &quot;sans&quot;, fontsize &#61; 24&#41;
     ax1 &#61; Axis&#40;fig, xlabel &#61; &quot;lon&quot;, ylabel &#61; &quot;lat&quot;&#41;
@@ -323,7 +328,7 @@ end</code></pre>
 <div class="page-foot">
 
   <div align="right">
-     Last Updated: August 21, 2021
+     Last Updated: August 22, 2021
   </div>
 
 <script type='text/javascript' id='clustrmaps'
