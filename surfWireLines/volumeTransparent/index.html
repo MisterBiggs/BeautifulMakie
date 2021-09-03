@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+    <link rel="stylesheet" href="/BeautifulMakie/libs/highlight/github.min.css">
+
+    <script src="/BeautifulMakie/libs/clipboard.min.js"></script>
+    <script src="/BeautifulMakie/libs/minimal-mistakes/main.min.js"></script>
+
+  
+
+  <link rel="stylesheet" href="/BeautifulMakie/css/jtd.css">
+  <link rel="stylesheet" href="/BeautifulMakie/css/extras.css">
+  <link rel="stylesheet" href="/BeautifulMakie/css/minimal-mistakes.css">
+
+   <title>volumeTransparent</title>  
+
+  <!-- LUNR -->
+ <script src="/BeautifulMakie/libs/lunr/lunr.min.js"></script>
+ <script src="/BeautifulMakie/libs/lunr/lunr_index.js"></script>
+ <script src="/BeautifulMakie/libs/lunr/lunrclient.min.js"></script>
+
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="masthead__inner-wrap">
+	<div class="masthead__menu">
+		<nav id="site-nav" class="greedy-nav">
+			<ul class="visible-links">
+				<li class="masthead__menu-item"><a id="home" href="/BeautifulMakie/">Beautiful Makie</a> </li>
+				<li class="masthead__menu-item"><a href="/BeautifulMakie/ScattersLines/" >2D</a></li>
+				<li class="masthead__menu-item"><a href="/BeautifulMakie/surfWireLines/" >3D</a></li>
+				<li class="masthead__menu-item"><a href="/BeautifulMakie/animations/" >Animations</a></li>
+				<li class="masthead__menu-item"><a href="/BeautifulMakie/withTheme/" >Themes</a></li>
+				<li class="masthead__menu-item"><a href="/BeautifulMakie/dashboards/" >Dashboards</a></li>
+				<li class="masthead__menu-item"><a href="/BeautifulMakie/GeoPlots/" >Geo</a></li>
+			</ul>
+			<button class="greedy-nav__toggle hidden" type="button">
+				<span class="visually-hidden">Toggle menu</span>
+				<div class="navicon"></div>
+			</button>
+			<ul class="hidden-links hidden"></ul>
+		</nav>
+	</div>
+</div>
+
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+
+  <div class="side-bar">
+    <label for="show-menu" class="show-menu"><font color ="#CC0000"> <strong> MENU </strong> </font></label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+			<a title="star this site !" href="https://github.com/lazarusA/BeautifulMakie">
+				<img align="left" src="https://img.shields.io/github/stars/lazarusA/BeautifulMakie?style&#61;social" alt="Stars" /></a>
+			<br><br>
+      <ul class="menu-list">
+				<!-- HOME -->
+      <!--    <li class="menu-list-item {{ispage index}}active{{end}}"><a href="/BeautifulMakie/" class="menu-list-link">• Home</a> -->
+					<!-- WORKFLOW -->
+ 		  <li class="menu-list-parent "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">• Lines and Scatters</a>
+ 			  <ul class="menu-list-child-list ">
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/" class="menu-list-link">Single line</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/latexSample/" class="menu-list-link">LaTeX example</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/besselFunctions/" class="menu-list-link">Bessel Functions, LaTeX legends</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/besselSecondKind/" class="menu-list-link">Bessel Second Kind, LaTeX legends line styles</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/Fig2Lines/" class="menu-list-link">Two lines</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/twinAxis/" class="menu-list-link">Twin Axis</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/timeSeries/" class="menu-list-link">Time Series, dates</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/ScatterHistDensitySides/" class="menu-list-link">Scatter, Histogram and Density on the Sides</a>
+
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/lineScatter/" class="menu-list-link">Line with scatter</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/linesScatters/" class="menu-list-link">Lines with scatters</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/linesAndScatters/" class="menu-list-link">Lines and scatters</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/ScattersCmaps/" class="menu-list-link">Scatters and colormaps</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/RRGraph/"class="menu-list-link">RRGraph</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/irisDataSet/" class="menu-list-link">Iris DataSet</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsDataSetWithChain/" class="menu-list-link">Penguins DataSet with scatters and regression lines</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsAoGsides/" class="menu-list-link">Penguins with AlgebraOfGraphics</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/penguinsAoGsides3d/" class="menu-list-link">Penguins with AlgebraOfGraphics, 3d plot included</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/BubblePlot/" class="menu-list-link">Bubble Plot</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/LineLogx/" class="menu-list-link">Log scale in x</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/LineLogy/" class="menu-list-link">Log scale in y</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/LineLogxy/" class="menu-list-link">Log scale in x and y</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/ScatterLogxyCbar/" class="menu-list-link">Log scale in x and y, scatters and colormap</a>
+
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/linesAndScattersLegOut/" class="menu-list-link">Lines and scatters (legend out)</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/MulticoloredLinesLegOut/" class="menu-list-link">Multicolored lines (legend out)</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/MulticoloredLinesCbarOut/" class="menu-list-link">Multicolored lines (colorbar out)</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/LinesAndMulticoloredLineCbarOut/" class="menu-list-link">Lines and multicolored lines</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/MultipleMulticoloredLineCbarOut/" class="menu-list-link">Multiple lines with different colormaps</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/MultipleMulticoloredLineCbarAround/" class="menu-list-link">Multiple lines with different colormaps (colorbars around plot)</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/LineWithInset/" class="menu-list-link">Line with inset</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/ScattersLines/LineWithInsetHeatmap/" class="menu-list-link">Line with an inset heatmap</a>
+
+ 			  </ul>
+
+			<li class="menu-list-parent "><a href="/BeautifulMakie/FilledCurves/" class="menu-list-link">• Filled Curves</a>
+ 			  <ul class="menu-list-child-list ">
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/" class="menu-list-link">Filled Line</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/FilledLines/" class="menu-list-link">Filled Lines, bell shaped curves</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/Bands/" class="menu-list-link">Bands</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/ConfidenceRegion/" class="menu-list-link">Confidence Region</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/FilledCurves/delaunayTriangulation/" class="menu-list-link">Delaunay Triangulation</a>
+
+ 			  </ul>
+
+			<li class="menu-list-parent "><a href="/BeautifulMakie/FlowFields/" class="menu-list-link">• Flow Fields</a>
+ 			  <ul class="menu-list-child-list ">
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/FlowFields/" class="menu-list-link">Arrows</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/FlowFields/streamplot/" class="menu-list-link">Streamplot</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/FlowFields/streamplotAndHeatmap/" class="menu-list-link">Streamplot and heatmap</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/FlowFields/streamplots3/" class="menu-list-link">3 streamplots fields</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/FlowFields/complexPolyaField/" class="menu-list-link">Complex function and Pólya Field</a>
+
+				</ul>
+			<li class="menu-list-parent "><a href="/BeautifulMakie/StatsPlots/" class="menu-list-link">• Statistical plots</a>
+ 			  <ul class="menu-list-child-list ">
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/" class="menu-list-link">Histograms, bins and counts</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/histogramsNorms/" class="menu-list-link">Histograms and normalization</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/histDensity/" class="menu-list-link">Histogram and pdf => density!</a>
+ 				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BoxPlot/" class="menu-list-link">Box Plots, vertical and horizontal</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/candlestick/" class="menu-list-link">Candle stick</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/ViolinPlot/" class="menu-list-link">Violin Plot</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BarViolinDataSet/" class="menu-list-link">Bars and Violins using RDatasets</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/DensitiesDataSet/" class="menu-list-link">Density plots using RDatasets</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BoxErrorBars/" class="menu-list-link">Boxes and y error bars</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/strippedBar/" class="menu-list-link">Stripped bar patterns</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/xBoxErrorBars/" class="menu-list-link">x-error boxes and y-error bars</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/BoxErrorBarsCmap/" class="menu-list-link">Boxes and y error bars, colormap</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/xyerrorbars/" class="menu-list-link">Simple xy error bars</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/StatsPlots/yerrorbars/" class="menu-list-link">Simple y error bars + colormap</a>
+ 			  </ul>
+
+			<li class="menu-list-parent "><a href="/BeautifulMakie/heatmaps/" class="menu-list-link">• Heatmaps plots</a>
+				<ul class="menu-list-child-list ">
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/" class="menu-list-link">Simple heatmap</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapIrregular/" class="menu-list-link">Heatmap with an irregular grid</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapLogIrregular/" class="menu-list-link">Heatmap with an irregular grid, log scales</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapIrregularCategories/" class="menu-list-link">Heatmap with an irregular grid, categorical ticks (center & edge)</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapText/" class="menu-list-link">Heatmap with text annotations</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapCbarLeft/" class="menu-list-link">Heatmap, left colorbar</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapCbarTop/" class="menu-list-link">Heatmap, top colorbar</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapCbarBottom/" class="menu-list-link">Heatmap, bottom colorbar</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapxyz/" class="menu-list-link">Heatmap with x,y,z values</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapGrid/" class="menu-list-link">Grid of Heatmaps</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmap2SharedCbars/" class="menu-list-link">Heatmaps, shared colorbars</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmap1SharedCbar/" class="menu-list-link">Heatmaps, 1 shared colorbar</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapScaleAdd/" class="menu-list-link">Heatmap Scale Added</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapScaleSections/" class="menu-list-link">Heatmap Scale Sections</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapScaleCrosshair/" class="menu-list-link">Heatmap Scale crosshair</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/heatmaps/heatmapScaleDetail/" class="menu-list-link">Heatmap Scale Detail</a>
+
+				</ul>
+
+				<li class="menu-list-parent "><a href="/BeautifulMakie/contour/" class="menu-list-link">• Contour plots</a>
+					<ul class="menu-list-child-list ">
+					<li class="menu-list-item "><a href="/BeautifulMakie/contour/" class="menu-list-link">Simple countour</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/contour/ContourOverHeatmap/" class="menu-list-link">Contour lines Over Heatmap</a>
+
+					<li class="menu-list-item "><a href="/BeautifulMakie/contour/contourQubit/" class="menu-list-link">Contour Qubit</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/contour/ContourComplexF/" class="menu-list-link">Contour Complex Functiont</a>
+
+					</ul>
+			<li class="menu-list-parent active"><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">• 3D plots</a>
+				<ul class="menu-list-child-list ">
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/" class="menu-list-link">Surface branching</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/RRGraph3D/" class="menu-list-link">RRGraph3D</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/surfWireContour/" class="menu-list-link">Surface, Wireframe and Contour</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/surfaceConstraints/" class="menu-list-link">Surface and Constraints</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/surface1Color/" class="menu-list-link">Surface, one color</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/surfaceComplexF/" class="menu-list-link">Surface, complex Function</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/revolutionSurf/" class="menu-list-link">Revolution Surface</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/revolutionSurf2/" class="menu-list-link">Revolution Surface 2</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/KleinBottle/" class="menu-list-link">Klein Bottle</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/wireTori/" class="menu-list-link">Wireframe Tori</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/wireSurfToris/" class="menu-list-link">Wireframe and Surface Tori</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/tesseralSphericalH/" class="menu-list-link">Tesseral Spherical Harmonics</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/RGBcube/" class="menu-list-link">RGB cube</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/volume/" class="menu-list-link">volume, x,y,z, f(x,y,z)</a>
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/volumeScatters/" class="menu-list-link">volume with scatters, x,y,z, f(x,y,z)</a>
+				<li class="menu-list-item active"><a href="/BeautifulMakie/surfWireLines/volumeTransparent/"
+						class="menu-list-link">volume, contour, scatters, x,y,z, f(x,y,z)</a>
+
+				<li class="menu-list-item "><a href="/BeautifulMakie/surfWireLines/line3D/" class="menu-list-link">Line in 3D</a>
+
+				</ul>
+				<li class="menu-list-parent "><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">• Geo plots</a>
+					<ul class="menu-list-child-list ">
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/" class="menu-list-link">Earth 3D</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/proj4_to_Sphere/" class="menu-list-link">Proj4.jl and OSM agg to Sphere</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/submarineCables/"
+							class="menu-list-link">GeoMakie, submarine Cables 2D</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/submarineCables3D/"
+							class="menu-list-link">GeoMakie, Submarine Cables 3D</a>
+					
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/geoFieldCountries/"
+							class="menu-list-link">GeoMakie, Field and World Countries</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/geoCoastlinesStatesUS/"
+							class="menu-list-link">GeoMakie, Coastlines and US states</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/geoCoastlinesField/"
+							class="menu-list-link">GeoMakie, Coastlines and Field</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/geoCoastlines/"
+							class="menu-list-link">GeoMakie, Coastlines</a>
+
+
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/moon/" class="menu-list-link">The moon</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/landSea/" class="menu-list-link">Land, Sea and Lakes</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/temPrecESDL/" class="menu-list-link">ESDL data, temperature & precipitation</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/temCubeESDL/" class="menu-list-link">ESDL data, temperature cube</a>
+
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/gppBeer2010/" class="menu-list-link">GPP Beer 2010, NetCDF file</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/topography/" class="menu-list-link">Surface, topography ETOPO1, NetCDF file</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/topographySphere/" class="menu-list-link">Surface sphere, topography ETOPO1, NetCDF file</a>
+					<li class="menu-list-item "><a href="/BeautifulMakie/GeoPlots/topoLinesFuji/" class="menu-list-link">Topography, Lines Fuji, .tif file</a>
+
+					</ul>
+
+					<li class="menu-list-parent "><a href="/BeautifulMakie/withTheme/" class="menu-list-link">• with_theme </a>
+						<ul class="menu-list-child-list ">
+						<li class="menu-list-item "><a href="/BeautifulMakie/withTheme/" class="menu-list-link">theme_black</a>
+						<li class="menu-list-item "><a href="/BeautifulMakie/withTheme/theme_dark_Contour3d/" class="menu-list-link">theme_dark, surface,Contour3d & streamplot</a>
+						<li class="menu-list-item "><a href="/BeautifulMakie/withTheme/theme_dark_astronauts/" class="menu-list-link">theme_dark, surface, astronauts</a>
+
+						</ul>
+
+						<li class="menu-list-parent "><a href="/BeautifulMakie/animations/" class="menu-list-link">• Animations </a>
+							<ul class="menu-list-child-list ">
+							<li class="menu-list-item "><a href="/BeautifulMakie/animations/" class="menu-list-link">Test NDVI</a>
+
+							<li class="menu-list-item "><a href="/BeautifulMakie/animations/animScatters/" class="menu-list-link">Animation scatters size</a>
+							<li class="menu-list-item "><a href="/BeautifulMakie/animations/animLinePoint/" class="menu-list-link">Animation Line and Point</a>
+							<li class="menu-list-item "><a href="/BeautifulMakie/animations/lorenzAttractorAnim/" class="menu-list-link">Lorenz Attractor Animation</a>
+
+							</ul>
+						<li class="menu-list-parent "><a href="/BeautifulMakie/dashboards/" class="menu-list-link">• Dashboards </a>
+							<ul class="menu-list-child-list ">
+							<li class="menu-list-item "><a href="/BeautifulMakie/dashboards/" class="menu-list-link">Tesseral Spherical Harmonics. Menu and Sliders</a>
+							<li class="menu-list-item "><a href="/BeautifulMakie/dashboards/plotVolColormaps/" class="menu-list-link">Plot Volume and ColorSchemes</a>
+
+							</ul>
+
+
+
+      </ul>
+
+    </div>
+    <div class="footer">
+			<form id="lunrSearchForm" name="lunrSearchForm" style="background:none">
+				<input class="search-input" name="q" placeholder="Search..." type="text" style="height:20px;width:150px;font-size:12pt;border-radius:10px;background:#323232;">
+				<input type="submit" value="Search" formaction="/BeautifulMakie/search/index.html" style="height:20px;width:100px;font-size:12pt;background:none;">
+			</form>
+			<div class="copyright">
+		     &copy;lazarusA
+			Built with <a href="https://franklinjl.org" target="_blank"><em>Franklin.jl</em></a>
+		  </div>
+      
+
+	<p style="text-align:center">
+		<a href="https://juliadatascience.io"> Storopoli J., Huijzer R., Alonso L. (2021). Julia Data Science (version
+			1.0.0). </a>
+	</p>
+	
+			<br>
+			<!--
+			<script type="text/javascript" id="clustrmaps" src="https://clustrmaps.com/map_v2.js?d=xLzejgAgiuTZK9q-myRo_QBWojYzPce67wdC_98QhOI"></script>
+			-->
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+<div class="franklin-content"><h2 id="volume_transparent_contour_scatters_xyz_fxyz"><a href="#volume_transparent_contour_scatters_xyz_fxyz" class="header-anchor">volume transparent, contour, scatters, x,y,z, f&#40;x,y,z&#41;,</a></h2>
+<p><img src="/BeautifulMakie/assets/scripts/output/volumeTransparent.png" alt=""> <pre><code class="language-julia"># by Lazaro Alonso
+using GLMakie
+let
+    x &#61; -1:0.2:1
+    y &#61; -1:0.2:1
+    z &#61; -1:0.2:1
+    vol1 &#61; &#91;ix*iy*iz for ix in x, iy in y, iz in z&#93;
+    points3d &#61; &#91;Point3f0&#40;ix, iy, iz&#41; for ix in x, iy in y, iz in z&#93;
+    vol2 &#61; &#40;vol1 .&#43; 1&#41;./2 # send everything to the interval 0,1 &#40;things don&#39;t seem to work with colorrange&#41;
+    # colormap with transparency in the middle 
+    cmap &#61; :viridis
+    colors &#61; to_colormap&#40;cmap, 101&#41;
+    n &#61; length&#40;colors&#41;
+    g&#40;x&#41; &#61; x^2
+    alphas &#61; &#91;g&#40;x&#41; for x in LinRange&#40;-1,1,101&#41;&#93;
+    cmap_alpha &#61; RGBAf0.&#40;colors, alphas&#41;
+    # the plot
+    fig &#61; Figure&#40;resolution &#61; &#40;1200,1200&#41;&#41;
+    ax1 &#61; Axis3&#40;fig&#91;1,1&#93;, perspectiveness &#61; 0.5, azimuth &#61; 7.19, 
+        elevation &#61; 0.57, aspect &#61; &#40;1,1,1&#41;&#41;
+    ax2 &#61; Axis3&#40;fig&#91;1,2&#93;, perspectiveness &#61; 0.5, azimuth &#61; 6.62, 
+        elevation &#61; 0.57, aspect &#61; &#40;1,1,1&#41;&#41;
+    ax3 &#61; Axis3&#40;fig&#91;2,1&#93;, perspectiveness &#61; 0.5, azimuth &#61; 7.38, 
+        elevation &#61; 0.57, aspect &#61; &#40;1,1,1&#41;&#41;
+    ax4 &#61; Axis3&#40;fig&#91;2,2&#93;, perspectiveness &#61; 0.5, azimuth &#61; 6.64, 
+        elevation &#61; 0.57, aspect &#61; &#40;1,1,1&#41;&#41;
+
+    volume&#33;&#40;ax1, x, y, z, vol2; colormap &#61; cmap, transparency &#61; true&#41;
+    contour&#33;&#40;ax2, x, y, z, vol1; colormap &#61; cmap, alpha&#61;0.05,
+        levels&#61;&#91;collect&#40;-1:0.01:-0.3&#41;..., collect&#40;0.3:0.01:1&#41;...&#93;&#41;
+    meshscatter&#33;&#40;ax3, vec&#40;points3d&#41;; color &#61; vec&#40;vol1&#41;, colormap &#61; cmap_alpha&#41;
+    meshscatter&#33;&#40;ax4, vec&#40;points3d&#41;; color &#61; vec&#40;vol1&#41;, colormap &#61; cmap_alpha,
+        marker &#61;  FRect3D&#40;Vec3f0&#40;0&#41;, Vec3f0&#40;2&#41;&#41;&#41;
+    xlims&#33;&#40;ax4, -1.2,1.2&#41;
+    ylims&#33;&#40;ax4, -1.2,1.2&#41;
+    zlims&#33;&#40;ax4, -1.2,1.2&#41;
+    fig
+end</code></pre> 
+<span style="color:#e53e00;"> <strong> Dependencies </strong> </span>
+ <div class="code-output"><pre><code class="plaintext code-output">      Status `~/Desktop/BeautifulMakie/_assets/Project.toml`
+  [e9467ef8] GLMakie v0.4.4
+</code></pre></div></p>
+<div class="page-foot">
+
+  <div align="right">
+     Last Updated: September 03, 2021
+  </div>
+
+<script type='text/javascript' id='clustrmaps'
+  src='https://cdn.clustrmaps.com/map_v2.js?cl=080808&w=350&t=n&d=xLzejgAgiuTZK9q-myRo_QBWojYzPce67wdC_98QhOI&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=808080'></script>
+
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+    
+    
+      <script src="/BeautifulMakie/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+      <!-- http://tutsplus.github.io/clipboard/ -->
+
+<script>
+(function(){
+
+	// Get the elements.
+	// - the 'pre' element.
+	// - the 'div' with the 'paste-content' id.
+
+	var pre = document.getElementsByTagName('pre');
+
+	// Add a copy button in the 'pre' element.
+	// which only has the className of 'language-'.
+
+	for (var i = 0; i < pre.length; i++) {
+		var isLanguage = pre[i].children[0].className.indexOf('language-');
+
+		if ( isLanguage === 0 ) {
+			var button           = document.createElement('button');
+					button.className = 'copy-button';
+					button.textContent = 'Copy';
+
+					pre[i].appendChild(button);
+		}
+	};
+
+	// Run Clipboard
+
+	var copyCode = new Clipboard('.copy-button', {
+		target: function(trigger) {
+			return trigger.previousElementSibling;
+    }
+	});
+
+	// On success:
+	// - Change the "Copy" text to "Copied".
+	// - Swap it to "Copy" in 2s.
+	// - Lead user to the "contenteditable" area with Velocity scroll.
+
+	copyCode.on('success', function(event) {
+		event.clearSelection();
+		event.trigger.textContent = 'Copied';
+		window.setTimeout(function() {
+			event.trigger.textContent = 'Copy';
+		}, 2000);
+
+	});
+
+	// On error (Safari):
+	// - Change the  "Press Ctrl+C to copy"
+	// - Swap it to "Copy" in 2s.
+
+	copyCode.on('error', function(event) {
+		event.trigger.textContent = 'Press "Ctrl + C" to copy';
+		window.setTimeout(function() {
+			event.trigger.textContent = 'Copy';
+		}, 5000);
+	});
+
+})();
+</script>
+
+    
+  </body>
+</html>
