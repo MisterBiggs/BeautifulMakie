@@ -366,7 +366,7 @@ let
         mesh&#33;&#40;Sphere&#40;Point3&#40;0&#41;,1&#41;, color &#61; :black, shading &#61; false, transparency &#61; false&#41;
         meshscatter&#33;&#40;toPoints3D, color &#61; 1:length&#40;toPoints3D&#41;, 
             markersize &#61; 0.005, colormap &#61; :plasma&#41;
-        &#91;lines&#33;&#40;ax,splitLines3D&#91;i&#93;, linewidth&#61;0.75&#41; for i in 1:length&#40;splitLines&#41;&#93;
+        &#91;lines&#33;&#40;ax,splitLines3D&#91;i&#93;, linewidth&#61;0.75&#41; for i in 1:length&#40;splitLines3D&#41;&#93;
         hidedecorations&#33;&#40;ax&#41;
         hidespines&#33;&#40;ax&#41;
         fig, ax
@@ -385,7 +385,7 @@ end</code></pre>
 <div class="page-foot">
 
   <div align="right">
-     Last Updated: September 05, 2021
+     Last Updated: September 19, 2021
   </div>
 <!--
 <script type='text/javascript' id='clustrmaps'
